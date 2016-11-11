@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lanxi.dao.ChartDao">
+
+    <!--<resultMap id="baseMap" type="com.lanxi.entity.Chart">-->
+        <!--<result column="CHART_ID" property="id" jdbcType="VARCHAR"/>-->
+    <!--</resultMap>-->
+
+    <select id="getIds"  resultType="String">
+        SELECT CHART_ID FROM T_CCMS_CHART;
+    </select>
+
+    <select id="getContents"  resultType="String">
+        SELECT CONTENT FROM T_CCMS_CHART;
+    </select>
+
+    <select id="getList" resultType="com.lanxi.entity.Chart">
+         SELECT * FROM T_CCMS_CHART;
+    </select>
+</mapper>

@@ -1,0 +1,90 @@
+.chart{
+	height: 320px;
+}
+#userMenu{
+	width: 160px;
+}
+#userMenu a{
+	color: white;
+	height: 35px;
+    line-height: 30px;
+}
+#userMenu a:hover{
+	color: black;
+}
+.skin-blue .main-header #userMenu,
+.skin-blue-light .main-header #userMenu{
+	background: rgb(54,127,170);
+}
+.skin-black .main-header #userMenu,
+.skin-black-light .main-header #userMenu{
+	background: white;
+}
+.skin-black .main-header #userMenu a,
+.skin-black-light .main-header #userMenu a{
+	color: #777;
+}
+.skin-black .main-header #userMenu a:hover,
+.skin-black-light .main-header #userMenu a:hover{
+	color: black;
+}
+.skin-green .main-header #userMenu,
+.skin-green-light .main-header #userMenu{
+	background: rgb(0,150,81);
+}
+.skin-red .main-header #userMenu,
+.skin-red-light .main-header #userMenu{
+	background: rgb(199,68,51);
+}
+.skin-yellow .main-header #userMenu,
+.skin-yellow-light .main-header #userMenu{
+	background: rgb(216,141,16);
+}
+.top,.searchbar,.toolbar{
+	vertical-align: middle;
+}
+.top>div,.bottom>div{
+	display: inline-block;
+	margin-right: 10px;
+}
+.toolbar a{
+	margin-right: 8px;
+	margin-bottom: 3px;
+}
+.searchbar>form{
+	display: inline-block;
+}
+.searchbar>form>div{
+	display: inline-block;
+	margin-right:5px ;
+	vertical-align: middle;
+    margin-top: 6px;
+}
+/* bootstrap 修正 */
+.dropdown-menu .divider {
+    margin: 0px;
+    }
+/* datatable修正 */
+div.dataTables_filter,div.dataTables_paginate {
+	float: right;
+	margin-top: 5px;
+}
+/* layui 修正 */
+.layui-input, .layui-textarea {
+    max-width: 600px;
+}
+legend{
+	border-bottom:none;
+	width: auto;
+	margin-bottom: 0px;
+}
+.laydate_body .laydate_bottom {
+    height: 31px !important;
+}
+.laydate_body .laydate_ym {
+    height: 26px !important;
+}
+.laydate_body .laydate_top {
+    height: 36px !important;
+
+}

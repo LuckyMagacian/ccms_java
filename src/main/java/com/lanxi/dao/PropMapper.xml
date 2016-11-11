@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lanxi.dao.PropDao">
+<insert id="addProp" parameterType="com.lanxi.entity.Prop">
+INSERT INTO T_CCMS_PROP 
+(PROP_ID,ACTV_NO,BATCH_NO,OPERATION,SOURCE_TABLE,CUST_PK,DATE_KEY,PROP_KEY,COMPARE,PROP_VALUE)
+VALUES
+(#{prop_id},#{actv_no},#{batch_no},#{operation},#{source_table},#{cust_pk},#{date_key},#{prop_key},#{compare},#{prop_value})
+</insert>
+<delete id="deleteProp" parameterType="com.lanxi.entity.Prop">
+delete from T_CCMS_PROP
+<where>
+<if test="prop_id != null"> and PROP_ID = #{prop_id}  </if>  
+<if test="actv_no != null"> and ACTV_NO = #{actv_no}  </if>  
+<if test="batch_no != null"> and BATCH_NO = #{batch_no}  </if>  
+<if test="operation != null"> and OPERATION = #{operation}  </if>  
+<if test="source_table != null"> and SOURCE_TABLE = #{source_table}  </if>  
+<if test="cust_pk != null"> and CUST_PK = #{cust_pk}  </if>  
+<if test="date_key != null"> and DATE_KEY = #{date_key}  </if>  
+<if test="prop_key != null"> and PROP_KEY = #{prop_key}  </if>  
+<if test="compare != null"> and COMPARE = #{compare}  </if>  
+<if test="prop_value != null"> and PROP_VALUE = #{prop_value}  </if>  
+</where>
+</delete>
+<update id="updateProp" parameterType="com.lanxi.entity.Prop">
+update T_CCMS_PROP
+<set> 
+<if test="prop_id != null"> PROP_ID = #{prop_id},</if>  
+<if test="actv_no != null"> ACTV_NO = #{actv_no},</if>  
+<if test="batch_no != null"> ACTV_NO = #{batch_no},</if>  
+<if test="operation != null"> OPERATION = #{operation},</if>  
+<if test="source_table != null"> SOURCE_TABLE = #{source_table},</if>  
+<if test="cust_pk != null"> CUST_PK = #{cust_pk},</if>  
+<if test="date_key != null"> DATE_KEY = #{date_key},</if>  
+<if test="prop_key != null"> DATE_KEY = #{prop_key},</if>  
+<if test="compare != null"> COMPARE = #{compare},</if>  
+<if test="prop_value != null"> PROP_VALUE = #{prop_value},</if>  
+</set>
+<where>
+<if test="prop_id != null"> and PROP_ID = #{prop_id}  </if>  
+<if test="actv_no != null"> and ACTV_NO = #{actv_no}  </if>  
+<if test="batch_no != null"> and BATCH_NO = #{batch_no}  </if>  
+<if test="operation != null"> and OPERATION = #{operation}  </if>  
+<if test="source_table != null"> and SOURCE_TABLE = #{source_table}  </if>  
+<if test="cust_pk != null"> and CUST_PK = #{cust_pk}  </if>  
+<if test="date_key != null"> and DATE_KEY = #{date_key}  </if>  
+<if test="prop_key != null"> and PROP_KEY = #{prop_key}  </if>  
+<if test="compare != null"> and COMPARE = #{compare}  </if>  
+<if test="prop_value != null"> and PROP_VALUE = #{prop_value}  </if>  
+</where>
+</update>
+
+<select id="selectProp" resultMap="propMap" parameterType="com.lanxi.entity.Prop" resultType="com.lanxi.entity.Prop">
+SELECT
+PROP_ID,ACTV_NO,BATCH_NO,OPERATION,SOURCE_TABLE,CUST_PK,DATE_KEY,PROP_KEY,COMPARE,PROP_VALUE
+FROM T_CCMS_PROP
+<where>
+<if test="prop_id != null"> and PROP_ID = #{prop_id}  </if>  
+<if test="actv_no != null"> and ACTV_NO = #{actv_no}  </if>  
+<if test="batch_no != null"> and BATCH_NO = #{batch_no}  </if>  
+<if test="operation != null"> and OPERATION = #{operation}  </if>  
+<if test="source_table != null"> and SOURCE_TABLE = #{source_table}  </if>  
+<if test="cust_pk != null"> and CUST_PK = #{cust_pk}  </if>  
+<if test="date_key != null"> and DATE_KEY = #{date_key}  </if>  
+<if test="prop_key != null"> and PROP_KEY = #{prop_key}  </if>  
+<if test="compare != null"> and COMPARE = #{compare}  </if>  
+<if test="prop_value != null"> and PROP_VALUE = #{prop_value}  </if>  
+</where>
+</select>
+<resultMap id="propMap" type="com.lanxi.entity.Prop">
+<result property="prop_id" 			column="PROP_ID"></result>
+<result property="actv_no" 			column="ACTV_NO"></result>
+<result property="batch_no" 			column="BATCH_NO"></result>
+<result property="operation" 			column="OPERATION"></result>
+<result property="source_table" 			column="SOURCE_TABLE"></result>
+<result property="cust_pk" 			column="CUST_PK"></result>
+<result property="date_key" 			column="DATE_KEY"></result>
+<result property="prop_key" 			column="PROP_KEY"></result>
+<result property="compare" 			column="COMPARE"></result>
+<result property="prop_value" 			column="PROP_VALUE"></result>
+</resultMap>
+</mapper>

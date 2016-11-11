@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lanxi.dao.AdminDao">
+
+    <insert id="addUser">
+    insert into T_CCMS_ADMIN (ADMIN_ID,ADMIN_TYPE,USERNAME,PASSWORD) values (#{admin_Id},#{admin_Type},#{username},#{password});
+    </insert>
+
+    <select id="getMaxId" resultType="String">
+    select max(ADMIN_ID) from T_CCMS_ADMIN;
+   </select>
+
+    <select id="getAllUser" resultType="com.lanxi.entity.Admin">
+        SELECT * FROM T_CCMS_ADMIN;
+    </select>
+
+    <update id="updateUser">
+        UPDATE T_CCMS_ADMIN SET ADMIN_TYPE=#{admin_Type},PASSWORD=#{password} WHERE USERNAME=#{username};
+    </update>
+
+    <delete id="deleteUser" parameterType="String">
+        DELETE  FROM T_CCMS_ADMIN WHERE USERNAME=#{username}
+    </delete>
+    
+    <select id="getCount" parameterType="String" resultType="Integer">
+        SELECT COUNT(USERNAME) FROM T_CCMS_ADMIN WHERE USERNAME=#{username}
+    </select>
+
+    <select id="getByUserName" parameterType="String">
+        SELECT * FROM T_CCMS_ADMIN WHERE USERNAME=#{username}
+    </select>
+</mapper>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
+		<link rel="stylesheet" href="../plugins/datatables/dataTables.bootstrap.css">
+		<link rel="stylesheet" href="../layui/css/layui.css">
+		<link rel="stylesheet" href="../css/home.css">
+		<style type="text/css">
+			@charset "utf-8";
+			/* layui修正 */
+			
+			.layui-form-label {
+				width: auto;
+			}		
+			.layui-textarea {
+				width: 90%;
+			}
+			.layui-form-select{
+				width: 140px;
+			}
+			#shopping+.layui-form-select{
+				width: 170px;
+			}
+			#age_min,#age_max,#opened_mths{
+				width: 60px;
+			}
+			form .layui-form-item .layui-input-inline {
+				width: auto;
+			}
+			.layui-form-item {
+				margin-bottom: 3px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<section class="content" style="margin-top: 15px;">
+			<div class="col-md-12">
+				<table id="filterTable" class="table table-bordered table-striped">
+					<thead>
+						<tr>
+							<th>#</th>
+							<th>姓名</th>
+							<th>卡号</th>
+							<th>手机号</th>
+						</tr>
+					</thead>
+				</table>
+			</div>
+		</section>
+		<div class="layui-form-item">
+			<label class="layui-form-label">营销建议</label>
+			<div class="layui-input-block">
+				<textarea id="desp" name="DESP" placeholder="请输入营销建议内容" required lay-verify="required" class="layui-textarea"></textarea>
+			</div>
+		</div>
+		<div class="layui-form-item">
+            <div class="layui-input-block">
+              <button lay-submit lay-filter="ownerInfo" class="layui-btn">保存</button>
+            </div>
+          </div>
+		<script src="../js/jquery.min.js"></script>
+		<script src="../plugins/datatables/jquery.dataTables.min.js"></script>
+		<script src="../plugins/datatables/dataTables.bootstrap.min.js"></script>
+		<script src="../layui/layui.js"></script>
+		<script src="../js/public.js"></script>
+		<script src="../js/marketFilter.js"></script>
+	</body>
+
+</html>

@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lanxi.dao.ActivityDao">
+	<insert id="addActivity" parameterType="com.lanxi.entity.Activity">
+      INSERT INTO T_CCMS_ACTIVITY
+      (ACTV_NO,BATCH_NO,ACTV_NAME,ACTV_TARGET,ACTV_STYLE,ACTV_TYPE,START_DATE,STOP_DATE,GIFT,MSG_TPLT,JOIN_TYPE,PEOPLE_LIMIT,ACTV_STATE,UPDATE_TIME,CREATE_TIME,RULE_TYPE,SUCCESS_RATE,DESP,CHECK_OPINION)
+      VALUES
+      (#{actv_no},#{batch_no},#{actv_name},#{actv_target},#{actv_style},#{actv_type},#{start_date},#{stop_date},#{gift},#{msg_tplt},#{join_type},#{people_limit},#{actv_state},#{update_time},#{create_time},#{rule_type},#{success_rate},#{desp},#{check_opinion})
+ 	</insert>
+    <delete id="deleteActivity" parameterType="com.lanxi.entity.Activity">
+        delete from T_CCMS_ACTIVITY
+        <where>
+            <if test="actv_no != null"> and ACTV_NO = #{actv_no}  </if>
+            <if test="batch_no != null"> and BATCH_NO = #{batch_no}  </if>
+            <if test="actv_name != null"> and ACTV_NAME = #{actv_name}  </if>
+            <if test="actv_target != null"> and ACTV_TARGET = #{actv_target}  </if>
+            <if test="actv_style != null"> and ACTV_STYLE = #{actv_style}  </if>
+            <if test="actv_type != null"> and ACTV_TYPE = #{actv_type}  </if>
+            <if test="start_date != null"> and START_DATE = #{start_date}  </if>
+            <if test="stop_date != null"> and STOP_DATE = #{stop_date}  </if>
+            <if test="gift != null"> and GIFT = #{gift}  </if>
+            <if test="msg_tplt != null"> and MSG_TPLT = #{msg_tplt}  </if>
+            <if test="join_type != null"> and JOIN_TYPE = #{join_type}  </if>
+            <if test="people_limit != null"> and PEOPLE_LIMIT = #{people_limit}  </if>
+            <if test="actv_state != null"> and ACTV_STATE = #{actv_state}  </if>
+            <if test="update_time != null"> and UPDATE_TIME = #{update_time}  </if>
+            <if test="create_time != null"> and CREATE_TIME = #{create_time}  </if>
+            <if test="rule_type != null"> and RULE_TYPE = #{rule_type}  </if>
+            <if test="success_rate != null"> and SUCCESS_RATE = #{success_rate}  </if>
+            <if test="desp != null"> and DESP = #{desp}  </if>
+            <if test="check_opinion != null"> and CHECK_OPINION = #{check_opinion}  </if>  
+        </where>
+    </delete>
+    <update id="updateActivity" parameterType="com.lanxi.entity.Activity">
+        update T_CCMS_ACTIVITY
+        <set>
+            <if test="actv_no != null"> ACTV_NO = #{actv_no} , </if>
+            <if test="batch_no != null"> BATCH_NO = #{batch_no}  ,</if>
+            <if test="actv_name != null"> ACTV_NAME = #{actv_name}  ,</if>
+            <if test="actv_target != null">ACTV_TARGET = #{actv_target}  ,</if>
+            <if test="actv_style != null">ACTV_STYLE = #{actv_style}  ,</if>
+            <if test="actv_type != null"> ACTV_TYPE = #{actv_type} ,</if>
+            <if test="start_date != null"> START_DATE = #{start_date}  ,</if>
+            <if test="stop_date != null">  STOP_DATE = #{stop_date}  ,</if>
+            <if test="gift != null">  GIFT = #{gift} , </if>
+            <if test="msg_tplt != null">  MSG_TPLT = #{msg_tplt},  </if>
+            <if test="join_type != null">  JOIN_TYPE = #{join_type},  </if>
+            <if test="people_limit != null">  PEOPLE_LIMIT = #{people_limit} , </if>
+            <if test="actv_state != null">  ACTV_STATE = #{actv_state} , </if>
+            <if test="update_time != null">  UPDATE_TIME = #{update_time} , </if>
+            <if test="create_time != null"> CREATE_TIME = #{create_time} , </if>
+            <if test="rule_type != null">  RULE_TYPE = #{rule_type} , </if>
+            <if test="success_rate != null">  SUCCESS_RATE = #{success_rate} , </if>
+            <if test="desp != null"> DESP = #{desp}  ,</if>
+            <if test="check_opinion != null"> CHECK_OPINION = #{check_opinion},</if>  
+        </set>
+        <where>
+           actv_no = #{actv_no}
+        </where>
+  	</update>
+    <select id="queryActivity" resultMap="activityMap" parameterType="com.lanxi.entity.Activity" resultType="com.lanxi.entity.Activity">
+      SELECT
+      ACTV_NO,BATCH_NO,ACTV_NAME,ACTV_TARGET,ACTV_STYLE,ACTV_TYPE,START_DATE,STOP_DATE,GIFT,MSG_TPLT,JOIN_TYPE,PEOPLE_LIMIT,ACTV_STATE,UPDATE_TIME,CREATE_TIME,RULE_TYPE,SUCCESS_RATE,DESP
+      FROM T_CCMS_ACTIVITY,CHECK_OPINION
+        <where>
+            <if test="actv_no != null"> and ACTV_NO = #{actv_no}  </if>
+            <if test="batch_no != null"> and BATCH_NO = #{batch_no}  </if>
+            <if test="actv_name != null"> and ACTV_NAME = #{actv_name}  </if>
+            <if test="actv_target != null"> and ACTV_TARGET = #{actv_target}  </if>
+            <if test="actv_style != null"> and ACTV_STYLE = #{actv_style}  </if>
+            <if test="actv_type != null"> and ACTV_TYPE = #{actv_type}  </if>
+            <if test="start_date != null"> and START_DATE = #{start_date}  </if>
+            <if test="stop_date != null"> and STOP_DATE = #{stop_date}  </if>
+            <if test="gift != null"> and GIFT = #{gift}  </if>
+            <if test="msg_tplt != null"> and MSG_TPLT = #{msg_tplt}  </if>
+            <if test="join_type != null"> and JOIN_TYPE = #{join_type}  </if>
+            <if test="people_limit != null"> and PEOPLE_LIMIT = #{people_limit}  </if>
+            <if test="actv_state != null"> and ACTV_STATE = #{actv_state}  </if>
+            <if test="update_time != null"> and UPDATE_TIME = #{update_time}  </if>
+            <if test="create_time != null"> and CREATE_TIME = #{create_time}  </if>
+            <if test="rule_type != null"> and RULE_TYPE = #{rule_type}  </if>
+            <if test="success_rate != null"> and SUCCESS_RATE = #{success_rate}  </if>
+            <if test="desp != null"> and DESP = #{desp}  </if>
+            <if test="check_opinion != null"> and CHECK_OPINION = #{check_opinion}  </if>  
+        </where>
+    </select>
+    <select id="queryActivityByMap"  resultMap="activityMap" parameterType="java.util.Map" resultType="com.lanxi.entity.Activity">
+      SELECT
+      ACTV_NO,BATCH_NO,ACTV_NAME,ACTV_TARGET,ACTV_STYLE,ACTV_TYPE,START_DATE,STOP_DATE,GIFT,MSG_TPLT,JOIN_TYPE,PEOPLE_LIMIT,ACTV_STATE,UPDATE_TIME,CREATE_TIME,RULE_TYPE,SUCCESS_RATE,DESP,CHECK_OPINION
+      FROM T_CCMS_ACTIVITY
+      <where>
+          <if test="actv_name != null"> and ACTV_NAME = #{actv_name}  </if>
+          <if test="actv_state != null"> and ACTV_STATE = #{actv_state}  </if>
+          <if test="start1 != null"> and START_DATE &gt;= #{start1}   </if>
+          <if test="start2 != null"> and START_DATE &lt;= #{start2}   </if>
+      </where>
+    </select>
+    <select id="queryActivityCanModify"  resultMap="activityMap"  resultType="com.lanxi.entity.Activity">
+      SELECT
+      ACTV_NO,BATCH_NO,ACTV_NAME,ACTV_TARGET,ACTV_STYLE,ACTV_TYPE,START_DATE,STOP_DATE,GIFT,MSG_TPLT,JOIN_TYPE,PEOPLE_LIMIT,ACTV_STATE,UPDATE_TIME,CREATE_TIME,RULE_TYPE,SUCCESS_RATE,DESP,CHECK_OPINION
+      FROM T_CCMS_ACTIVITY
+      <where>
+          ACTV_STATE='0' OR ACTV_STATE='4'
+      </where>
+    </select>
+	<select id="queryActivityByStatus"  resultMap="activityMap" parameterType="java.util.Map" resultType="com.lanxi.entity.Activity" >
+		SELECT
+      ACTV_NO,BATCH_NO,ACTV_NAME,ACTV_TARGET,ACTV_STYLE,ACTV_TYPE,START_DATE,STOP_DATE,GIFT,MSG_TPLT,JOIN_TYPE,PEOPLE_LIMIT,ACTV_STATE,UPDATE_TIME,CREATE_TIME,RULE_TYPE,SUCCESS_RATE,DESP,CHECK_OPINION
+      FROM T_CCMS_ACTIVITY
+      <where>
+       <if test="status0 != null"> OR ACTV_STATE = #{status0}  </if>
+       <if test="status1 != null"> OR ACTV_STATE = #{status1}  </if>
+       <if test="status2 != null"> OR ACTV_STATE = #{status2}  </if>
+       <if test="status3 != null"> OR ACTV_STATE = #{status3}  </if>
+       <if test="status4 != null"> OR ACTV_STATE = #{status4}  </if>
+      </where>
+	</select>
+	<resultMap id="activityMap" type="com.lanxi.entity.Activity">
+	<result property="actv_no" 				column="ACTV_NO"></result>
+	<result property="batch_no" 			column="BATCH_NO"></result>
+	<result property="actv_name" 			column="ACTV_NAME"></result>
+	<result property="actv_target" 			column="ACTV_TARGET"></result>
+	<result property="actv_style" 			column="ACTV_STYLE"></result>
+	<result property="actv_type" 			column="ACTV_TYPE"></result>
+	<result property="start_date" 			column="START_DATE"></result>
+	<result property="stop_date" 			column="STOP_DATE"></result>
+	<result property="gift" 				column="GIFT"></result>
+	<result property="msg_tplt" 			column="MSG_TPLT"></result>
+	<result property="join_type" 			column="JOIN_TYPE"></result>
+	<result property="people_limit" 			column="PEOPLE_LIMIT"></result>
+	<result property="actv_state" 			column="ACTV_STATE"></result>
+	<result property="update_time" 			column="UPDATE_TIME"></result>
+	<result property="create_time" 			column="CREATE_TIME"></result>
+	<result property="rule_type" 			column="RULE_TYPE"></result>
+	<result property="success_rate" 			column="SUCCESS_RATE"></result>
+	<result property="desp" 				column="DESP"></result>
+	<result property="check_opinion" 			column="CHECK_OPINION"></result>
+	</resultMap>
+	
+</mapper>
+

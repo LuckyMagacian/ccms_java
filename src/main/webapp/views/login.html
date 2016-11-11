@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title></title>
+    <link id="themes" rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/msgbox.css">
+    <link rel="stylesheet" href="css/public.css">
+    <link rel="stylesheet" href="css/login.css">
+	  <!--[if lt IE 9]>
+			<script src="js/html5shiv.min.js"></script>
+			<script src="js/respond.min.js"></script>
+	  <![endif]-->
+  </head>
+  <body>
+    <header id="top" class="container-fluid">
+      <div id="title"></div>
+    </header>
+    <div class="container-fluid">
+      <div id="content" class="row">
+        <div id="leftText" class="col-xs-2 col-sm-6 col-md-7 col-lg-7">
+          <div id="nameBg"></div>
+          <div id="name">
+            <div>中行</div>
+            <div>信用卡营销管理系统 </div>
+          </div>
+        </div>
+        <div id="loginDiv" class="col-xs-8 col-sm-6 col-md-5 col-lg-5">
+          <div id="loginContent" class="col-xs-12 col-sm-10 col-xs-offset-0 col-sm-offset-1">
+            <div id="loginTop">中行信用卡营销管理系统</div>
+            <div class="form-group has-feedback">
+              <label for="username" class="control-label">用户名</label>
+              <div class="input-group"><span class="input-group-addon glyphicon glyphicon-user"></span>
+                <input id="username" type="text" name="username" aria-describedby="usernameStatus" placeholder="字母、数字、下划线" onchange="valiUsername(this.id)" class="form-control">
+              </div><span aria-hidden="true" class="glyphicon form-control-feedback"></span><span id="usernameStatus" class="sr-only">(success)</span>
+            </div>
+            <div class="form-group">
+              <label for="password" class="control-label">密码</label>
+              <div class="input-group"><span class="input-group-addon glyphicon glyphicon-lock"></span>
+                <input id="password" type="password" name="password" aria-describedby="password" placeholder="登录密码" class="form-control"><span id="eye" class="input-group-addon glyphicon glyphicon-eye-close"></span>
+              </div>
+            </div>
+            <div id="loginHint" class="hint">&nbsp;</div>
+            <div id="loginBottom"><a id="loginBtn" href="javascript:login();" class="btn btn-primary">登录</a></div>
+          </div>
+        </div>
+      </div>
+      <div id="bottomText">
+      </div>
+    </div>
+    <footer class="copyright">
+      <p class="text-center">copyright &copy; 2016 杭州蓝喜信息技术有限公司 all right reserved</p>
+    </footer>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/msgbox.js"></script>
+    <script src="js/public.js"></script>
+    <script src="js/login.js"></script>
+  </body>
+</html>

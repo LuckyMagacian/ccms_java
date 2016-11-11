@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=8">
+  <title>信用卡营销管理系统</title>
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/font-awesome.min.css">
+  <link rel="stylesheet" href="css/ionicons.min.css">
+  <link rel="stylesheet" href="dist/css/AdminLTE.css">
+  <link rel="stylesheet" href="dist/css/skins/_all-skins.css">
+  <link rel="stylesheet" href="css/home.css">
+  <style>
+  	/* 响应式布局 */
+		@media only screen and (min-width: 1200px) {
+			
+		}
+		@media only screen and (min-width: 992px) {
+		}
+		@media only screen and (min-width: 768px) {
+			.content-wrapper{
+				height: 1000px;
+			}
+		}
+		@media (max-width: 767px) and (min-width: 320px) {
+			.content-wrapper{
+				height: auto;
+			}
+		}
+  </style>
+  <!--[if lt IE 9]>
+		<script src="js/html5shiv.min.js"></script>
+		<script src="js/respond.min.js"></script>
+  <![endif]-->
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+  <header class="main-header">
+    <a href="index2.html" class="logo">
+      <span class="logo-mini">MS</span>
+      <span class="logo-lg">信用卡营销管理系统</span>
+    </a>
+
+    <nav class="navbar navbar-static-top">
+      <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+        <span class="sr-only">导航按钮toggle</span>
+      </a>
+      <div class="navbar-custom-menu">
+        <ul class="nav navbar-nav">
+          <li class="dropdown user user-menu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <span class="hidden-xs">Admin</span>
+            </a>
+            <ul id="userMenu" class="dropdown-menu" role="menu">
+              <li><a href="#">修改密码</a></li>
+	            <li class="divider"></li>
+	            <li><a href="#">退出</a></li>
+            </ul>
+          </li>
+          <!-- Control Sidebar Toggle Button -->
+          <li>
+            <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
+          </li>
+        </ul>
+      </div>
+
+    </nav>
+  </header>
+  <!-- Left side column. contains the logo and sidebar -->
+  <aside class="main-sidebar">
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar">
+      <!-- search form -->
+      <form class="sidebar-form" onsubmit="search();return false;">
+        <div class="input-group">
+          <input type="text" name="q" class="form-control" placeholder="Search...">
+              <span class="input-group-btn">
+                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
+                </button>
+              </span>
+        </div>
+      </form>
+      <!-- /.search form -->
+      <!-- sidebar menu: : style can be found in sidebar.less -->
+      <ul class="sidebar-menu">
+        <li class="header">导航栏</li>
+        <li class="active">
+          <a href="index2.html">
+            <i class="fa fa-dashboard"></i> <span>首页概览</span>
+          </a>
+        </li>
+        <li class="treeview">
+          <a href="javascript:void(0);">
+            <i class="fa fa-files-o"></i>
+            <span>营销管理</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="pages/marketActivity.html"><i class="fa fa-circle-o"></i>营销活动</a>
+            	 	<!--<span class="pull-right-container">
+              		<small class="label pull-right bg-blue">17</small>
+            		</span>-->
+            </li>
+          </ul>
+        </li>
+        <li class="treeview">
+          <a href="javascript:void(0);">
+            <i class="fa fa-envelope"></i>
+            <span>进度提醒</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+          	<li><a href="pages/progressMarket.html"><i class="fa fa-circle-o"></i>进度跟踪</a></li>
+            <li><a href="pages/progressRemind.html"><i class="fa fa-circle-o"></i>提醒任务</a></li>
+          </ul>
+        </li>
+        <li class="treeview">
+          <a href="javascript:void(0);">
+            <i class="fa fa-edit"></i> <span>系统管理</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="usermanage.html"><i class="fa fa-circle-o"></i>用户管理</a></li>
+          </ul>
+        </li>
+      </ul>
+    </section>
+    <!-- /.sidebar -->
+  </aside>
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <section class="content-header">
+      <h1>中行信用卡营销管理系统
+        <small>Version 1.0</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><i class="fa fa-dashboard"></i> 首页概览</li>
+      </ol>
+    </section>
+    <section class="content">
+    	<div class="row">
+        <div class="col-md-12">
+          <div class="box">
+            <div class="box-header with-border">
+              <h3 class="box-title">营销月报</h3>
+              <div class="box-tools pull-right">
+              	<div class="has-feedback">
+              		<span style="position: absolute;top: 6px;left: -65px;">选择月份:</span>
+					        <input type="text" class="form-control input-sm" placeholder="yyyy-mm">
+					        <span class="glyphicon glyphicon-search form-control-feedback"></span>
+					      </div>
+              </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <div class="row">
+                <div class="col-md-4">
+                  <p class="text-center">
+                    <strong>月度占用饼状图</strong>
+                  </p>
+                  <div class="chart" id="monthPie">
+                  </div>
+                  <!-- /.chart-responsive -->
+                </div>
+                <!-- /.col -->
+                <div class="col-md-8">
+                  <p class="text-center">
+                    <strong>本月与上月柱状图</strong>
+                  </p>
+									<div class="chart" id="contrastBar">
+                  <!-- /.progress-group -->
+                </div>
+                <!-- /.col -->
+              </div>
+              <!-- /.row -->
+            </div>
+            <!-- ./box-body -->
+            <div class="box-footer">
+              <div class="row">
+                <div class="col-sm-3 col-xs-6">
+                  <div class="description-block border-right">
+                    <span class="description-percentage text-green"><i class="fa fa-caret-up"></i> 17%</span>
+                    <h5 class="description-header">35221人次</h5>
+                    <span class="description-text">分期</span>
+                  </div>
+                  <!-- /.description-block -->
+                </div>
+                <!-- /.col -->
+                <div class="col-sm-3 col-xs-6">
+                  <div class="description-block border-right">
+                    <span class="description-percentage text-yellow"><i class="fa fa-caret-left"></i> 0%</span>
+                    <h5 class="description-header">3345人次</h5>
+                    <span class="description-text">取现</span>
+                  </div>
+                  <!-- /.description-block -->
+                </div>
+                <!-- /.col -->
+                <div class="col-sm-3 col-xs-6">
+                  <div class="description-block border-right">
+                    <span class="description-percentage text-green"><i class="fa fa-caret-up"></i> 20%</span>
+                    <h5 class="description-header">1233人次</h5>
+                    <span class="description-text">刷卡</span>
+                  </div>
+                  <!-- /.description-block -->
+                </div>
+                <!-- /.col -->
+                <div class="col-sm-3 col-xs-6">
+                  <div class="description-block">
+                    <span class="description-percentage text-red"><i class="fa fa-caret-down"></i> 18%</span>
+                    <h5 class="description-header">1200人次</h5>
+                    <span class="description-text">循环</span>
+                  </div>
+                  <!-- /.description-block -->
+                </div>
+              </div>
+              <!-- /.row -->
+            </div>
+            <!-- /.box-footer -->
+          </div>
+          <!-- /.box -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+    </section>
+    <section class="content col-md-4">
+    	<div class="box box-default">
+			  <div class="box-header with-border">
+			    <h3 class="box-title">用户生命周期</h3>
+			  </div>
+			  <div class="box-body">
+          <div class="chart" id="lifecycleBar"></div>
+			  </div>
+			</div>
+    </section>
+    <section class="content col-md-4">
+    	<div class="box box-default">
+			  <div class="box-header with-border">
+			    <h3 class="box-title">用户忠诚度</h3>
+			  </div>
+			  <div class="box-body">
+			    <div class="chart" id="loyaltyBar"></div>
+			  </div>
+			</div>
+    </section>
+    <section class="content col-md-4">
+    	<div class="box box-default">
+			  <div class="box-header with-border">
+			    <h3 class="box-title">客户价值</h3>
+			  </div>
+			  <div class="box-body">
+			    <div class="chart" id="worthBar"></div>
+			  </div>
+			</div>
+    </section>
+    
+  </div>
+  <!-- /.content-wrapper -->
+  <footer class="main-footer">
+    <div class="pull-right hidden-xs">
+      <b>Version</b> 1.0.0
+    </div>
+    <strong>Copyright &copy; 2016-2017 188lanxi.com</strong> All rights reserved.
+  </footer>
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <div class="tab-content">
+      <!-- Home tab content -->
+      <div class="tab-pane" id="control-sidebar-home-tab">
+      </div>
+    </div>
+  </aside>
+
+  <div class="control-sidebar-bg"></div>
+</div>
+
+<script src="js/jquery.min.js"></script>
+<script src="bootstrap/js/bootstrap.min.js"></script>
+<script src="js/highcharts.js"></script>
+<script src="dist/js/app.min.js"></script>
+<script src="plugins/slimScroll/jquery.slimscroll.min.js"></script>
+<script src="dist/js/ms.js"></script>
+<script src="js/public.js"></script>
+<script src="js/index.js"></script>
+</body>
+</html>

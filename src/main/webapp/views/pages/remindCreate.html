@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
+		<link rel="stylesheet" href="../layui/css/layui.css">
+		<link rel="stylesheet" href="../css/home.css">
+		<style type="text/css">
+			@charset "utf-8";
+			/* layui修正 */
+			.layui-form-label {
+			    width: 130px;
+			}
+			.layui-textarea{
+				width: 90%;
+			}
+		</style>
+	</head>
+	<body>
+	<div class="container" style="margin-top: 15px;">
+      <div class="row">
+        <form id="remindCreateForm" name="remindCreateForm" action="#" method="post" onsubmit="" class="layui-form">
+          <div class="layui-form-item">
+            <label class="layui-form-label">活动名称</label>
+            <div class="layui-input-inline">
+              <input type="hidden" name="actv_no" id="actv_no" value="" />
+              <input type="hidden" name="batch_no" id="batch_no" value="" />
+              <select id="actv_name" name="actv_name" required lay-verify="required"></select>
+            </div>
+            <div class="layui-form-mid layui-word-aux">一些说明</div>
+          </div>
+          <div class="layui-form-item">
+            <label class="layui-form-label">任务名称</label>
+            <div class="layui-input-inline">
+              <input id="" type="text" name="" required lay-verify="required" autocomplete="off" maxlength="50" class="layui-input">
+            </div>
+          </div>
+         		<!-- 刷卡OR冻卡激活 -->
+          <div class="layui-form-item">       	
+            <label class="layui-form-label">刷卡笔数</label>
+            <div class="layui-input-inline">
+              <input id="skbs" type="text" name="skbs" autocomplete="off" class="layui-input">
+            </div>
+          </div>
+          <div class="layui-form-item">
+            <label class="layui-form-label">单笔金额</label>
+            <div class="layui-input-inline">
+              <input id="dbje" type="text" name="dbje" autocomplete="off" class="layui-input">
+            </div>
+          </div>
+          <div class="layui-form-item">
+            <label class="layui-form-label">累计金额</label>
+            <div class="layui-input-inline">
+              <input id="ljje" type="text" name="ljje" autocomplete="off" class="layui-input">
+            </div>
+          </div>
+          <div class="layui-form-item">
+            <label class="layui-form-label">提醒短信</label>
+            <div class="layui-input-block">
+            	<textarea id="msg_type" name="msg_type" placeholder="请输入短信模板内容" required lay-verify="required" class="layui-textarea"></textarea>
+            </div>
+          </div>
+          <div class="layui-form-item">
+            <div class="layui-input-block">
+              <input id="bankCategory" type="hidden" name="bankCategory">
+              <button lay-submit lay-filter="remindCreateForm" class="layui-btn">保存</button>
+              <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <script src="../js/jquery.min.js"></script>
+    <script src="../layui/layui.js"></script>
+    <script src="../js/public.js"></script>
+	<script src="../js/remindCreate.js"></script>
+	</body>
+</html>
