@@ -179,6 +179,7 @@ public class ActivityServiceImpl implements ActivityService{
 	        map.put("actv_state", actv_state);
 	        map.put("start1", start1);
 	        map.put("start2", start2);
+	        System.out.println(map);
 	        return daoService.getActivityDao().queryActivityByMap(map);
     	}catch (Exception e) {
 			throw new AppException("查询活动异常",e);

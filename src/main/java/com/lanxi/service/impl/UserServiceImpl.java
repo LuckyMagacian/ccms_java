@@ -39,7 +39,7 @@ public class UserServiceImpl implements UserService {
 			map.put("batch_no",batch_no);
 			map.put("update_flag","0");
 			// TODO 会等很久
-			String rs=HttpUtil.postKeyValue(map,ConfigUtil.get(""),"utf-8");
+			String rs=HttpUtil.postKeyValue(map,ConfigUtil.get("chooseUrl"),"utf-8");
 			JSONObject jobj=JSONObject.parseObject(rs);
 			String reCode=jobj.getString("result_code");
 			if("0".equals(reCode)){
@@ -69,7 +69,7 @@ public class UserServiceImpl implements UserService {
 			req.setCharacterEncoding("utf-8");
 			String actv_no=req.getParameter("actv_no");
 			String batch_no=req.getParameter("batch_no");
-			String condition=req.getParameter("");
+			String condition=req.getParameter("manualUrl");
 			Map<String, String> map=new HashMap<>();
 			map.put("actv_no", actv_no);
 			map.put("batch_no",batch_no);
