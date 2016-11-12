@@ -77,12 +77,11 @@ public class ExcelUtil {
 	 * @return
 	 */
 	public static HSSFSheet getSheet(int index){
-		if(workbook==null)
-			init();
 		int count=workbook.getNumberOfSheets();
 		if(index>=count)
 			for(int i=count;i<=index;i++)
 				workbook.createSheet();
+		HSSFSheet sheet=workbook.getSheetAt(index);
 		return workbook.getSheetAt(index);
 	}
 	/**
@@ -94,8 +93,9 @@ public class ExcelUtil {
 	public static HSSFRow getRow(int sheetIndex,int rowIndex){
 		HSSFSheet sheet=getSheet(sheetIndex);
 		int count=sheet.getLastRowNum();
-		if(rowIndex>=count)
-			for(int i=count;i<=rowIndex;i++)
+		System.out.println(count);
+		if(rowIndex>count)
+			for(int i=count;i<rowIndex;i++)
 				sheet.createRow(i);
 		return sheet.getRow(rowIndex);
 	}

@@ -106,3 +106,5 @@ local.properties
 *.iml
 target/
 /.idea/
+
+/.settings/

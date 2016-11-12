@@ -165,7 +165,7 @@ public class ActivityServiceImpl implements ActivityService{
 	        if(null!=date1&&!date1.trim().isEmpty())
 	        	start1		=tempFormat.parse(date1);
 	        if(null!=date2&&!date2.trim().isEmpty())
-	        	start2		=tempFormat.parse(req.getParameter("start2"));
+	        	start2		=tempFormat.parse(date2);
 	        Map<String, Object> map=new LinkedHashMap<String,Object>();
 	        map.put("actv_name", actv_name);
 	        map.put("actv_state", actv_state);

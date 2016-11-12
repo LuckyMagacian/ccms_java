@@ -32,8 +32,14 @@ public class TestUtil {
 	}
 	 @Test
     public void testExcel() throws IOException{
-		 
-    }
+		 System.out.println(ExcelUtil.getRow(0, 0));
+		 System.out.println(ExcelUtil.getRow(0, 0));
+		 System.out.println(ExcelUtil.getCell(0, 0,0));
+		 System.out.println(ExcelUtil.getCell(0, 0,0));
+		 System.out.println(ExcelUtil.getRow(0, 0));
+		 System.out.println(ExcelUtil.getCell(0, 0,0));
+
+	 }
     
     @Test
     public void testGetExcel(){

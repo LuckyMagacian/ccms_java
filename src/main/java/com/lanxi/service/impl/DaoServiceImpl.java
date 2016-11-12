@@ -47,7 +47,7 @@ public class DaoServiceImpl implements DaoService{
     public List<Activity> queryActivity(String actv_name, String actv_state, Date start1, Date start2) {
         Map<String,Object> map = new LinkedHashMap<>();
         map.put("actv_name",actv_name);
-        map.put("actv_stat",actv_state);
+        map.put("actv_state",actv_state);
         map.put("start1",start1);
         map.put("start2",start2);
         return activityDao.queryActivityByMap(map);

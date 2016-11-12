@@ -32,7 +32,7 @@ public interface DaoService {
     /**
      * 通过活动名称 活动状态 活动起始时间范围来查找活动
      * @param actv_name		活动名称
-     * @param actv_state 	获得弄个状态
+     * @param actv_state 	活动状态
      * @param start1		活动开始时间1
      * @param start2		活动开始时间2
      * @return

@@ -100,11 +100,13 @@ public class Activity {
     //规则组合条件
     private String  rule_type;
     //成功比例
-    private int  success_rate;
+    private int  	success_rate;
     //描述
     private String  desp;
     //审核意见
     private String 	check_opinion;
+    //营销建议
+    private String  suggestion;
     public int getSuccess_rate() {
         return success_rate;
     }
@@ -257,5 +259,24 @@ public class Activity {
 		this.check_opinion = check_opinion;
 	}
 
+	public String getSuggestion() {
+		return suggestion;
+	}
+
+	public void setSuggestion(String suggestion) {
+		this.suggestion = suggestion;
+	}
+
+	@Override
+	public String toString() {
+		return "Activity [actv_no=" + actv_no + ", batch_no=" + batch_no + ", actv_name=" + actv_name + ", actv_target="
+				+ actv_target + ", actv_style=" + actv_style + ", actv_type=" + actv_type + ", start_date=" + start_date
+				+ ", stop_date=" + stop_date + ", gift=" + gift + ", msg_tplt=" + msg_tplt + ", join_type=" + join_type
+				+ ", people_limit=" + people_limit + ", actv_state=" + actv_state + ", update_time=" + update_time
+				+ ", create_time=" + create_time + ", rule_type=" + rule_type + ", success_rate=" + success_rate
+				+ ", desp=" + desp + ", check_opinion=" + check_opinion + ", suggesttion=" + suggestion + "]";
+	}
+	
+	
 
 }

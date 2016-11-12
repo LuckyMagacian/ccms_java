@@ -47,7 +47,7 @@ public class TestDao {
 		activity.setActv_no("1");
 		activity.setBatch_no(1);
 		List<SelectedUser> users=dao.querySuccessUser(activity);
-		System.out.println(users);
+//		System.out.println(users);
 		List<HSSFCell> titiles=new ArrayList<>();
 		for(int i=0;i<8;i++){
 			HSSFCell cell=ExcelUtil.getCell(0, 0, i);
@@ -55,22 +55,27 @@ public class TestDao {
 			cell.setCellValue(titleStr[i]);
 			titiles.add(cell);
 		}
-		for(SelectedUser each:users){
-			for(int i=1;i<users.size();i++){
-				HSSFRow row=ExcelUtil.getRow(0, i);
-				Map<String, Field> fields=BeanUtil.getFieldsNoStatic(SelectedUser.class);
-				int j=0;
-				for(Map.Entry<String, Field> one:fields.entrySet()){
-					HSSFCell cell=ExcelUtil.getCell(0, i, j);
-					cell.setCellStyle(ExcelUtil.getCommonStyle());
-					Field field=one.getValue();
-					field.setAccessible(true);
-					cell.setCellValue(field.get(each)+"");
-				}
-			}
-		}
+//		for(SelectedUser each:users){
+//			for(int i=1;i<users.size();i++){
+//				HSSFRow row=ExcelUtil.getRow(0, i);
+//				Map<String, Field> fields=BeanUtil.getFieldsNoStatic(SelectedUser.class);
+//				int j=0;
+//				for(Map.Entry<String, Field> one:fields.entrySet()){
+//					HSSFCell cell=ExcelUtil.getCell(0, i, j);
+//					cell.setCellStyle(ExcelUtil.getCommonStyle());
+//					Field field=one.getValue();
+//					System.out.println(field.getName());
+//					field.setAccessible(true);
+//					cell.setCellValue(field.get(each)+"");
+//				}
+//			}
+//		}
 		ExcelUtil.generatorExcel("D:/");
 		
 	}
 	
+	@Test
+	public void testWhat(){
+		System.out.println(dao.queryActivity(null, Activity.ACTIVITY_STATE_READY, null, null));
+	}
 }
