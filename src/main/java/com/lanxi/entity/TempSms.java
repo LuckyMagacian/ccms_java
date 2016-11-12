@@ -1,8 +1,11 @@
 package com.lanxi.entity;
 
 public class TempSms {
+	/**短信通道-移动-免费*/
 	public static String SMS_TDID_MOBILE="1";
+	/**短信通道-沃动-收费*/
 	public static String SMS_TDID_WODONG="2";
+	/**商户号*/
 	public static String SMS_MCHTID		="10";
 	
 	/**商户号 ->10*/

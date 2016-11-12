@@ -11,24 +11,36 @@ public class SelectedUser {
 	
 	
 	/**用户状态-有效*/
-	public static final String USER_STATE_USEFUL="0";
+	public static final String USER_STATE_USEFUL="0";	
 	/**用户状态-无效*/
 	public static final String USER_STATE_NOUSE	="1";
+	
+	
 	
 	/**活动结果-成功*/
 	public static final String USER_RESULT_SUCCESS	="0";
 	/**活动结果-失败*/
 	public static final String USER_RESULT_FAIL		="1";
+	/**活动状态-即将完成*/
+	public static final String USER_RESULT_NEAR		="2";
 	//---------------------------------常量区end-------------------------------------------
-	
+	/**活动编号*/
 	private String 	actv_no;
+	/**批次编号*/
 	private int		batch_no;
+	/**用户卡号*/
 	private String	custr_nbr;
+	/**用户姓名*/
 	private String	name;
+	/**用户手机*/
 	private String 	phone;
+	/**报名方式*/
 	private String 	apply;
+	/**用户状态*/
 	private	String	state;
+	/**活动结果*/
 	private String	result;
+	
 	public String getActv_no() {
 		return actv_no;
 	}

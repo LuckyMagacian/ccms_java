@@ -36,6 +36,7 @@ public class ActivityController {
 			if(null!=activity&&null!=activity.getActv_no()){
 				message.setErrCode("0000");
 				message.setErrMsg("创建活动成功");
+				message.setContent(activity);
 				logger.info("活动创建成功");
 			}else{
 				message.setErrCode("9998");

@@ -31,6 +31,15 @@ FROM T_CCMS_SELECT
 </where>
 </select>
 
+<select id="failedUser" resultMap="selectedUserMap" parameterType="com.lanxi.entity.Activity">
+UPDATE T_CCMS_SELECTEDUSER
+<set>
+RESULT = '1'
+</set>
+<where> 
+ ACTV_NO = #{actv_no} AND BATCH_NO = #{batch_no} AND RESULT != '0' AND RESULT != '1'
+</where>
+</select>
 
 <resultMap id="selectedUserMap" type="com.lanxi.entity.SelectedUser">
 <result property="actv_no" 			column="ACTV_NO"></result>

@@ -4,6 +4,7 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -76,6 +77,16 @@ public class TestDao {
 	
 	@Test
 	public void testWhat(){
-		System.out.println(dao.queryActivity(null, Activity.ACTIVITY_STATE_READY, null, null));
+//		List<Activity> list=dao.queryActivity(null, Activity.ACTIVITY_STATE_WAIT, null, null);
+		
+//		System.out.println(list);
+//		System.out.println(list.get(0).getStart_date());
+		Date date=new Date();
+		System.out.println(date);
+		System.out.println(date.getYear());
+		System.out.println(date.getMonth());
+		System.out.println(date.getDate());
+		System.out.println(date.getDay());
+		System.out.println(date.getTime());
 	}
 }

@@ -1,6 +1,8 @@
 package com.lanxi.test;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -8,6 +10,7 @@ import org.junit.Test;
 
 import com.lanxi.common.ConfigUtil;
 import com.lanxi.common.ExcelUtil;
+import com.lanxi.common.HttpUtil;
 import com.lanxi.common.RandomUtil;
 import com.lanxi.common.SmsUtil;
 import com.lanxi.common.TimeUtil;
@@ -44,5 +47,18 @@ public class TestUtil {
     @Test
     public void testGetExcel(){
     	System.out.println(ExcelUtil.getCell(1,10,1));
+    }
+    @Test
+    public void testConfig(){
+    	System.out.println(ConfigUtil.get("chooseTestUrl"));
+    }
+    @Test
+    public void testPostKeyValue(){
+    	Map<String, String> map=new HashMap<>();
+		map.put("actv_no","1");
+		map.put("batch_no","1");
+		map.put("update_flag","1");
+		String rs=HttpUtil.postKeyValue(map, ConfigUtil.get("chooseTestUrl"),"utf-8");
+		System.out.println(rs);
     }
 }

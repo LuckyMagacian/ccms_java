@@ -10,6 +10,14 @@ import java.util.Properties;
 
 public class ConfigUtil {
 	private static Properties properties;
+	
+	/**
+	 * 初始化 固定
+	 */
+	static{
+		loadProperties(ConfigUtil.class.getClassLoader().getResourceAsStream("cmss.properties"));
+	}
+	
 	/**
 	 * 从输入流中加载配置文件
 	 * @param inStream

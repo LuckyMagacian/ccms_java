@@ -62,6 +62,45 @@
 	        <property name="maxUploadSize" value="-1"/>
 	    </bean>
 	
+		
+		<!-- 任务工厂 -->
+		<bean id="tasks"   lazy-init="false" autowire="no" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+			<property name="triggers">
+				<list>
+					<ref local="startActivity"></ref>
+					<ref local="endActivity"></ref>
+				</list>
+			</property>
+		</bean>
+		<!--调度 活动开始 短信通知-->
+		<bean id="startActivity" class="org.springframework.scheduling.quartz.CronTriggerBean">
+			<property name="jobDetail" ref="startActivityJob"/> 
+			<property name="cronExpression">
+				<value>* 0 1 * * ?</value><!-- 每天的早上6点触发 -->
+			</property>
+		</bean>
+		<!-- 任务 -->
+		<bean id="startActivityJob"  class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+			<property name="targetObject" ref="quartzTaskService"/>
+			<property name="targetMethod">
+				<value>startActivity</value>
+			</property>
+		</bean>
+		
+		<!--调度 活动开始 短信通知-->
+		<bean id="endActivity" class="org.springframework.scheduling.quartz.CronTriggerBean">
+			<property name="jobDetail" ref="startActivityJob"/> 
+			<property name="cronExpression">
+				<value>* 0 1 * * ?</value><!-- 每天的早上6点触发 -->
+			</property>
+		</bean>
+		<!-- 任务 -->
+		<bean id="endActivityJob"  class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+			<property name="targetObject" ref="quartzTaskService"/>
+			<property name="targetMethod">
+				<value>endActivity</value>
+			</property>
+		</bean>
 	    <!--&lt;!&ndash; 拦截器 &ndash;&gt;-->
 	    <!--<mvc:interceptors>-->
 	        <!--<mvc:interceptor>-->

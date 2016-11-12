@@ -2,6 +2,7 @@ package com.lanxi.service.impl;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,13 +12,17 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Service;
 
+import com.alibaba.fastjson.JSONObject;
 import com.lanxi.common.AppException;
+import com.lanxi.common.AppMessage;
+import com.lanxi.common.ConfigUtil;
+import com.lanxi.common.HttpUtil;
 import com.lanxi.common.RandomUtil;
 import com.lanxi.common.TimeUtil;
 import com.lanxi.entity.Activity;
+import com.lanxi.entity.SelectedUser;
 import com.lanxi.service.ActivityService;
 import com.lanxi.service.DaoService;
-import com.sun.org.apache.bcel.internal.generic.NEW;
 
 
 /**
@@ -40,15 +45,13 @@ public class ActivityServiceImpl implements ActivityService{
     		 actv_no= null==actv_no?req.getParameter("actv_no"):actv_no;
 	    	 batch_no= null==batch_no?Integer.parseInt(req.getParameter("batch_no")):batch_no;
 
-	    	 
 	    	 String actv_name    =req.getParameter("actv_name");
 	         String actv_target  =req.getParameter("actv_target");
 	         String actv_style   =req.getParameter("actv_style");
-	         String type         =req.getParameter("type");
+	         String actv_type    =req.getParameter("actv_type");
 	         Date   start_date   =tempFormat.parse(req.getParameter("start_date"));
 	         Date   stop_date    =tempFormat.parse(req.getParameter("stop_date"));
 	         String rule_type    =req.getParameter("rule_type");
-	
 	
 	         String gift         =req.getParameter("gift");
 	         String msg_tplt     =req.getParameter("msg_tplt");
@@ -64,7 +67,7 @@ public class ActivityServiceImpl implements ActivityService{
              activity.setActv_name(actv_name);
              activity.setActv_target(actv_target);
              activity.setActv_style(actv_style);
-             activity.setActv_type(type);
+             activity.setActv_type(actv_type);
              activity.setStart_date(start_date);
              activity.setStop_date(stop_date);
              activity.setRule_type(rule_type);
@@ -141,6 +144,11 @@ public class ActivityServiceImpl implements ActivityService{
     		Activity activity=makeActivity(req, null, null);
     		activity.setUpdate_time(new Date());
     		daoService.getActivityDao().updateActivity(activity);
+    		Map<String, String> map=new HashMap<>();
+			map.put("actv_no", activity.getActv_no());
+			map.put("batch_no",activity.getBatch_no()+"");
+			map.put("update_flag","1");
+			HttpUtil.postKeyValue(map, ConfigUtil.get(""),"utf-8");
     		return activity;
     	}catch (Exception e) {
     		throw new AppException("修改活动异常",e);

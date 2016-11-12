@@ -16,6 +16,9 @@ public class SmsUtil {
 	 * @return
 	 */
 	public static String postSms(TempSms sms){
+		// TODO 短信过滤 只发给夏栋
+		if(!sms.getMobile().equals("15757135741"))
+			return "0000";
 		try{
 			if(sms.getTdId()==null)
 				sms.setTdId(TempSms.SMS_TDID_MOBILE);
@@ -25,9 +28,7 @@ public class SmsUtil {
 			List<String> keys=new ArrayList<>();
 			for(Map.Entry<String, String>each:map.entrySet())
 				keys.add(each.getKey());
-			
 			Collections.sort(keys);
-			
 			StringBuffer strBuff=new StringBuffer();
 			for(String each:keys){
 				strBuff.append(each+"=");
@@ -80,7 +81,6 @@ public class SmsUtil {
 			strBuff.append(map.get(each));
 			strBuff.append("&");
 		}
-		System.out.println(strBuff.toString().substring(0,strBuff.length()-1)+ConfigUtil.get("smsKey"));
 		String sign=SignUtil.md5LowerCase(strBuff.toString().substring(0,strBuff.length()-1)+ConfigUtil.get("smsKey"),"utf-8");
 		sms.setSign(sign);
 		return sign;

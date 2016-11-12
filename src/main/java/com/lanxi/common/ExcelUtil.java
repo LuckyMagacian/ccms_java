@@ -77,11 +77,12 @@ public class ExcelUtil {
 	 * @return
 	 */
 	public static HSSFSheet getSheet(int index){
+		if(index<0)
+			throw new AppException("页号不能小于0");
 		int count=workbook.getNumberOfSheets();
 		if(index>=count)
 			for(int i=count;i<=index;i++)
 				workbook.createSheet();
-		HSSFSheet sheet=workbook.getSheetAt(index);
 		return workbook.getSheetAt(index);
 	}
 	/**
@@ -91,11 +92,14 @@ public class ExcelUtil {
 	 * @return
 	 */
 	public static HSSFRow getRow(int sheetIndex,int rowIndex){
+		if(rowIndex<0)
+			throw new AppException("获取行号不能小于0");
 		HSSFSheet sheet=getSheet(sheetIndex);
 		int count=sheet.getLastRowNum();
-		System.out.println(count);
-		if(rowIndex>count)
-			for(int i=count;i<rowIndex;i++)
+		HSSFRow row=sheet.getRow(rowIndex);
+		if(row==null)
+		if(rowIndex>=count)
+			for(int i=count;i<=rowIndex;i++)
 				sheet.createRow(i);
 		return sheet.getRow(rowIndex);
 	}
@@ -111,6 +115,7 @@ public class ExcelUtil {
 		int count =row.getLastCellNum();
 		if(count==-1)
 			count=0;
+		if(row.getCell(cellIndex)==null)
 		if(cellIndex>=count)
 			for(int i=count;i<=cellIndex;i++)
 				row.createCell(i);

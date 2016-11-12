@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 
+import com.lanxi.entity.Activity;
 import com.lanxi.entity.SelectedUser;
 @Repository
 public interface SelectedUserDao {
@@ -16,7 +17,7 @@ public interface SelectedUserDao {
 	public List<SelectedUser> selectSelectedUser(SelectedUser user);
 	/**
 	 * 通过条件筛选用户
-	 * 1活动名		->	actv_no
+	 * 1活动编号		->	actv_no
 	 * 2批次			->	batch_no
 	 * 3用户报名方式	->	apply
 	 * 4活动结果		->	result
@@ -25,4 +26,11 @@ public interface SelectedUserDao {
 	 * @return
 	 */
 	public List<SelectedUser> selectUserByState(Map<String, Object> args);
+	/**
+	 * 结束活动
+	 * 1活动编号
+	 * 2批次号
+	 * @param activity 
+	 */
+	public void failedUser(Activity activity);
 }

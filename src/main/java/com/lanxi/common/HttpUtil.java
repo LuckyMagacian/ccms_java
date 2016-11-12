@@ -9,8 +9,19 @@ import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.message.BasicNameValuePair;
 
 public class HttpUtil {
 	public static final String defEnCharset="utf-8";/**默认编码字符集*/
@@ -76,8 +87,9 @@ public class HttpUtil {
 			conn.setDoOutput(true);
 			conn.setDoInput(true);
 			conn.setRequestMethod("POST");
-			conn.setConnectTimeout(6000);
-			conn.setReadTimeout(6000);
+			// TODO 超时时间10分钟
+			conn.setConnectTimeout(600000);
+			conn.setReadTimeout(600000);
 			if(type!=null)
 				conn.setRequestProperty("Content-Type",type+";Charset="+charset);
 			conn.connect();
@@ -155,4 +167,34 @@ public class HttpUtil {
 		return post(xml, res, charset,"txt/html");
 	}
 
+	/**
+	 * 发送键值对
+	 * @param params	键值对
+	 * @param url		目标url
+	 * @param charset	编解码字符集
+	 * @return
+	 */
+	public static String postKeyValue(Map<String, String> params,String url,String charset){
+		try {
+		HttpClient client=HttpClientBuilder.create().build();
+			HttpPost   post  =new HttpPost(url);
+			List<NameValuePair> keyValue=new ArrayList<>();
+			for(Map.Entry<String, String> each:params.entrySet())
+				keyValue.add(new BasicNameValuePair(each.getKey(), each.getValue()));
+			UrlEncodedFormEntity entity=new UrlEncodedFormEntity(keyValue);
+			entity.setContentEncoding(charset);
+			post.setEntity(entity);
+			HttpResponse res=client.execute(post);
+			
+			BufferedReader buffReader=new BufferedReader(new InputStreamReader(res.getEntity().getContent(),charset));
+			StringBuffer strBuff=new StringBuffer();
+			String temp=null;
+			while((temp=buffReader.readLine())!=null)
+				strBuff.append(temp);
+			return strBuff.toString();
+
+		} catch (Exception e) {
+			throw new AppException("发送键值对异常", e);
+		}
+	}
 }
