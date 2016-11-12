@@ -73,7 +73,7 @@
 			</property>
 		</bean>
 		<!--调度 活动开始 短信通知-->
-		<bean id="startActivity" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<bean id="startActivity" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
 			<property name="jobDetail" ref="startActivityJob"/> 
 			<property name="cronExpression">
 				<value>* 0 1 * * ?</value><!-- 每天的早上6点触发 -->
@@ -88,8 +88,8 @@
 		</bean>
 		
 		<!--调度 活动开始 短信通知-->
-		<bean id="endActivity" class="org.springframework.scheduling.quartz.CronTriggerBean">
-			<property name="jobDetail" ref="startActivityJob"/> 
+		<bean id="endActivity" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+			<property name="jobDetail" ref="endActivityJob"/> 
 			<property name="cronExpression">
 				<value>* 0 1 * * ?</value><!-- 每天的早上6点触发 -->
 			</property>

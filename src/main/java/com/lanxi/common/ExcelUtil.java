@@ -72,6 +72,14 @@ public class ExcelUtil {
 		return titleStyle;
 	}
 	/**
+	 * 获取工作簿
+	 * @return
+	 */
+	public static HSSFWorkbook getWorkBook(){
+		return workbook;
+	}
+	
+	/**
 	 * 根据索引获取页
 	 * @param index
 	 * @return
@@ -79,11 +87,23 @@ public class ExcelUtil {
 	public static HSSFSheet getSheet(int index){
 		if(index<0)
 			throw new AppException("页号不能小于0");
+		//没有sheet count=0  1个sheet count=1 两个count number=2
 		int count=workbook.getNumberOfSheets();
-		if(index>=count)
-			for(int i=count;i<=index;i++)
-				workbook.createSheet();
-		return workbook.getSheetAt(index);
+		
+		if(count>index)
+			return workbook.getSheetAt(index);
+		if(count==index){
+			workbook.createSheet().setDefaultColumnWidth(20);//设置默认单元格宽度
+			return workbook.getSheetAt(index);
+		}
+		if(count<index){
+			while(count<=index){
+				workbook.createSheet().setDefaultColumnWidth(20);
+				count++;
+			}
+			return workbook.getSheetAt(index);
+		}
+		return null;
 	}
 	/**
 	 * 根据索引获取行
@@ -95,12 +115,12 @@ public class ExcelUtil {
 		if(rowIndex<0)
 			throw new AppException("获取行号不能小于0");
 		HSSFSheet sheet=getSheet(sheetIndex);
-		int count=sheet.getLastRowNum();
+		//可以隔行创建行,未创建的行依然是null,
+		//最终行号为创建的行号最大值
+		//没有创建时 最大行号为0
 		HSSFRow row=sheet.getRow(rowIndex);
 		if(row==null)
-		if(rowIndex>=count)
-			for(int i=count;i<=rowIndex;i++)
-				sheet.createRow(i);
+			sheet.createRow(rowIndex);
 		return sheet.getRow(rowIndex);
 	}
 	/**
@@ -112,13 +132,11 @@ public class ExcelUtil {
 	 */
 	public static HSSFCell getCell(int sheetIndex,int rowIndex,int cellIndex){
 		HSSFRow row=getRow(sheetIndex, rowIndex);
-		int count =row.getLastCellNum();
-		if(count==-1)
-			count=0;
-		if(row.getCell(cellIndex)==null)
-		if(cellIndex>=count)
-			for(int i=count;i<=cellIndex;i++)
-				row.createCell(i);
+		if(cellIndex<0)
+			throw new AppException("单元格编号不能小于0");
+		HSSFCell cell=row.getCell(cellIndex);
+		if(cell==null)
+			row.createCell(cellIndex);
 		return row.getCell(cellIndex);
 	}
 	/**
