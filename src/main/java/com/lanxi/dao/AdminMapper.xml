@@ -15,7 +15,7 @@
     </select>
 
     <update id="updateUser">
-        UPDATE T_CCMS_ADMIN SET PASSWORD=#{password} WHERE USERNAME=#{username};
+        UPDATE T_CCMS_ADMIN SET PASSWORD=#{password} WHERE ADMIN_ID=#{admin_Id};
     </update>
 
     <delete id="deleteUser" parameterType="String">

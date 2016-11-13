@@ -102,28 +102,30 @@ public class AdminController {
     @ResponseBody
     public Map updateAdmin(HttpServletRequest servletRequest, HttpSession session) {
         Map<String, Object> map = new HashMap<>();
-        //得到登录用户的类型
-        String type = null;
         try {
-            type = (String) session.getAttribute("admin_Type");
+            //得到登录用户的类型
+            String type = (String) session.getAttribute("admin_Type");
+            if (!type.equals("系统管理员")) {
+                map.put("message", "您不是管理员，没有权限");
+                return map;
+            }
         } catch (Exception e) {
             map.put("message", "获取身份类型失败");
-            return map;
-        }
-        if (!type.equals("系统管理员")) {
-            map.put("message", "您不是管理员，没有权限");
             return map;
         }
         Admin admin = new Admin();
         String username = null;
         String password = null;
+        String admin_Id=null;
         try {
             username = servletRequest.getParameter("username").trim();
+            admin_Id=servletRequest.getParameter("admin_Id");
             password = servletRequest.getParameter("password").trim();
         } catch (Exception e) {
             map.put("message", "获取参数失败");
             return map;
         }
+        admin.setAdmin_Id(admin_Id);
         admin.setUsername(username);
         admin.setPassword(password);
         try {
