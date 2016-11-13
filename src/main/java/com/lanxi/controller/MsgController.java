@@ -76,7 +76,7 @@ public class MsgController {
             //修改表中的apply的值
             selectService.updateApply(select);
 
-            map.put("retCode" + ":" + "0000", "retDesc" + ":" + "发送成功");
+            map.put("retCode:0000", "retDesc:发送成功");
         } catch (Exception e) {
             map.put("发送失败", e.getMessage());
             logger.error("MsgController-receive" + e.getMessage(), e);

@@ -56,11 +56,11 @@ public class LoginController {
         Admin admin = adminService.getByUsername(username);
         if (admin == null) {//验证用户名是否存在
             map.put("statusCode", 300);
-            map.put("301", "用户名错误");
+            map.put("message", "用户名错误");
             return map;
         } else if (!admin.getPassword().equals(password)) {//验证密码是否正确
             map.put("statusCode", 300);
-            map.put("302", "密码错误");
+            map.put("message", "密码错误");
             return map;
         } else {//登陆
             String admin_Type = admin.getAdmin_Type();
@@ -71,7 +71,7 @@ public class LoginController {
                 map.put("admin_Type", admin_Type);
                 map.put("username", username);
                 map.put("statusCode", 200);
-                map.put("303", "登陆成功");
+                map.put("message", "登陆成功");
             } catch (Exception e) {
                 map.put("statusCode", 300);
                 logger.error("loginController-login.do" + e.getMessage(), e);

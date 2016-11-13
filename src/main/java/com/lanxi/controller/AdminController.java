@@ -33,7 +33,7 @@ public class AdminController {
         //得到登录用户的类型
         try {
             String type = (String) session.getAttribute("admin_Type");
-            if (!type.equals("系统管理员")) {
+            if (!type.equals("1")) {
                 map.put("message", "您不是管理员，没有权限");
                 return map;
             }
@@ -105,7 +105,7 @@ public class AdminController {
         try {
             //得到登录用户的类型
             String type = (String) session.getAttribute("admin_Type");
-            if (!type.equals("系统管理员")) {
+            if (!type.equals("1")) {
                 map.put("message", "您不是管理员，没有权限");
                 return map;
             }
@@ -149,7 +149,7 @@ public class AdminController {
         try {
             String type = (String) session.getAttribute("admin_Type");
             name = (String) session.getAttribute("username");
-            if (!type.equals("系统管理员")) {
+            if (!type.equals("1")) {
                 map.put("message", "您不是管理员，没有权限");
                 return map;
             }
