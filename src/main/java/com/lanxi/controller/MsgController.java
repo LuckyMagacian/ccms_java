@@ -29,27 +29,6 @@ public class MsgController {
     private static Logger logger = Logger.getLogger(MsgController.class);
     @Resource
     SelectService selectService;
-//
-//    @RequestMapping("/msg.send")
-//    @ResponseBody
-//    public Map Util(HttpServletRequest servletRequest) {
-//        Map<String, Object> map = new HashMap<>();
-//        String arr[];
-//        String msg_tpltJson = servletRequest.getParameter("msg_tplt");
-//        String paramsJson=servletRequest.getParameter("params");
-//        arr=msg_tpltJson.split("xxx");
-//        Type type = new TypeToken<ArrayList<Map<String,Object>>>()
-//        {}.getType();
-//        ArrayList<Map<String,Object>> jsonObjects = new Gson().fromJson(paramsJson, type);
-//
-////        JSONArray jsonArray = JSONArray.fromObject(paramsJson);
-////        for(int i=0;i<jsonArray.length(); i++){
-////            JSONObject jsonJ = jsonArray.getJSONObject(i);
-////            jsonJ.getString("phone");
-////            jsonJ.getString("param");
-////        }
-//          return map;
-//    }
 
 //   public static void main(String[] args) {
 //        String params = "[{ phone:15757135754,  param: [p1,p2,p3] }," +

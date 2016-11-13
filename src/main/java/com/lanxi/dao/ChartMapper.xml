@@ -14,7 +14,7 @@
         SELECT CONTENT FROM T_CCMS_CHART;
     </select>
 
-    <select id="getList" resultType="com.lanxi.entity.Chart">
-         SELECT * FROM T_CCMS_CHART;
+    <select id="getChartList" resultType="com.lanxi.entity.Chart">
+         SELECT CONTENT,CHART_ID FROM T_CCMS_CHART;
     </select>
 </mapper>

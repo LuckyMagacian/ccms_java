@@ -50,26 +50,26 @@ public class LoginController {
 //        rep.setCharacterEncoding("utf-8");
 //        PrintWriter out = rep.getWriter();
         Map<String, Object> map = new HashMap<>();
-        String userName = req.getParameter("userName").trim();
-        String passWord = req.getParameter("passWord").trim();
+        String username = req.getParameter("username").trim();
+        String password = req.getParameter("password").trim();
         //根据用户名从数据库中取出信息
-        Admin admin = adminService.getByUserName(userName);
+        Admin admin = adminService.getByUsername(username);
         if (admin == null) {//验证用户名是否存在
             map.put("statusCode", 300);
             map.put("301", "用户名错误");
-            return null;
-        } else if (!admin.getPassWord().equals(passWord)) {//验证密码是否正确
+            return map;
+        } else if (!admin.getPassword().equals(password)) {//验证密码是否正确
             map.put("statusCode", 300);
             map.put("302", "密码错误");
-            return null;
+            return map;
         } else {//登陆
             String admin_Type = admin.getAdmin_Type();
             session.setAttribute("admin", admin);//session存储用户
-            session.setAttribute("userName", userName);
+            session.setAttribute("username", username);
             session.setAttribute("admin_Type", admin_Type);
             try {
                 map.put("admin_Type", admin_Type);
-                map.put("userName", userName);
+                map.put("username", username);
                 map.put("statusCode", 200);
                 map.put("303", "登陆成功");
             } catch (Exception e) {

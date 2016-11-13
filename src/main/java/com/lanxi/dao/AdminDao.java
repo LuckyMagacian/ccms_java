@@ -23,12 +23,12 @@ public interface AdminDao {
     void updateUser(Admin admin);
 
     //删除用户
-    void deleteUser(String userName);
+    void deleteUser(String username);
 
     //查询是否存在该用户名
-    int  getCount(String userName);
+    int  getCount(String username);
 
     //根据用户名取出信息
-    Admin getByUserName(String userName);
+    Admin getByUsername(String username);
 
 }

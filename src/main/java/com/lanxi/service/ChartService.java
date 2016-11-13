@@ -13,5 +13,5 @@ public interface ChartService {
     //得到chartMap
      Map getChartMap();
      //得到chart列表
-     List<Chart> getList();
+     List<Chart> getChartList();
 }

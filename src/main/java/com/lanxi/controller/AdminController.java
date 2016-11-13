@@ -52,8 +52,8 @@ public class AdminController {
         Admin admin = new Admin();
         admin.setAdmin_Id(admin_Id);
         admin.setAdmin_Type(admin_Type);
-        admin.setPassWord(password);
-        admin.setUserName(username);
+        admin.setPassword(password);
+        admin.setUsername(username);
         logger.info(" admin_type=" + admin_Type + " username=" + username + " password=" + password + " admin_Id=" + admin_Id);
         try {
             adminService.addAdmin(admin);
@@ -97,11 +97,11 @@ public class AdminController {
         }
         Admin admin = new Admin();
         String username = servletRequest.getParameter("username").trim();
-        String admin_Type = servletRequest.getParameter("admin_Type").trim();
+       // String admin_Type = servletRequest.getParameter("admin_Type").trim();
         String password = servletRequest.getParameter("password").trim();
-        admin.setUserName(username);
-        admin.setAdmin_Type(admin_Type);
-        admin.setPassWord(password);
+        admin.setUsername(username);
+        //admin.setAdmin_Type(admin_Type);
+        admin.setPassword(password);
         try {
             adminService.updateAdmin(admin);
             map.put("statusCode", 200);

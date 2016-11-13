@@ -15,5 +15,5 @@ public interface ChartDao {
     //得到contents列表
     List<String> getContents();
     //得到chart列表
-    List<Chart> getList();
+    List<Chart> getChartList();
 }
