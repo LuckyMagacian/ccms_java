@@ -19,7 +19,7 @@
     </update>
 
     <delete id="deleteUser" parameterType="String">
-        DELETE  FROM T_CCMS_ADMIN WHERE USERNAME=#{username}
+        DELETE  FROM T_CCMS_ADMIN WHERE ADMIN_ID=#{admin_Id}
     </delete>
     
     <select id="getCount" parameterType="String" resultType="Integer">

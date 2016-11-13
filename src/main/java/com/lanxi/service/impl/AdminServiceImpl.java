@@ -39,8 +39,8 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public void deleteAdmin(String username) {
-        adminDao.deleteUser(username);
+    public void deleteAdmin(String admin_Id) {
+        adminDao.deleteUser(admin_Id);
     }
 
     @Override

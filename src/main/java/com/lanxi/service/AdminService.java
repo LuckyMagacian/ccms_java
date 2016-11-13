@@ -21,7 +21,7 @@ public interface AdminService {
     void updateAdmin(Admin admin);
 
     //删除用户
-    void deleteAdmin(String username);
+    void deleteAdmin(String admin_Id);
 
     //查询是否存在该用户名
     int getCount(String username);

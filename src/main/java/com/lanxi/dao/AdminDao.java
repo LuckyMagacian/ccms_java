@@ -23,7 +23,7 @@ public interface AdminDao {
     void updateUser(Admin admin);
 
     //删除用户
-    void deleteUser(String username);
+    void deleteUser(String chart_Id);
 
     //查询是否存在该用户名
     int  getCount(String username);

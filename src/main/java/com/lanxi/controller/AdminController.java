@@ -116,10 +116,10 @@ public class AdminController {
         Admin admin = new Admin();
         String username = null;
         String password = null;
-        String admin_Id=null;
+        String admin_Id = null;
         try {
             username = servletRequest.getParameter("username").trim();
-            admin_Id=servletRequest.getParameter("admin_Id");
+            admin_Id = servletRequest.getParameter("admin_Id");
             password = servletRequest.getParameter("password").trim();
         } catch (Exception e) {
             map.put("message", "获取参数失败");
@@ -158,8 +158,10 @@ public class AdminController {
             return map;
         }
         String username = null;
+        String admin_Id=null;
         try {
             username = servletRequest.getParameter("username").trim();
+            admin_Id=servletRequest.getParameter("admin_Id").trim();
         } catch (Exception e) {
             map.put("message", "获取参数失败");
             return map;
@@ -169,7 +171,7 @@ public class AdminController {
             return map;
         }
         try {
-            adminService.deleteAdmin(username);
+            adminService.deleteAdmin(admin_Id);
             map.put("statusCode", 200);
             map.put("message", "删除成功");
         } catch (Exception e) {
