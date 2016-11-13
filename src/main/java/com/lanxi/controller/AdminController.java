@@ -31,9 +31,14 @@ public class AdminController {
     public Map AddUser(HttpSession session, HttpServletRequest servletRequest) {
         Map<String, Object> map = new HashMap<>();
         //得到登录用户的类型
-        String type = (String) session.getAttribute("admin_Type");
-        if (!type.equals("系统管理员")) {
-            map.put("message", "您不是管理员，没有权限");
+        try {
+            String type = (String) session.getAttribute("admin_Type");
+            if (!type.equals("系统管理员")) {
+                map.put("message", "您不是管理员，没有权限");
+                return map;
+            }
+        } catch (Exception e) {
+            map.put("message", "获取身份类型失败");
             return map;
         }
         String admin_Type = null;
@@ -98,7 +103,13 @@ public class AdminController {
     public Map updateAdmin(HttpServletRequest servletRequest, HttpSession session) {
         Map<String, Object> map = new HashMap<>();
         //得到登录用户的类型
-        String type = (String) session.getAttribute("admin_Type");
+        String type = null;
+        try {
+            type = (String) session.getAttribute("admin_Type");
+        } catch (Exception e) {
+            map.put("message", "获取身份类型失败");
+            return map;
+        }
         if (!type.equals("系统管理员")) {
             map.put("message", "您不是管理员，没有权限");
             return map;
@@ -132,10 +143,16 @@ public class AdminController {
     public Map deleteAdmin(HttpServletRequest servletRequest, HttpSession session) {
         Map<String, Object> map = new HashMap<>();
         // 得到登录用户的类型
-        String type = (String) session.getAttribute("admin_Type");
-        String name = (String) session.getAttribute("username");
-        if (!type.equals("系统管理员")) {
-            map.put("message", "您不是管理员，没有权限");
+        String name = null;
+        try {
+            String type = (String) session.getAttribute("admin_Type");
+            name = (String) session.getAttribute("username");
+            if (!type.equals("系统管理员")) {
+                map.put("message", "您不是管理员，没有权限");
+                return map;
+            }
+        } catch (Exception e) {
+            map.put("message", "获取身份失败");
             return map;
         }
         String username = null;
@@ -167,15 +184,16 @@ public class AdminController {
     @ResponseBody
     public Map getSessionMessage(HttpSession session) {
         Map<String, Object> map = new HashMap<>();
-        Admin admin = (Admin) session.getAttribute("admin");
-        String username = (String) session.getAttribute("username");
-        String admin_Type = (String) session.getAttribute("admin_Type");
         try {
+            Admin admin = (Admin) session.getAttribute("admin");
+            String username = (String) session.getAttribute("username");
+            String admin_Type = (String) session.getAttribute("admin_Type");
             map.put("username", username);
             map.put("admin", admin);
             map.put("admin_Type", admin_Type);
             map.put("statusCode", 200);
         } catch (Exception e) {
+            map.put("message", "获取信息失败");
             map.put("statusCode", 300);
             logger.error("AdminController-getSessionMessage" + e.getMessage(), e);
         } finally {

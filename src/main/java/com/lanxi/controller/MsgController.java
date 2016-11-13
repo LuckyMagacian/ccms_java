@@ -2,7 +2,7 @@ package com.lanxi.controller;
 
 
 import com.lanxi.entity.Select;
-import com.lanxi.Util.RequestUtil;
+import com.lanxi.common.RequestUtil;
 import com.lanxi.service.SelectService;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
@@ -12,12 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
-import java.lang.reflect.Type;
-import java.util.ArrayList;
 import java.util.Map;
-
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 /**
  * Created by Administrator on 2016/11/9.

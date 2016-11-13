@@ -1,4 +1,4 @@
-package com.lanxi.Util;
+package com.lanxi.common;
 
 import java.io.BufferedReader;
 import java.io.IOException;
