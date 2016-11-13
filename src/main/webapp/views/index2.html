@@ -43,24 +43,24 @@
     </a>
 
     <nav class="navbar navbar-static-top">
-      <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+      <a href="javascript:void(0);" class="sidebar-toggle" data-toggle="offcanvas" role="button">
         <span class="sr-only">导航按钮toggle</span>
       </a>
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
           <li class="dropdown user user-menu">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <span class="hidden-xs">Admin</span>
+            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
+              <span class="hidden-xs" id="loginName">Admin</span>
             </a>
             <ul id="userMenu" class="dropdown-menu" role="menu">
-              <li><a href="#">修改密码</a></li>
+              <li><a href="javascript:rePwd()">修改密码</a></li>
 	            <li class="divider"></li>
-	            <li><a href="#">退出</a></li>
+	            <li><a href="javascript:logOut()">退出</a></li>
             </ul>
           </li>
           <!-- Control Sidebar Toggle Button -->
           <li>
-            <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
+            <a href="javascript:void(0);" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
           </li>
         </ul>
       </div>
@@ -127,7 +127,7 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="usermanage.html"><i class="fa fa-circle-o"></i>用户管理</a></li>
+            <li><a href="pages/userManage.html"><i class="fa fa-circle-o"></i>用户管理</a></li>
           </ul>
         </li>
       </ul>
@@ -184,11 +184,11 @@
             </div>
             <!-- ./box-body -->
             <div class="box-footer">
-              <div class="row">
+              <div class="row" id="monthData">
                 <div class="col-sm-3 col-xs-6">
                   <div class="description-block border-right">
                     <span class="description-percentage text-green"><i class="fa fa-caret-up"></i> 17%</span>
-                    <h5 class="description-header">35221人次</h5>
+                    <h5 class="description-header">35221元</h5>
                     <span class="description-text">分期</span>
                   </div>
                   <!-- /.description-block -->
@@ -197,7 +197,7 @@
                 <div class="col-sm-3 col-xs-6">
                   <div class="description-block border-right">
                     <span class="description-percentage text-yellow"><i class="fa fa-caret-left"></i> 0%</span>
-                    <h5 class="description-header">3345人次</h5>
+                    <h5 class="description-header">3345元</h5>
                     <span class="description-text">取现</span>
                   </div>
                   <!-- /.description-block -->
@@ -206,7 +206,7 @@
                 <div class="col-sm-3 col-xs-6">
                   <div class="description-block border-right">
                     <span class="description-percentage text-green"><i class="fa fa-caret-up"></i> 20%</span>
-                    <h5 class="description-header">1233人次</h5>
+                    <h5 class="description-header">1233元</h5>
                     <span class="description-text">刷卡</span>
                   </div>
                   <!-- /.description-block -->
@@ -215,7 +215,7 @@
                 <div class="col-sm-3 col-xs-6">
                   <div class="description-block">
                     <span class="description-percentage text-red"><i class="fa fa-caret-down"></i> 18%</span>
-                    <h5 class="description-header">1200人次</h5>
+                    <h5 class="description-header">1200元</h5>
                     <span class="description-text">循环</span>
                   </div>
                   <!-- /.description-block -->

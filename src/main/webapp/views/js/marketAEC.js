@@ -28,7 +28,6 @@ $(function() {
 				end.start = datas //将结束日的初始值设定为开始日
 			}
 		};
-
 		var end = {
 			min: laydate.now(),
 			max: '2099-12-31 23:59:59',
@@ -37,7 +36,6 @@ $(function() {
 				start.max = datas; //结束日选好后，重置开始日的最大日期
 			}
 		};
-
 		document.getElementById('start_date').onclick = function() {
 			start.elem = this;
 			laydate(start);
@@ -48,12 +46,11 @@ $(function() {
 			}
 			//监听提交
 		form.on('submit(marketAECForm)', function(data) {
-			console.log(data.field);
 			var temp=data.field,
-				actvStyle=Number(temp.sctv_style);
+				actvStyle=temp.actv_style;
 			temp.prop=[];
 			switch (actvStyle){
-				case 1://首刷激活
+				case '1'://首刷激活
 					temp.prop.push({
 						"date_key":"",
 						"source_table":"",
@@ -64,8 +61,8 @@ $(function() {
 						"prop_value":temp.ssjh
 					});
 					break;
-				case 2://东卡激活
-				case 4://刷卡
+				case '2'://东卡激活
+				case '4'://刷卡
 					if(temp.skbs!=""){//刷卡笔数不为空
 						temp.prop.push({
 							"date_key":"INP_DATE",
@@ -100,7 +97,7 @@ $(function() {
 						});
 					}
 					break;
-				case 3://分期
+				case '3'://分期
 					if(temp.fqs!=""){//分期数不为空
 						temp.prop.push({
 							"date_key":"PURCH_DAY",
@@ -127,7 +124,25 @@ $(function() {
 				default:console.log("未定义的错误! actvStyle="+actvStyle);
 					break;
 			}
-			console.log(JSON.stringify(temp));
+			$.ajax({
+				type:"post",
+				url:"/activity/generatActivity.do",
+				dataType:'json',
+				data:temp,
+				beforeSend:function(){
+					
+				},
+				success:function(jsonStr){
+					if(jsonStr.errCode=="0000"){
+						
+					}else{
+						layer.alert(jsonStr.errMsg);
+					}
+				},
+				error:function(e){
+					console.log("error:"+JSON.stringify(e));
+				}
+			});
 			return false;
 		});
 	});

@@ -88,6 +88,11 @@ actvName={//活动名称,ID:name
 	"1001":"活动一",
 	"1003":"活动3",
 	"1004":"活动4"
+};
+adminType={
+	"1": "系统管理员",
+	"2": "审核人员",
+	"3": "业务人员"
 }
 
 /**
@@ -194,4 +199,111 @@ function searchbar(cls, jsonArr, formJson) {
 			selectOp(this.id,this.jsonArr);
 		}
 	});
+}
+
+/** 
+ * 创建完整表格，不含表格头(在id="id"的html table中初始化表格头)
+ * id:表格对应id,jsonArr=<toolbar:[<>],searchbar:<>,formInfo:<>>
+ * toolbar,searchbar/formInfo详见tableBtn,searchbar函数中
+ * func：表格数据格式化，带一个参数jsonStr，为ajax收到的原始数据
+ * */
+function installTable(id,url,jsonArr,func){
+	layui.use('layer', function(){
+		var layer = layui.layer;
+		$.ajax({
+			type:"post",
+			url:url,
+			dataType:"json",
+			beforeSend:function(){
+				layer.open({
+					type:3,
+					scrollbar: false
+				});
+			},
+			success:function(jsonStr){
+				layer.closeAll('loading'); //关闭加载层
+				var dataArr=jsonStr;
+				if(func!=undefined){
+					var dataArr=func(jsonStr);
+				}
+				$("#"+id).DataTable({
+			  		dom: '<"top"<"toolbar">f<"searchbar">>rt<"bottom"lip>',
+			  		language: {
+			  			"lengthMenu": "每页 _MENU_ 条记录",
+			  			"zeroRecords": "没有找到记录",
+			  			"info": "第 _PAGE_ 页 ( 总共 _PAGES_ 页 )",
+			  			"infoEmpty": "无记录",
+			  			"infoFiltered": "(从 _MAX_ 条记录过滤)"
+			  		},
+			  		data:dataArr
+			  	});
+				if(jsonArr.toolbar!=undefined){
+					tableBtn('toolbar',jsonArr.toolbar);//加载表格头部按钮
+				}
+				if(jsonArr.searchbar!=undefined){
+					searchbar('searchbar', jsonArr.searchbar, jsonArr.formInfo);
+				}
+			},
+			error:function(e){
+				console.log("err:"+JSON.stringify(e));
+			}
+			
+		});
+	});
+}
+
+/**
+ *  ajax请求封装
+ * url:请求后台地址,dataJson:post请求数据
+ * beforeFunc:请求前触发函数,不带参数
+ * successFunc:成功时触发函数,带一个参数jsonStr
+ * */
+function ajaxPost(url,dataJson,successFunc){
+	$.ajax({
+		  	type:"post",
+		  	url:url,
+		  	dataType:"json",
+		  	beforeSend:function(){
+		  		
+		  	},
+		  	success:function(jsonStr){
+		  		if(typeof successFunc=='function'){
+		  			successFunc(jsonStr);
+		  		}
+		  		
+		  	},
+		  	error:function(e){
+		  		console.log("error!\n "+e);
+		  	}
+		  });
+}
+
+/** 通用验证函数
+    regStr:正则式
+    vailStr:待验证字符串
+    id:效果显示在该id上
+*/
+function pubValidate(regStr, valiStr, id) {
+    var flag = 0;
+    if (!regStr.test(valiStr)) flag = 1; //test()方法搜索字符串指定的值，根据结果并返回真或假。
+    else flag = 0;
+    if (flag) {//匹配不正确
+        $("#" + id).parent().removeClass("has-success");
+        $("#" + id).parent().addClass("has-error");
+        return false;
+    }
+    else {//匹配正确
+        $("#" + id).parent().removeClass("has-error");
+        $("#" + id).parent().addClass("has-success");
+        return true;
+    }
+}
+
+/** 用户名验证*/
+function valiUsername(id){
+    var regStr = /^\w+$/,//正则，匹配字母数字下划线
+        valiStr = $("#" + id).val(),
+        result = pubValidate(regStr, valiStr, id);
+        $("#loginHint").html("&nbsp;");
+    return result;
 }
