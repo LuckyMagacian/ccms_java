@@ -63,5 +63,11 @@ public interface ActivityService {
      * @return
      */
     public Activity copyActivity(HttpServletRequest req);
+    /**
+     * 通过活动编号和活动批次号查询活动
+     * @param req
+     * @return
+     */
+    public Activity queryActivityByIdAndBatchNo(HttpServletRequest req);
    
 }

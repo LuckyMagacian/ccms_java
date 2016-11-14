@@ -11,6 +11,7 @@ import com.lanxi.service.DaoService;
 import java.lang.*;
 import javax.annotation.Resource;
 
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Component;
 
 import java.util.*;
@@ -20,6 +21,7 @@ import java.util.*;
  */
 @Component("daoService")
 public class DaoServiceImpl implements DaoService{
+	private Logger logger=Logger.getLogger(DaoServiceImpl.class);
     @Resource
     private ActivityDao activityDao;
     @Resource
@@ -39,7 +41,9 @@ public class DaoServiceImpl implements DaoService{
         Activity activity=new Activity();
         activity.setActv_no(actv_no);
         activity.setBatch_no(batch_no==null?0:batch_no);
-        return activityDao.queryActivity(activity).get(0);
+        List<Activity> list=activityDao.queryActivity(activity);
+        logger.info("通过活动编号和活动批次号查询活动结果:"+list);
+        return list.get(0);
     }
 
 

@@ -49,16 +49,20 @@ public class ActivityServiceImpl implements ActivityService{
 	         String actv_target  =req.getParameter("actv_target");
 	         String actv_style   =req.getParameter("actv_style");
 	         String actv_type    =req.getParameter("actv_type");
-	         Date   start_date   =tempFormat.parse(req.getParameter("start_date"));
-	         Date   stop_date    =tempFormat.parse(req.getParameter("stop_date"));
+	         String start=req.getParameter("start_date");
+	         Date   start_date   =start==null?null:tempFormat.parse(start);
+	         String stop =req.getParameter("stop_date");
+	         Date   stop_date    =stop==null? null:tempFormat.parse(stop);
 	         String rule_type    =req.getParameter("rule_type");
 	
 	         String gift         =req.getParameter("gift");
 	         String msg_tplt     =req.getParameter("msg_tplt");
 	         String join_type    =req.getParameter("join_type");
-	         int people_limit    =Integer.parseInt(req.getParameter("people_limit"));
+	         String limit		 =req.getParameter("people_limit");
+	         Integer people_limit=limit==null?9999:Integer.parseInt(limit);
 	         String actv_stat    =Activity.ACTIVITY_STATE_WAIT;
-	         int success_rate    =Integer.parseInt(req.getParameter("success_rate"));
+	         String rate		 =req.getParameter("success_rate");
+	         Integer success_rate=rate==null?0:Integer.parseInt(rate);
 	         String desp         =req.getParameter("desp");
 	         
 	         Activity activity   =new Activity();
@@ -105,7 +109,16 @@ public class ActivityServiceImpl implements ActivityService{
             throw  new AppException("创建活动异常",e);
         }
     }
-
+    public Activity queryActivityByIdAndBatchNo(HttpServletRequest req){
+    	try{
+    		String actv_no=req.getParameter("actv_no");
+    		String batch=req.getParameter("batch_no");
+    		Integer batch_no=Integer.parseInt(batch);
+    		return daoService.getActivityByIdAndBatchNo(actv_no, batch_no);
+    	}catch (Exception e) {
+    		throw new AppException("通过活动编号和批次号查询活动异常",e);
+    	}
+    }
     /**
      * 查询可以修改的活动
      * @return
@@ -148,7 +161,7 @@ public class ActivityServiceImpl implements ActivityService{
 			map.put("actv_no", activity.getActv_no());
 			map.put("batch_no",activity.getBatch_no()+"");
 			map.put("update_flag","1");
-			HttpUtil.postKeyValue(map, ConfigUtil.get(""),"utf-8");
+			HttpUtil.postKeyValue(map, ConfigUtil.get("chooseTestUrl"),"utf-8");
     		return activity;
     	}catch (Exception e) {
     		throw new AppException("修改活动异常",e);

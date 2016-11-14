@@ -51,6 +51,8 @@ public class ActivityController {
 			return message;
 		}
 	}			
+
+	
 	@SuppressWarnings("finally")
 	@RequestMapping("/queryCanModify.do")
 	@ResponseBody

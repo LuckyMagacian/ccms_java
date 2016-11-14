@@ -10,6 +10,7 @@ import java.util.Map;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.log4j.Logger;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.springframework.stereotype.Service;
@@ -24,13 +25,16 @@ import com.lanxi.entity.Activity;
 import com.lanxi.entity.SelectedUser;
 import com.lanxi.service.DaoService;
 import com.lanxi.service.UserService;
+import com.sun.org.apache.bcel.internal.generic.NEW;
 @Service("userService")
 public class UserServiceImpl implements UserService {
+	private static Logger logger=Logger.getLogger(UserServiceImpl.class);
 	@Resource
 	DaoService daoService;
 	@Override
 	public Map<String, Object> autoFilter(HttpServletRequest req) {
 		try{
+			logger.info("开始智能筛选");
 			req.setCharacterEncoding("utf-8");
 			String actv_no=req.getParameter("actv_no");
 			String batch_no=req.getParameter("batch_no");
@@ -43,6 +47,7 @@ public class UserServiceImpl implements UserService {
 			JSONObject jobj=JSONObject.parseObject(rs);
 			String reCode=jobj.getString("result_code");
 			if("0".equals(reCode)){
+				logger.info("筛选完成");
 				String reMsg =jobj.getString("result_msg");
 //				String suggestion=jobj.getString("suggesstion");
 				Activity activity=daoService.getActivityByIdAndBatchNo(actv_no, Integer.parseInt(batch_no));
