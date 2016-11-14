@@ -27,7 +27,7 @@ public class SelectedUser {
 	/**活动编号*/
 	private String 	actv_no;
 	/**批次编号*/
-	private Integer		batch_no;
+	private Integer	batch_no;
 	/**用户卡号*/
 	private String	custr_nbr;
 	/**用户姓名*/
