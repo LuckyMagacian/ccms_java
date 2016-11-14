@@ -70,7 +70,7 @@ public class Activity {
     //活动id
     private String  actv_no;
     //批次号
-    private int     batch_no;
+    private Integer batch_no;
     //活动名称
     private String  actv_name;
     //活动目的
@@ -90,7 +90,7 @@ public class Activity {
     //参与类型
     private String  join_type;
     //人数限制
-    private int     people_limit;
+    private Integer people_limit;
     //活动状态
     private String  actv_state;
     //更新时间
@@ -100,18 +100,18 @@ public class Activity {
     //规则组合条件
     private String  rule_type;
     //成功比例
-    private int  	success_rate;
+    private Integer success_rate;
     //描述
     private String  desp;
     //审核意见
     private String 	check_opinion;
     //营销建议
     private String  suggestion;
-    public int getSuccess_rate() {
+    public Integer getSuccess_rate() {
         return success_rate;
     }
 
-    public void setSuccess_rate(int success_rate) {
+    public void setSuccess_rate(Integer success_rate) {
         this.success_rate = success_rate;
     }
 
@@ -147,11 +147,11 @@ public class Activity {
         this.actv_no = actv_no;
     }
 
-    public int getBatch_no() {
+    public Integer getBatch_no() {
         return batch_no;
     }
 
-    public void setBatch_no(int batch_no) {
+    public void setBatch_no(Integer batch_no) {
         this.batch_no = batch_no;
     }
 
@@ -219,11 +219,11 @@ public class Activity {
         this.join_type = join_type;
     }
 
-    public int getPeople_limit() {
+    public Integer getPeople_limit() {
         return people_limit;
     }
 
-    public void setPeople_limit(int people_limit) {
+    public void setPeople_limit(Integer people_limit) {
         this.people_limit = people_limit;
     }
 

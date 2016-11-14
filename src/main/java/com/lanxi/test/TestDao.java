@@ -20,12 +20,14 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.lanxi.common.BeanUtil;
 import com.lanxi.common.ExcelUtil;
+import com.lanxi.dao.ActivityDao;
 import com.lanxi.dao.SelectedUserDao;
 import com.lanxi.entity.Activity;
 import com.lanxi.entity.SelectedUser;
 import com.lanxi.service.ActivityService;
 import com.lanxi.service.DaoService;
 import com.lanxi.service.impl.DaoServiceImpl;
+import com.sun.scenario.effect.AbstractShadow;
 
 @SuppressWarnings("unused")
 public class TestDao {
@@ -91,5 +93,14 @@ public class TestDao {
 		System.out.println(date.getDate());
 		System.out.println(date.getDay());
 		System.out.println(date.getTime());
+	}
+	
+	@Test
+	public void testDaoA(){
+		ActivityDao adao=ac.getBean(ActivityDao.class);
+		Activity activity=new Activity();
+		activity.setActv_no("1");
+		activity.setBatch_no(1);
+		System.out.println(adao.queryActivity(activity));
 	}
 }

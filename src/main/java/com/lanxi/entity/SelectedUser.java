@@ -27,7 +27,7 @@ public class SelectedUser {
 	/**活动编号*/
 	private String 	actv_no;
 	/**批次编号*/
-	private int		batch_no;
+	private Integer		batch_no;
 	/**用户卡号*/
 	private String	custr_nbr;
 	/**用户姓名*/
@@ -47,10 +47,10 @@ public class SelectedUser {
 	public void setActv_no(String actv_no) {
 		this.actv_no = actv_no;
 	}
-	public int getBatch_no() {
+	public Integer getBatch_no() {
 		return batch_no;
 	}
-	public void setBatch_no(int batch_no) {
+	public void setBatch_no(Integer batch_no) {
 		this.batch_no = batch_no;
 	}
 	public String getCustr_nbr() {

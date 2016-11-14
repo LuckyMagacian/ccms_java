@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.lanxi.common.AppMessage;
 import com.lanxi.entity.Activity;
 import com.lanxi.entity.Prop;
+import com.lanxi.entity.SelectedUser;
 import com.lanxi.service.ActivityService;
 import com.lanxi.service.PropService;
 import com.sun.org.apache.bcel.internal.generic.NEW;
@@ -131,6 +132,21 @@ public class ActivityController {
 			return message;
 		}
 	}
+	
+	@RequestMapping("/queryActivityByIdAndBatch.do")
+	@ResponseBody
+	public AppMessage queryActivityByIdAndBatch(HttpServletRequest req){
+		AppMessage message=new AppMessage();
+		Activity activity=service.queryActivityByIdAndBatchNo(req);
+		if(activity!=null)
+		message.setErrCode("0000");
+		else
+		message.setErrCode("9999");
+		message.setErrMsg("12334");
+		message.setContent(activity);
+		return message;
+	}
+	
 	@SuppressWarnings("finally")
 	@RequestMapping("/queryActivity.do")
 	@ResponseBody

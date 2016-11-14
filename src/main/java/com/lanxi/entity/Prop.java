@@ -10,7 +10,7 @@ public class Prop {
     //活动编号
     private String actv_no;
     //批次号
-    private int batch_no;
+    private Integer batch_no;
     //操作类型
     private String operation;
     //数据源表名
@@ -50,11 +50,11 @@ public class Prop {
         this.actv_no = actv_no;
     }
 
-    public int getBatch_no() {
+    public Integer getBatch_no() {
         return batch_no;
     }
 
-    public void setBatch_no(int batch_no) {
+    public void setBatch_no(Integer batch_no) {
         this.batch_no = batch_no;
     }
 
