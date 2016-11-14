@@ -31,6 +31,7 @@ public class RequestUtil {
     public static Map<String, String> getFromsRequest(HttpServletRequest request)
             throws IOException {
         if ("POST".equals(request.getMethod())) {
+
             return getParamsPost(request.getInputStream());//post传的值
         }
         Enumeration<?> names = request.getParameterNames();
@@ -75,6 +76,7 @@ public class RequestUtil {
             String line;
             while ((line = in.readLine()) != null) {
                 sb.append(line);//拼接传入的值
+                System.out.println("读取"+line);
             }
             log.info("接受参数："+URLDecoder.decode(sb.toString(),"UTF-8"));
             return URLDecoder.decode(sb.toString(),"UTF-8");

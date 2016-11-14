@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lanxi.dao.SelectDao">
 
-    <update id="updateSelect">
+    <update id="updateApply">
         UPDATE T_CCMS_SELECT SET APPLY='1' WHERE ACTV_NO=#{actv_No} and BATCH_NO=#{batch_No} and PHONE=#{phone} and STATE='1';
     </update>
 

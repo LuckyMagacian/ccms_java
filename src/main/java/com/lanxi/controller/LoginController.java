@@ -46,9 +46,6 @@ public class LoginController {
     @RequestMapping("/login.do")
     @ResponseBody
     public Map login(HttpSession session, HttpServletRequest req, HttpServletResponse rep) throws IOException {
-//        rep.setContentType("text/html;charset=UTF-8");
-//        rep.setCharacterEncoding("utf-8");
-//        PrintWriter out = rep.getWriter();
         Map<String, Object> map = new HashMap<>();
         String username = req.getParameter("username").trim();
         String password = req.getParameter("password").trim();

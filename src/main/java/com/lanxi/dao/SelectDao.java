@@ -10,6 +10,4 @@ import org.springframework.stereotype.Repository;
 public interface SelectDao {
     //修改
     void updateApply(Select select);
-
-
 }

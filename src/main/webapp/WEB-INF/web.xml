@@ -36,6 +36,17 @@
     </filter-mapping>
 
 
+    <!-- SpringSecurity必须的filter -->
+    <!--<filter>-->
+    <!--<filter-name>springSecurityFilterChain</filter-name>-->
+    <!--<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>-->
+    <!--</filter>-->
+
+    <!--<filter-mapping>-->
+    <!--<filter-name>springSecurityFilterChain</filter-name>-->
+    <!--<url-pattern>/*</url-pattern>-->
+    <!--</filter-mapping>-->
+
 
     <!-- SpringMVC配置 -->
     <servlet>
@@ -69,16 +80,15 @@
         <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
     </listener>
 
-    <!-- 解决HTTP PUT请求Spring无法获取请求参数的问题 
-    <filter>
-        <filter-name>HiddenHttpMethodFilter</filter-name>
-        <filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>
-    </filter>
-    <filter-mapping> 
-        <filter-name>HiddenHttpMethodFilter</filter-name>
-        <servlet-name>SpringMVC</servlet-name>
-    </filter-mapping>
-    -->
+    <!--&lt;!&ndash; 解决HTTP PUT请求Spring无法获取请求参数的问题 &ndash;&gt;-->
+    <!--<filter>-->
+    <!--<filter-name>HiddenHttpMethodFilter</filter-name>-->
+    <!--<filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>-->
+    <!--</filter>-->
+    <!--<filter-mapping>-->
+    <!--<filter-name>HiddenHttpMethodFilter</filter-name>-->
+    <!--<servlet-name>SpringMVC</servlet-name>-->
+    <!--</filter-mapping>-->
 
 
     <!-- 欢迎页面 -->

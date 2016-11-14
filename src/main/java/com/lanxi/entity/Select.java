@@ -8,7 +8,7 @@ public class Select {
     //活动id
     private String actv_No;
     //批次号
-    int batch_No;
+    private int batch_No;
     //客户证件号
     private String custr_Nbr;
     //客户姓名
