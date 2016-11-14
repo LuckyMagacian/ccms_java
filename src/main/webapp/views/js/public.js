@@ -208,11 +208,18 @@ function searchbar(cls, jsonArr, formJson) {
  * func：表格数据格式化，带一个参数jsonStr，为ajax收到的原始数据
  * */
 function installTable(id,url,jsonArr,func){
+	var data=null;
+	if(jsonArr.data==undefined){
+		data={};
+	}else{
+		data=jsonArr.data;
+	}
 	layui.use('layer', function(){
 		var layer = layui.layer;
 		$.ajax({
 			type:"post",
 			url:url,
+			data:data,
 			dataType:"json",
 			beforeSend:function(){
 				layer.open({

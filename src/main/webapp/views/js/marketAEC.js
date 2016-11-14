@@ -1,6 +1,9 @@
 $(function() {
+	/* 全局变量 */
+	update_flag=null;
 	//获取url的参数
 	paramObj= getParam();
+	AECSet(paramObj[0].action);
 	/**
 	 * 初始化select下拉框
 	 * 函数位于js>public.js
@@ -19,7 +22,7 @@ $(function() {
 			layer = layui.layer,
 			laydate = layui.laydate;
 
-		var start = {
+		/*var start = {
 			min: laydate.now(),
 			max: '2099-12-31 23:59:59',
 			istoday: false,
@@ -43,7 +46,7 @@ $(function() {
 		document.getElementById('stop_date').onclick = function() {
 				end.elem = this
 				laydate(end);
-			}
+			}*/
 			//监听提交
 		form.on('submit(marketAECForm)', function(data) {
 			var temp=data.field,
@@ -139,7 +142,7 @@ $(function() {
 					if(jsonStr.errCode=="0000"){
 						var actv_no=jsonStr.content.actv_no,
 							batch_no=jsonStr.content.batch_no;
-						filterPeople(actv_no,batch_no);
+						filterPeople(actv_no,batch_no,update_flag);
 						/*var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
  							parent.layer.close(index); //执行关闭自身操作*/
 						
@@ -158,17 +161,17 @@ $(function() {
 });
 
 
-function filterPeople(actv_no,batch_no) {
+function filterPeople(actv_no,batch_no,update_flag) {
 	layui.use('layer', function() {
 		var layer = layui.layer;
 		layer.open({
 			title: "营销客户筛选",
 			type: 2,
-			area: ['700px', '530px'],
-			maxmin: true,
-			content: 'marketFilter.html?actv_no='+actv_no+'&batch_no='+batch_no,
-			scrollbar: false,
-			cancel: function() {
+			area: ['700px', '560px'],
+			maxmin: false,
+			content: 'marketFilter.html?actv_no='+actv_no+'&batch_no='+batch_no+'&update_flag='+update_flag,
+			scrollbar: false
+			/*,cancel: function() {
 				//询问框
 				layer.confirm('手动关闭可能导致活动异常,确认?', {
 					offset:"100px",
@@ -178,8 +181,19 @@ function filterPeople(actv_no,batch_no) {
 				},function(){
 					return false;
 				});
-			}
+			}*/
 		});
 
 	});
+}
+
+function AECSet(action){
+	switch (action){
+		case 'add':
+			update_flag=0;
+			break;
+		default:
+		console.log("未定义action:"+action);
+			break;
+	}
 }
