@@ -10,9 +10,9 @@ public class Admin {
     //管理员类型
     private String admin_Type;
     //用户名
-    private String userName;
+    private String username;
     //密码
-    private String passWord;
+    private String password;
 
     public String getAdmin_Id() {
         return admin_Id;
@@ -30,19 +30,19 @@ public class Admin {
         this.admin_Type = admin_Type;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public String getPassWord() {
-        return passWord;
+    public String getPassword() {
+        return password;
     }
 
-    public void setPassWord(String passWord) {
-        this.passWord = passWord;
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

@@ -31,10 +31,10 @@ public class ChartController {
         Map<String, Object> map = new HashMap<>();
         List<Map> mapList = new ArrayList<>();
         try {
-            List<Chart> list = chartService.getList();
+            List<Chart> list = chartService.getChartList();
             for (Chart chart : list) {
                 Map<String, String> chartMap = new HashMap<>();
-                chartMap.put(chart.getChar_id(),chart.getContent());
+                chartMap.put(chart.getChart_id(),chart.getContent());
                 mapList.add(chartMap);
             }
             map.put("content", mapList);

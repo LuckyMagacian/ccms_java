@@ -6,7 +6,7 @@ package com.lanxi.entity;
 //
 public class Chart {
     // 图表id
-  private String char_id;
+  private String chart_id;
     //json数据
     private String content;
 
@@ -18,12 +18,12 @@ public class Chart {
         this.content = content;
     }
 
-    public String getChar_id() {
-        return char_id;
+    public String getChart_id() {
+        return chart_id;
     }
 
-    public void setChar_id(String char_id) {
-        this.char_id = char_id;
+    public void setChart_id(String chart_id) {
+        this.chart_id = chart_id;
     }
 
 

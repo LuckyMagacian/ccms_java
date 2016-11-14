@@ -39,19 +39,19 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public void deleteAdmin(String userName) {
-        adminDao.deleteUser(userName);
+    public void deleteAdmin(String admin_Id) {
+        adminDao.deleteUser(admin_Id);
     }
 
     @Override
-    public int getCount(String userName) {
+    public int getCount(String username) {
 
-        return adminDao.getCount(userName);
+        return adminDao.getCount(username);
     }
 
     @Override
-    public Admin getByUserName(String userName) {
+    public Admin getByUsername(String username) {
 
-        return adminDao.getByUserName(userName);
+        return adminDao.getByUsername(username);
     }
 }

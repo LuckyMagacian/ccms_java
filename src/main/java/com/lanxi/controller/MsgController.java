@@ -2,7 +2,7 @@ package com.lanxi.controller;
 
 
 import com.lanxi.entity.Select;
-import com.lanxi.Util.RequestUtil;
+import com.lanxi.common.RequestUtil;
 import com.lanxi.service.SelectService;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
@@ -12,12 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
-import java.lang.reflect.Type;
-import java.util.ArrayList;
 import java.util.Map;
-
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 /**
  * Created by Administrator on 2016/11/9.
@@ -29,27 +24,6 @@ public class MsgController {
     private static Logger logger = Logger.getLogger(MsgController.class);
     @Resource
     SelectService selectService;
-//
-//    @RequestMapping("/msg.send")
-//    @ResponseBody
-//    public Map Util(HttpServletRequest servletRequest) {
-//        Map<String, Object> map = new HashMap<>();
-//        String arr[];
-//        String msg_tpltJson = servletRequest.getParameter("msg_tplt");
-//        String paramsJson=servletRequest.getParameter("params");
-//        arr=msg_tpltJson.split("xxx");
-//        Type type = new TypeToken<ArrayList<Map<String,Object>>>()
-//        {}.getType();
-//        ArrayList<Map<String,Object>> jsonObjects = new Gson().fromJson(paramsJson, type);
-//
-////        JSONArray jsonArray = JSONArray.fromObject(paramsJson);
-////        for(int i=0;i<jsonArray.length(); i++){
-////            JSONObject jsonJ = jsonArray.getJSONObject(i);
-////            jsonJ.getString("phone");
-////            jsonJ.getString("param");
-////        }
-//          return map;
-//    }
 
 //   public static void main(String[] args) {
 //        String params = "[{ phone:15757135754,  param: [p1,p2,p3] }," +
@@ -102,7 +76,7 @@ public class MsgController {
             //修改表中的apply的值
             selectService.updateApply(select);
 
-            map.put("retCode" + ":" + "0000", "retDesc" + ":" + "发送成功");
+            map.put("retCode:0000", "retDesc:发送成功");
         } catch (Exception e) {
             map.put("发送失败", e.getMessage());
             logger.error("MsgController-receive" + e.getMessage(), e);

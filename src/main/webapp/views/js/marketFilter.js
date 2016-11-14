@@ -74,7 +74,13 @@
 
 			//监听提交
 		form.on('submit(filterSearch)', function(data) {
-			console.log(data.field);
+			var temp=new Object(),
+				actv_no=$("#actv_no").val(),
+				batch_no=$("#batch_no").val();
+			temp.actv_no=actv_no;
+			temp.batch_no=batch_no;
+			temp.condition=JSON.stringify(data.field);
+			alert(temp);
 			return false;
 		});
 	});

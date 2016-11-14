@@ -1,4 +1,5 @@
  $(function() {
+ 	/* 表格初始化 */
   	$("#marketTable").DataTable({
   		dom: '<"top"<"toolbar">f<"searchbar">>rt<"bottom"lip>',
   		data: [
@@ -19,7 +20,7 @@
 		"click":"createMarketActivity()",
 		"name":"创建活动"
 	}];
-	tableBtn('toolbar',jsonArr);
+	tableBtn('toolbar',jsonArr);//表格按钮创建
 	
 	var jsonArr2=[{
 		"name":"活动名称",
@@ -32,10 +33,10 @@
 		"id":"actv_state",
 		"jsonArr":actvState
 	},{
-		"name":"活动日期",
-		"htmlStr":'<input id="start_date" type="text" name="start_date" placeholder="开始日期" autocomplete="off" class="layui-input" readonly="readonly" onclick="layui.laydate({elem: this, festival: true})"></div>'
+		"name":"活动开始日期",
+		"htmlStr":'<input id="start_date" type="text" name="start_date" placeholder="开始日期起" autocomplete="off" class="layui-input" readonly="readonly" onclick="layui.laydate({elem: this, festival: true})"></div>'
 					+'<div class="layui-form-mid"> - </div><div class="layui-input-inline">'
-					+'<input id="stop_date" type="text" name="stop_date" placeholder="结束日期" autocomplete="off" readonly="readonly" class="layui-input" onclick="layui.laydate({elem: this, festival: true})">',
+					+'<input id="stop_date" type="text" name="stop_date" placeholder="开始日期止" autocomplete="off" readonly="readonly" class="layui-input" onclick="layui.laydate({elem: this, festival: true})">',
 		"type":"other"
 	},{
 		"name":"查询",
@@ -66,7 +67,6 @@
 				end.start = datas //将结束日的初始值设定为开始日
 			}
 		};
-
 		var end = {
 			min: laydate.now(),
 			max: '2099-12-31 23:59:59',
@@ -75,7 +75,6 @@
 				start.max = datas; //结束日选好后，重置开始日的最大日期
 			}
 		};
-
 		document.getElementById('start_date').onclick = function() {
 			start.elem = this;
 			laydate(start);
@@ -86,7 +85,7 @@
 			}
 			//监听提交
 		form.on('submit(activitySearch)', function(data) {
-			console.log(data.field);
+			layer.msg(JSON.stringify(data.field))
 			return false;
 		});
 	});

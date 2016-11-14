@@ -31,7 +31,7 @@ public class ChartServiceImpl implements ChartService {
     }
 
     @Override
-    public List<Chart> getList() {
-        return chartDao.getList();
+    public List<Chart> getChartList() {
+        return chartDao.getChartList();
     }
 }

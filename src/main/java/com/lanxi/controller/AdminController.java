@@ -28,17 +28,30 @@ public class AdminController {
     //添加用户
     @RequestMapping("/admin.add")
     @ResponseBody
-    public Map AddUser(HttpSession session,HttpServletRequest servletRequest) {
+    public Map AddUser(HttpSession session, HttpServletRequest servletRequest) {
         Map<String, Object> map = new HashMap<>();
         //得到登录用户的类型
-        String type=(String)session.getAttribute("admin_Type");
-        if(!type.equals("系统管理员")){
-            map.put("message","您不是管理员，没有权限");
+        try {
+            String type = (String) session.getAttribute("admin_Type");
+            if (!type.equals("1")) {
+                map.put("message", "您不是管理员，没有权限");
+                return map;
+            }
+        } catch (Exception e) {
+            map.put("message", "获取身份类型失败");
             return map;
         }
-        String admin_Type = servletRequest.getParameter("admin_Type").trim();
-        String username = servletRequest.getParameter("username").trim();
-        String password = servletRequest.getParameter("password").trim();
+        String admin_Type = null;
+        String username = null;
+        String password = null;
+        try {
+            admin_Type = servletRequest.getParameter("admin_Type").trim();
+            username = servletRequest.getParameter("username").trim();
+            password = servletRequest.getParameter("password").trim();
+        } catch (Exception e) {
+            map.put("message", "获取参数失败");
+            return map;
+        }
         //检查表中是否已经存在该用户名
         int count = adminService.getCount(username);
         if (count > 0) {
@@ -52,8 +65,8 @@ public class AdminController {
         Admin admin = new Admin();
         admin.setAdmin_Id(admin_Id);
         admin.setAdmin_Type(admin_Type);
-        admin.setPassWord(password);
-        admin.setUserName(username);
+        admin.setPassword(password);
+        admin.setUsername(username);
         logger.info(" admin_type=" + admin_Type + " username=" + username + " password=" + password + " admin_Id=" + admin_Id);
         try {
             adminService.addAdmin(admin);
@@ -87,21 +100,34 @@ public class AdminController {
     //修改用户
     @RequestMapping("/admin.update")
     @ResponseBody
-    public Map updateAdmin(HttpServletRequest servletRequest,HttpSession session) {
+    public Map updateAdmin(HttpServletRequest servletRequest, HttpSession session) {
         Map<String, Object> map = new HashMap<>();
-        //得到登录用户的类型
-        String type=(String)session.getAttribute("admin_Type");
-        if(!type.equals("系统管理员")){
-            map.put("message","您不是管理员，没有权限");
+        try {
+            //得到登录用户的类型
+            String type = (String) session.getAttribute("admin_Type");
+            if (!type.equals("1")) {
+                map.put("message", "您不是管理员，没有权限");
+                return map;
+            }
+        } catch (Exception e) {
+            map.put("message", "获取身份类型失败");
             return map;
         }
         Admin admin = new Admin();
-        String username = servletRequest.getParameter("username").trim();
-        String admin_Type = servletRequest.getParameter("admin_Type").trim();
-        String password = servletRequest.getParameter("password").trim();
-        admin.setUserName(username);
-        admin.setAdmin_Type(admin_Type);
-        admin.setPassWord(password);
+        String username = null;
+        String password = null;
+        String admin_Id = null;
+        try {
+            username = servletRequest.getParameter("username").trim();
+            admin_Id = servletRequest.getParameter("admin_Id");
+            password = servletRequest.getParameter("password").trim();
+        } catch (Exception e) {
+            map.put("message", "获取参数失败");
+            return map;
+        }
+        admin.setAdmin_Id(admin_Id);
+        admin.setUsername(username);
+        admin.setPassword(password);
         try {
             adminService.updateAdmin(admin);
             map.put("statusCode", 200);
@@ -116,28 +142,64 @@ public class AdminController {
     //删除用户
     @RequestMapping("/admin.delete")
     @ResponseBody
-    public Map deleteAdmin(HttpServletRequest servletRequest,HttpSession session) {
+    public Map deleteAdmin(HttpServletRequest servletRequest, HttpSession session) {
         Map<String, Object> map = new HashMap<>();
-       // 得到登录用户的类型
-        String type=(String)session.getAttribute("admin_Type");
-        String name=(String)session.getAttribute("username");
-        if(!type.equals("系统管理员")){
-            map.put("message","您不是管理员，没有权限");
+        // 得到登录用户的类型
+        String name = null;
+        try {
+            String type = (String) session.getAttribute("admin_Type");
+            name = (String) session.getAttribute("username");
+            if (!type.equals("1")) {
+                map.put("message", "您不是管理员，没有权限");
+                return map;
+            }
+        } catch (Exception e) {
+            map.put("message", "获取身份失败");
             return map;
         }
-        String username = servletRequest.getParameter("username").trim();
-        if(username==name){
-            map.put("message","您不能删除自己");
+        String username = null;
+        String admin_Id=null;
+        try {
+            username = servletRequest.getParameter("username").trim();
+            admin_Id=servletRequest.getParameter("admin_Id").trim();
+        } catch (Exception e) {
+            map.put("message", "获取参数失败");
+            return map;
+        }
+        if (username == name) {
+            map.put("message", "您不能删除自己");
             return map;
         }
         try {
-            adminService.deleteAdmin(username);
+            adminService.deleteAdmin(admin_Id);
             map.put("statusCode", 200);
             map.put("message", "删除成功");
         } catch (Exception e) {
             map.put("statusCode", 300);
             map.put("message", "删除失败");
             logger.error("AdminController-delete" + e.getMessage(), e);
+        } finally {
+            return map;
+        }
+    }
+
+    //得到session里面的数据
+    @RequestMapping("/admin.getSessionMessage")
+    @ResponseBody
+    public Map getSessionMessage(HttpSession session) {
+        Map<String, Object> map = new HashMap<>();
+        try {
+            Admin admin = (Admin) session.getAttribute("admin");
+            String username = (String) session.getAttribute("username");
+            String admin_Type = (String) session.getAttribute("admin_Type");
+            map.put("username", username);
+            map.put("admin", admin);
+            map.put("admin_Type", admin_Type);
+            map.put("statusCode", 200);
+        } catch (Exception e) {
+            map.put("message", "获取信息失败");
+            map.put("statusCode", 300);
+            logger.error("AdminController-getSessionMessage" + e.getMessage(), e);
         } finally {
             return map;
         }

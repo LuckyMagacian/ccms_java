@@ -15,18 +15,18 @@
     </select>
 
     <update id="updateUser">
-        UPDATE T_CCMS_ADMIN SET ADMIN_TYPE=#{admin_Type},PASSWORD=#{password} WHERE USERNAME=#{username};
+        UPDATE T_CCMS_ADMIN SET PASSWORD=#{password} WHERE ADMIN_ID=#{admin_Id};
     </update>
 
     <delete id="deleteUser" parameterType="String">
-        DELETE  FROM T_CCMS_ADMIN WHERE USERNAME=#{username}
+        DELETE  FROM T_CCMS_ADMIN WHERE ADMIN_ID=#{admin_Id}
     </delete>
     
     <select id="getCount" parameterType="String" resultType="Integer">
         SELECT COUNT(USERNAME) FROM T_CCMS_ADMIN WHERE USERNAME=#{username}
     </select>
 
-    <select id="getByUserName" parameterType="String">
+    <select id="getByUsername" parameterType="String" resultType="com.lanxi.entity.Admin">
         SELECT * FROM T_CCMS_ADMIN WHERE USERNAME=#{username}
     </select>
 </mapper>
