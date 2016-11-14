@@ -1,5 +1,5 @@
 /* 全局变量 */
-
+project='/ccms_java';
 /** 营销活动模块
  * jsonName=<value:name>
  * */
@@ -89,11 +89,11 @@ actvName={//活动名称,ID:name
 	"1003":"活动3",
 	"1004":"活动4"
 };
-adminType={
+userType={//用户角色
 	"1": "系统管理员",
 	"2": "审核人员",
 	"3": "业务人员"
-}
+};
 
 /**
  * 获取url参数
@@ -203,7 +203,7 @@ function searchbar(cls, jsonArr, formJson) {
 
 /** 
  * 创建完整表格，不含表格头(在id="id"的html table中初始化表格头)
- * id:表格对应id,jsonArr=<toolbar:[<>],searchbar:<>,formInfo:<>>
+ * id:表格对应id,jsonArr=<toolbar:[<>],searchbar:[<>],formInfo:<>>
  * toolbar,searchbar/formInfo详见tableBtn,searchbar函数中
  * func：表格数据格式化，带一个参数jsonStr，为ajax收到的原始数据
  * */
@@ -278,32 +278,49 @@ function ajaxPost(url,dataJson,successFunc){
 		  });
 }
 
-/** 通用验证函数
-    regStr:正则式
-    vailStr:待验证字符串
-    id:效果显示在该id上
-*/
-function pubValidate(regStr, valiStr, id) {
-    var flag = 0;
-    if (!regStr.test(valiStr)) flag = 1; //test()方法搜索字符串指定的值，根据结果并返回真或假。
-    else flag = 0;
-    if (flag) {//匹配不正确
-        $("#" + id).parent().removeClass("has-success");
-        $("#" + id).parent().addClass("has-error");
-        return false;
-    }
-    else {//匹配正确
-        $("#" + id).parent().removeClass("has-error");
-        $("#" + id).parent().addClass("has-success");
-        return true;
-    }
+/* 用户权限控制 */
+adminId=null,
+adminType=null;
+loginName=null;
+
+function userControll(jsonStr){
+	if(jsonStr.statusCode==200){
+		if(jsonStr.admin_Type==null || jsonStr.username==null || jsonStr.admin==null){
+			alert("登录超时,请重新登录");
+			location.href=project+"/views/login.html";
+		}else{
+			adminId=jsonStr.admin.admin_Id;
+			adminType=jsonStr.admin_Type;
+			loginName=jsonStr.username;
+			$("#loginName").html(loginName);
+		}
+	}else{
+		console.log("获取session失败!"+jsonStr.message);
+	}
 }
 
-/** 用户名验证*/
-function valiUsername(id){
-    var regStr = /^\w+$/,//正则，匹配字母数字下划线
-        valiStr = $("#" + id).val(),
-        result = pubValidate(regStr, valiStr, id);
-        $("#loginHint").html("&nbsp;");
-    return result;
+$(function(){
+	ajaxPost(project+'/admin/admin.getSessionMessage',{},userControll);
+});
+
+function rePwd(){
+	ajaxPost(project+'/admin/admin.update',{},function(jsonStr){
+		
+	});
 }
+
+function logOut(){
+	ajaxPost(project+'/login/loginOut.do',{},function(jsonStr){
+		if(jsonStr.statusCode==200){
+			location.href=project+"/views/login.html";
+		}else{
+			alert('登出失败!,请重试');
+			console.log("error! "+jsonStr.message);
+		}
+	});
+}
+
+/* 时间戳格式化 */
+    function getLocalTime(nS) {     
+       return new Date(parseInt(nS)).toLocaleString().replace(/年|月/g, "-").replace(/日/g, " ");      
+    } 

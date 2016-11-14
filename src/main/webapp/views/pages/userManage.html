@@ -109,7 +109,7 @@
             </li>
           </ul>
         </li>
-        <li class="treeview active">
+        <li class="treeview">
           <a href="javascript:void(0);">
             <i class="fa fa-envelope"></i>
             <span>进度提醒</span>
@@ -119,10 +119,10 @@
           </a>
           <ul class="treeview-menu">
           	<li><a href="progressMarket.html"><i class="fa fa-circle-o"></i>进度跟踪</a></li>
-            <li class="active"><a href="progressRemind.html"><i class="fa fa-circle-o"></i>提醒任务</a></li>
+            <li><a href="progressRemind.html"><i class="fa fa-circle-o"></i>提醒任务</a></li>
           </ul>
         </li>
-        <li class="treeview">
+        <li class="treeview active">
           <a href="javascript:void(0);">
             <i class="fa fa-edit"></i> <span>系统管理</span>
             <span class="pull-right-container">
@@ -130,7 +130,7 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="userManage.html"><i class="fa fa-circle-o"></i>用户管理</a></li>
+            <li class="active"><a href="userManage.html"><i class="fa fa-circle-o"></i>用户管理</a></li>
           </ul>
         </li>
       </ul>
@@ -145,8 +145,8 @@
         <small>Version 1.0</small>
       </h1>
       <ol class="breadcrumb">
-        <li><i class="fa fa-files-o"></i> 进度提醒</li>
-        <li class="active"><a href="progressRemind.html">提醒任务</a></li>
+        <li><i class="fa fa-edit"></i> 系统管理</li>
+        <li class="active"><a href="userManage.html">用户管理</a></li>
       </ol>
     </section>
     <section class="content">
@@ -158,16 +158,13 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-              <table id="remindTable" class="table table-bordered table-striped">
+              <table id="userManageTable" class="table table-bordered table-striped">
                 <thead>
                 <tr>
                 	<th>#</th>
-                  <th>活动名称</th>
-                  <th>任务名称</th>
-                  <th>活动状态</th>
-                  <th>短信模版</th>
-                  <th>提醒客户</th>
-                  <th>提醒详情</th>
+                  <th>角色</th>
+                  <th>用户名</th>
+                  <th>用户编号</th>
                   <th>用户操作</th>
                 </tr>
                 </thead>
@@ -212,6 +209,6 @@
 <script src="../dist/js/ms.js"></script>
 <script src="../layui/layui.js"></script>
 <script src="../js/public.js"></script>
-<script src="../js/progressRemind.js"></script>
+<script src="../js/userManage.js"></script>
 </body>
 </html>
