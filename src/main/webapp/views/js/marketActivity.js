@@ -190,7 +190,6 @@ function auditActv(actv_no,batch_no,status){
 		offset:"100px",
 		btn: ['确定','取消'] //按钮
 	}, function(){
-		
-		  });
+	
 	});
 }
