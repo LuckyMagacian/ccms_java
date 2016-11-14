@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lanxi.dao.MsgDao">
+<insert id="addMsg" parameterType="com.lanxi.entity.Msg">
+INSERT INTO T_CCMS_MSG 
+(MSG_ID,ACTV_NO,BATCH_NO,PHONE,MSG_TYPE,CONTENT,SEND_STATE,SEND_TIME)
+VALUES
+(#{msg_id},#{actv_no},#{batch_no},#{phone},#{msg_type},#{content},#{send_state},#{send_time})
+</insert>	
+<delete id="deleteMsg" parameterType="com.lanxi.entity.Msg">
+DELETE from T_CCMS_MSG
+<where>
+<if test="msg_id != null"> and MSG_ID = #{msg_id}  </if>  
+<if test="actv_no != null"> and ACTV_NO = #{actv_no}  </if>  
+<if test="batch_no != null"> and BATCH_NO = #{batch_no}  </if>  
+<if test="phone != null"> and PHONE = #{phone}  </if>  
+<if test="msg_type != null"> and MSG_TYPE = #{msg_type}  </if>  
+<if test="content != null"> and CONTENT = #{content}  </if>  
+<if test="send_state != null"> and SEND_STATE = #{send_state}  </if>  
+<if test="send_time != null"> and SEND_TIME = #{send_time}  </if>  
+</where>
+</delete>
+<update id="updateMsg" parameterType="com.lanxi.entity.Msg">
+update T_CCMS_MSG
+<set> 
+<if test="msg_id != null"> MSG_ID = #{msg_id},</if>  
+<if test="actv_no != null"> ACTV_NO = #{actv_no},</if>  
+<if test="batch_no != null"> BATCH_NO = #{batch_no},</if>  
+<if test="phone != null"> PHONE = #{phone},</if>  
+<if test="msg_type != null"> MSG_TYPE = #{msg_type},</if>  
+<if test="content != null"> CONTENT = #{content},</if>  
+<if test="send_state != null"> SEND_STATE = #{send_state},</if>  
+<if test="send_time != null"> SEND_TIME = #{send_time},</if>  
+</set>
+<where>
+<if test="msg_id != null"> and MSG_ID = #{msg_id}  </if>  
+<if test="actv_no != null"> and ACTV_NO = #{actv_no}  </if>  
+<if test="batch_no != null"> and BATCH_NO = #{batch_no}  </if>  
+<if test="phone != null"> and PHONE = #{phone}  </if>  
+<if test="msg_type != null"> and MSG_TYPE = #{msg_type}  </if>  
+<if test="content != null"> and CONTENT = #{content}  </if>  
+<if test="send_state != null"> and SEND_STATE = #{send_state}  </if>  
+<if test="send_time != null"> and SEND_TIME = #{send_time}  </if>  
+</where>
+</update>
+<select id="selectMsg" resultMap="msgMap" parameterType="com.lanxi.entity.Msg" resultType="com.lanxi.entity.Msg">
+select
+MSG_ID,ACTV_NO,BATCH_NO,PHONE,MSG_TYPE,CONTENT,SEND_STATE,SEND_TIME
+from T_CCMS_MSG
+<where>
+<if test="msg_id != null"> and MSG_ID = #{msg_id}  </if>  
+<if test="actv_no != null"> and ACTV_NO = #{actv_no}  </if>  
+<if test="batch_no != null"> and BATCH_NO = #{batch_no}  </if>  
+<if test="phone != null"> and PHONE = #{phone}  </if>  
+<if test="msg_type != null"> and MSG_TYPE = #{msg_type}  </if>  
+<if test="content != null"> and CONTENT = #{content}  </if>  
+<if test="send_state != null"> and SEND_STATE = #{send_state}  </if>  
+<if test="send_time != null"> and SEND_TIME = #{send_time}  </if>  
+</where>
+</select>
+<resultMap id="msgMap" type="com.lanxi.entity.Msg">
+<result property="msg_id" 			column="MSG_ID"></result>
+<result property="actv_no" 			column="ACTV_NO"></result>
+<result property="batch_no" 			column="BATCH_NO"></result>
+<result property="phone" 			column="PHONE"></result>
+<result property="msg_type" 			column="MSG_TYPE"></result>
+<result property="content" 			column="CONTENT"></result>
+<result property="send_state" 			column="SEND_STATE"></result>
+<result property="send_time" 			column="SEND_TIME"></result>
+</resultMap>
+</mapper>
+
