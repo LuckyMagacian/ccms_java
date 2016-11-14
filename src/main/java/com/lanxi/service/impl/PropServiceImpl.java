@@ -38,6 +38,9 @@ public class PropServiceImpl implements PropService {
 	            req.setCharacterEncoding("utf-8");
 	            String jsonStr=req.getParameter("prop");
 	            JSONArray jArray=JSONArray.parseArray(jsonStr);
+	            
+	            System.out.println(jsonStr);
+	            
 	            List<Prop> props=new ArrayList<>();
 	            for(int index=0;index<jArray.size();index++){
 	            	JSONObject temp=jArray.getJSONObject(index);
@@ -92,6 +95,7 @@ public class PropServiceImpl implements PropService {
     @Override
     public List<Prop> generatorProp(HttpServletRequest req, Activity activity) {
         try{
+        	Prop temp=new Prop();
         	List<Prop> props=makeProp(req, activity);
         	for(Prop each:props)
                 daoService.getPropDao().addProp(each);
@@ -100,17 +104,24 @@ public class PropServiceImpl implements PropService {
             throw  new AppException("创建关联规则异常",e);
         }
     }
+    
+    
+    
     /**
      * 修改关联规则属性
      * @param req
      * @return
      */
 	@Override
-	public List<Prop> modifyProp(HttpServletRequest req) {
+	public List<Prop> modifyProp(HttpServletRequest req,Activity activity) {
 		try {
-			List<Prop> props=makeProp(req, null);
+			Prop temp=new Prop();
+			temp.setActv_no(activity.getActv_no());
+			temp.setBatch_no(activity.getBatch_no());
+			daoService.getPropDao().deleteProp(temp);
+			List<Prop> props=generatorProp(req, activity);
 			for(Prop each:props)
-                daoService.getPropDao().updateProp(each);
+                daoService.getPropDao().addProp(each);
 			return props;
 		} catch (Exception e) {
 			throw new AppException("修改关联规则异常",e);

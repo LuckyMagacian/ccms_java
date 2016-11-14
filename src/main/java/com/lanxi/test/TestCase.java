@@ -89,4 +89,9 @@ public class TestCase {
     	list.add("3");
     	System.out.println(JSONObject.toJSONString(list));
     }
+    @Test
+    public void testStrR(){
+    	String string="1234567891011121";
+    	System.out.println(string.substring(0,6)+string.substring(0,string.length()-10).replaceAll("\\w","*")+string.substring(string.length()-4));
+    }
 }

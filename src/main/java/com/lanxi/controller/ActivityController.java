@@ -10,15 +10,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.lanxi.common.AppException;
 import com.lanxi.common.AppMessage;
 import com.lanxi.entity.Activity;
 import com.lanxi.entity.Prop;
-import com.lanxi.entity.SelectedUser;
 import com.lanxi.service.ActivityService;
 import com.lanxi.service.PropService;
 import com.lanxi.service.QuartzTaskService;
-import com.sun.org.apache.bcel.internal.generic.NEW;
 
 @Controller
 @RequestMapping("/activity")
@@ -37,7 +34,10 @@ public class ActivityController {
 		logger.info("请求创建活动");
 		AppMessage message=new AppMessage();
 		try{
+			System.out.println(req.getParameter("actv_name"));
+			System.out.println(req.getParameter("prop"));
 			Activity activity=service.generatorActivity(req);
+			List<Prop>props=propService.generatorProp(req, activity);
 			if(null!=activity&&null!=activity.getActv_no()){
 				message.setErrCode("0000");
 				message.setErrMsg("创建活动成功");
@@ -120,6 +120,7 @@ public class ActivityController {
 		AppMessage message=new AppMessage();
 		try{
 			Activity activity=service.modifyActivity(req);
+			propService.modifyProp(req, activity);
 			if(activity!=null){
 				message.setErrCode("0000");
 				message.setErrMsg("修改成功");

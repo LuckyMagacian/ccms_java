@@ -23,6 +23,7 @@ import com.lanxi.entity.Activity;
 import com.lanxi.entity.SelectedUser;
 import com.lanxi.service.ActivityService;
 import com.lanxi.service.DaoService;
+import com.lanxi.service.PropService;
 
 
 /**
@@ -32,6 +33,8 @@ import com.lanxi.service.DaoService;
 public class ActivityServiceImpl implements ActivityService{
     @Resource
     private DaoService daoService;
+    @Resource
+    private PropService propService;
 	private SimpleDateFormat tempFormat=new SimpleDateFormat("yyyy-MM-dd");
     /**
      * 构建活动

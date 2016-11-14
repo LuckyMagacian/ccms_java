@@ -26,6 +26,7 @@ import com.lanxi.entity.SelectedUser;
 import com.lanxi.service.DaoService;
 import com.lanxi.service.UserService;
 import com.sun.org.apache.bcel.internal.generic.NEW;
+import com.sun.swing.internal.plaf.basic.resources.basic;
 @Service("userService")
 public class UserServiceImpl implements UserService {
 	private static Logger logger=Logger.getLogger(UserServiceImpl.class);
@@ -169,7 +170,50 @@ public class UserServiceImpl implements UserService {
 					cell.setCellStyle(ExcelUtil.getCommonStyle());
 					Field field=fields.get(j);
 					field.setAccessible(true);
-					cell.setCellValue(field.get(users.get(i))+"");
+					String value=field.get(users.get(i))+"";
+					
+					if(field.getName().equals("custr_nbr"))
+						value=value.substring(0,6)+value.substring(0,value.length()-10).replaceAll("\\w","*")+value.substring(value.length()-4);
+					if(field.getName().equals("apply")){
+						switch (value) {
+						case "0":
+							value="自动";
+							break;
+						case "1":
+							value="主动报名";
+							break;
+						default:
+							value="未报名";
+							break;
+						}
+					}
+					if(field.getName().equals("state")){
+						switch (value) {
+						case "0":
+							value="有效用户";
+							break;
+						case "1":
+							value="无效";
+							break;
+						}
+					}
+					if(field.getName().equals("result")){
+						switch (value) {
+						case "0":
+							value="活动完成";
+							break;
+						case "1":
+							value="失败";
+							break;
+						case "2":
+							value="将完成";
+							break;
+						default:
+							value="";
+							break;
+						}
+					}
+					cell.setCellValue(value);
 				}
 			return ExcelUtil.getWorkBook();
 		}catch (Exception e) {

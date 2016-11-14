@@ -24,7 +24,7 @@ public interface PropService {
      * @param req
      * @return
      */
-    public List<Prop> modifyProp(HttpServletRequest req);
+    public List<Prop> modifyProp(HttpServletRequest req,Activity activity);
     /**
      * 查询活动关联规则
      * @param activity
