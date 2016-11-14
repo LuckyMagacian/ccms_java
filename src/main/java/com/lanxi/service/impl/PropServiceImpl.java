@@ -38,7 +38,9 @@ public class PropServiceImpl implements PropService {
 	            req.setCharacterEncoding("utf-8");
 	            String jsonStr=req.getParameter("prop");
 	            JSONArray jArray=JSONArray.parseArray(jsonStr);
+	            
 	            System.out.println(jsonStr);
+	            
 	            List<Prop> props=new ArrayList<>();
 	            for(int index=0;index<jArray.size();index++){
 	            	JSONObject temp=jArray.getJSONObject(index);
@@ -94,7 +96,6 @@ public class PropServiceImpl implements PropService {
     public List<Prop> generatorProp(HttpServletRequest req, Activity activity) {
         try{
         	Prop temp=new Prop();
-        	
         	List<Prop> props=makeProp(req, activity);
         	for(Prop each:props)
                 daoService.getPropDao().addProp(each);

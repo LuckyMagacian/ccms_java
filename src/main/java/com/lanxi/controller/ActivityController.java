@@ -34,8 +34,10 @@ public class ActivityController {
 		logger.info("请求创建活动");
 		AppMessage message=new AppMessage();
 		try{
+			System.out.println(req.getParameter("actv_name"));
+			System.out.println(req.getParameter("prop"));
 			Activity activity=service.generatorActivity(req);
-			List<Prop>     props=propService.generatorProp(req, activity);
+			List<Prop>props=propService.generatorProp(req, activity);
 			if(null!=activity&&null!=activity.getActv_no()){
 				message.setErrCode("0000");
 				message.setErrMsg("创建活动成功");
