@@ -10,52 +10,52 @@ public class Activity {
     //-----------------------------------------------------------常量区start---------------------------------------------------------------------------------------
 
 	/**活动目的-唤醒睡眠卡*/
-    public static final String ACTIVITY_TARGET_AWAKEN                ="0";
+    public static final String ACTIVITY_TARGET_AWAKEN                ="1";
     /**活动目的-提升业务质量*/
-    public static final String ACTIVITY_TARGET_IMPROVE               ="1";
-    /**活动目的-维护忠诚度*/
-    public static final String ACTIVITY_TARGET_PRESERVE              ="2";
+    public static final String ACTIVITY_TARGET_IMPROVE               ="2";
+//    /**活动目的-维护忠诚度*/
+//    public static final String ACTIVITY_TARGET_PRESERVE              ="3";
 
     /**活动形式-首刷激活*/
-    public static final String ACTIVITY_STYLE_FIRST_BRUSH_ACTIVATE   ="0";
+    public static final String ACTIVITY_STYLE_FIRST_BRUSH_ACTIVATE   ="1";
     /**活动形式-冻卡激活*/
-    public static final String ACTIVITY_STYLE_FROZEN_CARD_ACTIVATE   ="1";
+    public static final String ACTIVITY_STYLE_FROZEN_CARD_ACTIVATE   ="2";
     /**活动形式-分期*/
-    public static final String ACTIVITY_STYLE_BY_STAGES              ="2";
+    public static final String ACTIVITY_STYLE_BY_STAGES              ="3";
     /**活动形式-刷卡*/
-    public static final String ACTIVITY_STYLE_BRUSH                  ="3";
-    /**活动形式-回馈客户*/
-    public static final String ACTIVITY_STYLE_FEEDBACK               ="4";
+    public static final String ACTIVITY_STYLE_BRUSH                  ="4";
+//    /**活动形式-回馈客户*/
+//    public static final String ACTIVITY_STYLE_FEEDBACK               ="5";
 
     /**活动类型-赠送积分*/
-    public static final String ACTIVITY_TYPE_GIVE_POINTS             ="0";
+    public static final String ACTIVITY_TYPE_GIVE_POINTS             ="1";
     /**活动类型-手续费折扣*/
-    public static final String ACTIVITY_TYPE_DISCOUNT                ="1";
+    public static final String ACTIVITY_TYPE_DISCOUNT                ="2";
     /**活动类型-赠送礼品*/
-    public static final String ACTIVITY_TYPE_GIVE_GIFT               ="2";
+    public static final String ACTIVITY_TYPE_GIVE_GIFT               ="3";
     /**活动类型-分期抽奖*/
-    public static final String ACTIVITY_TYPE_DRAW                    ="3";
+    public static final String ACTIVITY_TYPE_DRAW                    ="4";
     /**活动类型-首刷*/
-    public static final String ACTIVITY_TYPE_FIRST_BRUSH             ="4";
+    public static final String ACTIVITY_TYPE_FIRST_BRUSH             ="5";
     /**活动类型-激活*/
-    public static final String ACTIVITY_TYPE_ACTIVATE                ="5";
+    public static final String ACTIVITY_TYPE_ACTIVATE                ="6";
     /**活动类型-满减*/
-    public static final String ACTIVITY_TYPE_FULL_REDUCTION          ="6";
+    public static final String ACTIVITY_TYPE_FULL_REDUCTION          ="7";
     /**活动类型-满送*/
     public static final String ACTIVITY_TYPE_FULL_GIVE               ="8";
     /**活动类型-满额返现*/
     public static final String ACTIVITY_TYPE_FULL_FEEDBACK           ="9";
 
     /**活动状态-等待审核*/
-    public static final String ACTIVITY_STATE_WAIT                   ="0";
+    public static final String ACTIVITY_STATE_WAIT                   ="1";
     /**活动状态-尚未开始*/
-    public static final String ACTIVITY_STATE_READY                  ="1";
+    public static final String ACTIVITY_STATE_READY                  ="2";
     /**活动状态-正在进行*/
-    public static final String ACTIVITY_STATE_INING                  ="2";
+    public static final String ACTIVITY_STATE_INING                  ="3";
     /**活动状态-活动结束*/
-    public static final String ACTIVITY_STATE_END                    ="3";
+    public static final String ACTIVITY_STATE_END                    ="4";
     /**活动状态-审核未过*/
-    public static final String ACTIVITY_STATE_FAIL                   ="4";
+    public static final String ACTIVITY_STATE_FAIL                   ="5";
 
     /**规则组合条件-任一*/
     public static final String RULE_TYPE_ONE                         ="0";

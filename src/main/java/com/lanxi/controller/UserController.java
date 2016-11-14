@@ -69,7 +69,7 @@ public class UserController {
 			return message;
 		}
 	}
-	@RequestMapping("/exportUser.do")
+	@RequestMapping("/exportUser.xls")
 	public void exportUser(HttpServletRequest req,HttpServletResponse res){
 		try {
 			HSSFWorkbook workbook=userService.exportUser(req);
