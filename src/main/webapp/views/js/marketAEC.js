@@ -4,6 +4,7 @@ $(function() {
 	//获取url的参数
 	paramObj= getParam();
 	AECSet(paramObj[0].action);
+	
 	/**
 	 * 初始化select下拉框
 	 * 函数位于js>public.js
@@ -21,7 +22,7 @@ $(function() {
 		var form = layui.form(),
 			layer = layui.layer,
 			laydate = layui.laydate;
-
+		var index = parent.layer;
 		/*var start = {
 			min: laydate.now(),
 			max: '2099-12-31 23:59:59',
@@ -127,6 +128,8 @@ $(function() {
 				default:console.log("未定义的错误! actvStyle="+actvStyle);
 					break;
 			}
+			temp.prop=JSON.stringify(temp.prop);
+			layer.alert(JSON.stringify(temp));
 			$.ajax({
 				type:"post",
 				url:project+"/activity/generatActivity.do",
@@ -140,6 +143,7 @@ $(function() {
 				},
 				success:function(jsonStr){
 					if(jsonStr.errCode=="0000"){
+						
 						var actv_no=jsonStr.content.actv_no,
 							batch_no=jsonStr.content.batch_no;
 						filterPeople(actv_no,batch_no,update_flag);
