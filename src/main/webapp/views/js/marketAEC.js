@@ -126,18 +126,27 @@ $(function() {
 			}
 			$.ajax({
 				type:"post",
-				url:"/activity/generatActivity.do",
+				url:project+"/activity/generatActivity.do",
 				dataType:'json',
 				data:temp,
 				beforeSend:function(){
-					
+					layer.open({
+						type:3,
+						scrollbar: false
+					});
 				},
 				success:function(jsonStr){
 					if(jsonStr.errCode=="0000"){
+						var actv_no=jsonStr.content.actv_no,
+							batch_no=jsonStr.content.batch_no;
+						filterPeople(actv_no,batch_no);
+						/*var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+ 							parent.layer.close(index); //执行关闭自身操作*/
 						
 					}else{
 						layer.alert(jsonStr.errMsg);
 					}
+					layer.closeAll('loading');
 				},
 				error:function(e){
 					console.log("error:"+JSON.stringify(e));
@@ -147,3 +156,30 @@ $(function() {
 		});
 	});
 });
+
+
+function filterPeople(actv_no,batch_no) {
+	layui.use('layer', function() {
+		var layer = layui.layer;
+		layer.open({
+			title: "营销客户筛选",
+			type: 2,
+			area: ['700px', '530px'],
+			maxmin: true,
+			content: 'marketFilter.html?actv_no='+actv_no+'&batch_no='+batch_no,
+			scrollbar: false,
+			cancel: function() {
+				//询问框
+				layer.confirm('手动关闭可能导致活动异常,确认?', {
+					offset:"100px",
+					btn: ['确定','取消'] //按钮
+				}, function(){
+				  return true;
+				},function(){
+					return false;
+				});
+			}
+		});
+
+	});
+}

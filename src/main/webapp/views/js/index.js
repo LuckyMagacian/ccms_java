@@ -1,5 +1,5 @@
 $(function() {
-	ajaxPost("/chart/chart.do", {}, initChart);
+	ajaxPost(project+"/chart/chart.do", {}, initChart);
 });
 
 /**
