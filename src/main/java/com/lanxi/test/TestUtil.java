@@ -25,7 +25,7 @@ public class TestUtil {
 		TempSms sms=new TempSms();
 		sms.setContent("短信发送测试");
 		sms.setMchtId("10");
-		sms.setMobile("15068610940");
+		sms.setMobile("15757135741");
 		sms.setOrderId("10"+TimeUtil.getDateTime()+RandomUtil.getRandomNumber(4));
 		sms.setTdId("1");
 		sms.setTradeDate(TimeUtil.getDate());
@@ -60,5 +60,11 @@ public class TestUtil {
 		map.put("update_flag","1");
 		String rs=HttpUtil.postKeyValue(map, ConfigUtil.get("chooseTestUrl"),"utf-8");
 		System.out.println(rs);
+    }
+    @Test
+    public void testPost(){
+    	String url="http://192.168.17.122:8080/msg/msg.receive";
+    	String content = "actv_No=2,bacth_No=1";
+    	System.out.println(HttpUtil.postStr(content, url, "utf-8"));
     }
 }
