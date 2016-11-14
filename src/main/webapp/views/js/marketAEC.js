@@ -56,72 +56,72 @@ $(function() {
 			switch (actvStyle){
 				case '1'://首刷激活
 					temp.prop.push({
-						"date_key":"",
-						"source_table":"",
-						"operation":"",
-						"cust_pk":"",
-						"prop_key":"SSJH",
-						"compare":"",
-						"prop_value":temp.ssjh
+						'date_key':'',
+						'source_table':'',
+						'operation':'',
+						'cust_pk':'',
+						'prop_key':'SSJH',
+						'compare':'',
+						'prop_value':temp.ssjh
 					});
 					break;
 				case '2'://东卡激活
 				case '4'://刷卡
-					if(temp.skbs!=""){//刷卡笔数不为空
+					if(temp.skbs!=''){//刷卡笔数不为空
 						temp.prop.push({
-							"date_key":"INP_DATE",
-							"source_table":"EVENT_D",
-							"operation":"count",
-							"cust_pk":"ACCTNBR",
-							"prop_key":"BILL_AMT",
-							"compare":">=",
-							"prop_value":temp.skbs
+							'date_key':'INP_DATE',
+							'source_table':'EVENT_D',
+							'operation':'count',
+							'cust_pk':'ACCTNBR',
+							'prop_key':'BILL_AMT',
+							'compare':'>=',
+							'prop_value':temp.skbs
 						});
 					}
-					if(temp.dbje!=""){//单笔金额不为空
+					if(temp.dbje!=''){//单笔金额不为空
 						temp.prop.push({
-							"date_key":"INP_DATE",
-							"source_table":"EVENT_D",
-							"operation":"compare",
-							"cust_pk":"ACCTNBR",
-							"prop_key":"BILL_AMT",
-							"compare":">=",
-							"prop_value":temp.dbje
+							'date_key':'INP_DATE',
+							'source_table':'EVENT_D',
+							'operation':'compare',
+							'cust_pk':'ACCTNBR',
+							'prop_key':'BILL_AMT',
+							'compare':'>=',
+							'prop_value':temp.dbje
 						});
 					}
-					if(temp.ljje!=""){//累计金额不为空
+					if(temp.ljje!=''){//累计金额不为空
 						temp.prop.push({
-							"date_key":"INP_DATE",
-							"source_table":"EVENT_D",
-							"operation":"sum",
-							"cust_pk":"ACCTNBR",
-							"prop_key":"BILL_AMT",
-							"compare":">=",
-							"prop_value":temp.ljje
+							'date_key':'INP_DATE',
+							'source_table':'EVENT_D',
+							'operation':'sum',
+							'cust_pk':'ACCTNBR',
+							'prop_key':'BILL_AMT',
+							'compare':'>=',
+							'prop_value':temp.ljje
 						});
 					}
 					break;
 				case '3'://分期
-					if(temp.fqs!=""){//分期数不为空
+					if(temp.fqs!=''){//分期数不为空
 						temp.prop.push({
-							"date_key":"PURCH_DAY",
-							"source_table":"MPUR_D",
-							"operation":"compare",
-							"cust_pk":"XACCOUNT",
-							"prop_key":"NBR_MTHS",
-							"compare":">=",
-							"prop_value":temp.fqs
+							'date_key':'PURCH_DAY',
+							'source_table':'MPUR_D',
+							'operation':'compare',
+							'cust_pk':'XACCOUNT',
+							'prop_key':'NBR_MTHS',
+							'compare':'>=',
+							'prop_value':temp.fqs
 						});
 					}
-					if(temp.fqje!=""){//分期金额不为空
+					if(temp.fqje!=''){//分期金额不为空
 						temp.prop.push({
-							"date_key":"PURCH_DAY",
-							"source_table":"MPUR_D",
-							"operation":"compare",
-							"cust_pk":"XACCOUNT",
-							"prop_key":"ORIG_PURCH",
-							"compare":">=",
-							"prop_value":temp.fqje
+							'date_key':'PURCH_DAY',
+							'source_table':'MPUR_D',
+							'operation':'compare',
+							'cust_pk':'XACCOUNT',
+							'prop_key':'ORIG_PURCH',
+							'compare':'>=',
+							'prop_value':temp.fqje
 						});
 					}
 					break;
