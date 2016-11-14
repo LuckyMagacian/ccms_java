@@ -63,8 +63,12 @@ public class TestUtil {
     }
     @Test
     public void testPost(){
-    	String url="http://192.168.17.122:8080/msg/msg.receive";
+    	String url="http://192.168.17.122:8080/ccms_java/msg/msg.receive";
     	String content = "actv_No=2,bacth_No=1";
-    	System.out.println(HttpUtil.postStr(content, url, "utf-8"));
+    	String mobile="18368093686";
+    	Map<String, Object>map=new HashMap<>();
+    	map.put("content",content);
+    	map.put("mobile",mobile);
+    	System.out.println(HttpUtil.postStr("mobile="+map.get("mobile")+"content="+map.get("content"), url, "utf-8"));
     }
 }

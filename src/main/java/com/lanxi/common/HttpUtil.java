@@ -44,7 +44,7 @@ public class HttpUtil {
 				OutputStreamWriter writer;
 				writer = new OutputStreamWriter(outStream, charset);
 				PrintWriter printer=new PrintWriter(writer);
-				printer.print(content);
+				printer.println(content);
 				printer.close();
 			} catch (Exception e) {
 				throw new AppException("发送post请求异常", e);

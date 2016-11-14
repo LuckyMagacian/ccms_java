@@ -35,12 +35,9 @@ public class SmsServiceImpl implements SmsService {
 	public String sendSms(HttpServletRequest req) {
 		try{
 			String content=req.getParameter("content");
-			System.out.println(content);
 			byte[] bytes=content.getBytes("ISO8859-1");
 			content=new String(bytes, "utf-8");
-			System.out.println(content);
 			String phone=req.getParameter("phone");
-			System.out.println(content);
 			return sendSms(phone, content);
 		}catch (Exception e) {
 			throw new AppException("发送短信失败",e);

@@ -42,6 +42,7 @@ public class ActivityServiceImpl implements ActivityService{
      */
     private Activity makeActivity(HttpServletRequest req,String actv_no,Integer batch_no){
     	try{
+    		 req.setCharacterEncoding("utf-8");
     		 actv_no= null==actv_no?req.getParameter("actv_no"):actv_no;
 	    	 batch_no= null==batch_no?Integer.parseInt(req.getParameter("batch_no")):batch_no;
 
