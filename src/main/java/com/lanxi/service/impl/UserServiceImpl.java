@@ -38,10 +38,11 @@ public class UserServiceImpl implements UserService {
 			req.setCharacterEncoding("utf-8");
 			String actv_no=req.getParameter("actv_no");
 			String batch_no=req.getParameter("batch_no");
+			String update_flag=req.getParameter("update_flag");
 			Map<String, String> map=new HashMap<>();
 			map.put("actv_no", actv_no);
 			map.put("batch_no",batch_no);
-			map.put("update_flag","0");
+			map.put("update_flag",update_flag);
 			// TODO 会等很久
 			String rs=HttpUtil.postKeyValue(map,ConfigUtil.get("chooseUrl"),"utf-8");
 			JSONObject jobj=JSONObject.parseObject(rs);

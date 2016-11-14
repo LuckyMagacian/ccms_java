@@ -157,11 +157,6 @@ public class ActivityServiceImpl implements ActivityService{
     		Activity activity=makeActivity(req, null, null);
     		activity.setUpdate_time(new Date());
     		daoService.getActivityDao().updateActivity(activity);
-    		Map<String, String> map=new HashMap<>();
-			map.put("actv_no", activity.getActv_no());
-			map.put("batch_no",activity.getBatch_no()+"");
-			map.put("update_flag","1");
-			HttpUtil.postKeyValue(map, ConfigUtil.get("chooseTestUrl"),"utf-8");
     		return activity;
     	}catch (Exception e) {
     		throw new AppException("修改活动异常",e);
