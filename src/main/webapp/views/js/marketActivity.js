@@ -41,14 +41,14 @@ $(function() {
 function createMarketActivity() {
 	layui.use('layer', function() {
 		var layer = layui.layer;
-		marketActivity=layer.open({
+		marketActivity = layer.open({
 			title: "创建营销活动",
 			type: 2,
-			area: ['700px', '530px'],
+			area: ['700px', '560px'],
 			maxmin: true,
 			content: 'marketAEC.html?action=add',
 			scrollbar: false
-			//,cancel: layer.msg('取消创建活动') //回调客户筛选
+				//,cancel: layer.msg('取消创建活动') //回调客户筛选
 		});
 
 	});
@@ -67,7 +67,7 @@ function tableData(jsonStr) {
 			batch_no = this.batch_no;
 			tempRow[0] = i + 1; //#
 			tempRow[1] = this.actv_name; //活动名称
-			tempRow[2] = '第'+batch_no+'期'; //期数
+			tempRow[2] = '第' + batch_no + '期'; //期数
 			tempRow[3] = startDate.split(' ')[0]; //开始时间
 			tempRow[4] = stopDate.split(' ')[0]; //结束时间
 			tempRow[5] = actvState[acvtStatus]; //活动状态
@@ -113,7 +113,7 @@ function tableData(jsonStr) {
 			}
 			//监听提交
 		form.on('submit(activitySearch)', function(data) {
-			layer.msg(JSON.stringify(data.field))
+			ajaxPost(project + '/activity/queryActivity.do', data.field, resetTable);
 			return false;
 		});
 	});
@@ -160,36 +160,110 @@ function userOperate(status) {
  * 活动详情 
  * actv_no:活动编号,batch_no:批次号
  * */
-function actvDetail(actv_no,batch_no){
-	
+function actvDetail(actv_no, batch_no) {
+
 }
 
 /**
  * 活动审核 
  * actv_no:活动编号,batch_no:批次号,status:活动状态
  * */
-function editActv(actv_no,batch_no,status){
-	
+function auditActv(actv_no, batch_no, status) {
+	layui.use(['layer', 'form'], function() {
+		var layer = layui.layer,
+			form = layui.form();
+		layer.open({
+			type: 1,
+			area: ['420px', '240px'], //宽高
+			content: '<form id="auditForm" name="auditForm" action="#" method="post" onsubmit="" class="layui-form"><div class="layui-form-item">' +
+				'<label class="layui-form-label">审核意见</label><div class="layui-input-inline">' +
+				'<input type="hidden" name="actv_no" id="actv_no" value="' + actv_no + '" />' +
+				'<input type="hidden" name="batch_no" id="batch_no" value="' + batch_no + '" />' +
+				'<select id="actv_state" name="actv_state" required lay-verify="required"><option value="2">审核通过</option><option value="5">审核不通过</option></select></div></div>' +
+				'<div class="layui-form-item"><label class="layui-form-label">审核说明</label><div class="layui-input-inline">' +
+				'<input id="check_opinion" type="text" autocomplete="off" maxlength="50" class="layui-input"></div></div>' +
+				'<div class="layui-form-item"><div class="layui-input-block"><button lay-submit lay-filter="auditForm" class="layui-btn">确定</button></div></div></form>'
+		});
+		//监听提交
+		form.on('submit(auditForm)', function(data) {
+			layer.msg(JSON.stringify(data.field))
+			return false;
+		});
+	});
 }
 
 /**
  * 修改活动
  * actv_no:活动编号,batch_no:批次号,status:活动状态
  * */
-function delActv(actv_no,batch_no,status){
-	
+function editActv(actv_no, batch_no, status) {
+	layui.use('layer', function() {
+		var layer = layui.layer;
+		marketActivity = layer.open({
+			title: "修改营销活动",
+			type: 2,
+			area: ['700px', '530px'],
+			maxmin: true,
+			content: 'marketAEC.html?action=edit&actv_no=' + actv_no + '&batch_no=' + batch_no,
+			scrollbar: false
+				//,cancel: layer.msg('取消创建活动') //回调客户筛选
+		});
+
+	});
 }
 
 /**
  * 删除活动 
  * actv_no:活动编号,batch_no:批次号,status:活动状态
  * */
-function auditActv(actv_no,batch_no,status){
+function delActv(actv_no, batch_no, status) {
 	//询问框
 	layer.confirm('确认删除该活动？', {
-		offset:"100px",
-		btn: ['确定','取消'] //按钮
-	}, function(){
-	
+		offset: "100px",
+		btn: ['确定', '取消'] //按钮
+	}, function() {
+
+	});
+}
+
+/* 筛选后重新加载表格*/
+function resetTable(jsonStr) {
+	var dataArr = null;
+	if(jsonStr.errCode == "0000") {
+		var temp = new Array();
+		var jsonArr = jsonStr.content;
+		$.each(jsonArr, function(i) {
+			var startDate = getLocalTime(this.start_date),
+				stopDate = getLocalTime(this.stop_date),
+				acvtStatus = this.actv_state,
+				tempRow = new Array();
+			actv_no = this.actv_no;
+			batch_no = this.batch_no;
+			tempRow[0] = i + 1; //#
+			tempRow[1] = this.actv_name; //活动名称
+			tempRow[2] = '第' + batch_no + '期'; //期数
+			tempRow[3] = startDate.split(' ')[0]; //开始时间
+			tempRow[4] = stopDate.split(' ')[0]; //结束时间
+			tempRow[5] = actvState[acvtStatus]; //活动状态
+			tempRow[6] = '[<a href="' + project + '/user/exportUser.xls?actv_no=' + actv_no + '&batch_no=' + batch_no + '">导出</a>]'; //客户详情
+			tempRow[7] = '[<a href="javascript:actvDetail(' + actv_no + ',' + batch_no + ')">查看</a>]'; //活动详情
+			tempRow[8] = userOperate(acvtStatus); //用户操作
+			temp[i] = tempRow;
+			dataArr=temp;
+		});
+	} else {
+		layer.alert('加载表格数据失败');
+		console.log(jsonStr.errMsg);
+	}
+	$("#marketTable").DataTable({
+		dom: '<"top"<"toolbar">f<"searchbar">>rt<"bottom"lip>',
+		language: {
+			"lengthMenu": "每页 _MENU_ 条记录",
+			"zeroRecords": "没有找到记录",
+			"info": "第 _PAGE_ 页 ( 总共 _PAGES_ 页 )",
+			"infoEmpty": "无记录",
+			"infoFiltered": "(从 _MAX_ 条记录过滤)"
+		},
+		data: dataArr
 	});
 }
