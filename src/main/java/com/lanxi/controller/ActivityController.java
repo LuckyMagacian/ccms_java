@@ -10,12 +10,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.lanxi.common.AppException;
 import com.lanxi.common.AppMessage;
 import com.lanxi.entity.Activity;
 import com.lanxi.entity.Prop;
 import com.lanxi.entity.SelectedUser;
 import com.lanxi.service.ActivityService;
 import com.lanxi.service.PropService;
+import com.lanxi.service.QuartzTaskService;
 import com.sun.org.apache.bcel.internal.generic.NEW;
 
 @Controller
@@ -26,6 +28,8 @@ public class ActivityController {
 	ActivityService service;
     @Resource
 	PropService	propService;
+    @Resource
+    QuartzTaskService taskService;
 	@SuppressWarnings("finally")
 	@RequestMapping("/generatActivity.do")
 	@ResponseBody
@@ -273,6 +277,30 @@ public class ActivityController {
 			message.setErrMsg("系统错误,修改失败");
 			logger.error("发生了错误,复制活动失败");
 		}finally{
+			return message;
+		}
+	}
+	
+	
+	@SuppressWarnings("finally")
+	@RequestMapping("/controllerActivity.do")
+	@ResponseBody
+	public AppMessage controllerActivity(HttpServletRequest req){
+		AppMessage message=new AppMessage();
+		try {
+			Object obj=taskService.controlActivity(req);
+			if(obj!=null){
+				message.setErrCode("0000");
+				message.setErrMsg("操作成功");
+				message.setContent(obj);
+			}else{
+				message.setErrCode("9998");
+				message.setErrMsg("操作失败");
+			}
+		} catch (Exception e) {
+			message.setErrCode("9999");
+			message.setErrMsg("系统错误,操作失败");
+		}finally {
 			return message;
 		}
 	}

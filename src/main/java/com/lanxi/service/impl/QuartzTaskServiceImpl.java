@@ -6,9 +6,11 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Service;
 
+import com.lanxi.common.AppException;
 import com.lanxi.common.ConfigUtil;
 import com.lanxi.common.HttpUtil;
 import com.lanxi.entity.Activity;
@@ -23,6 +25,38 @@ public class QuartzTaskServiceImpl implements QuartzTaskService {
 	DaoService daoService;
 	@Resource
 	SmsService smsService;
+	/**
+	 * 活动控制
+	 * @param req
+	 */
+	public Object controlActivity(HttpServletRequest req){
+		try {
+			String actv_no=req.getParameter("actv_no");
+			String batch=req.getParameter("batch_no");
+			String actv_state=req.getParameter("actv_state");
+			Integer batch_no=Integer.parseInt(batch);
+			Activity activity=daoService.getActivityByIdAndBatchNo(actv_no, batch_no);
+			String oldState=activity.getActv_state();
+			activity.setActv_state(actv_state);
+			if(!"3".equals(oldState)&&"3".equals(activity.getActv_state())){
+				//有效用户 短信提醒
+				Map<String, Object>map=new HashMap<>();
+				map.put("actv_no", activity.getActv_no());
+				map.put("batch_no", activity.getBatch_no());
+				map.put("state",SelectedUser.USER_STATE_USEFUL);
+				List<SelectedUser> users=daoService.getSelectedUserDao().selectUserByState(map);
+				for(SelectedUser each:users)
+					smsService.sendSms(each.getPhone(), activity.getMsg_tplt());
+			}
+			daoService.getActivityDao().updateActivity(activity);
+			return activity;
+		} catch (Exception e) {
+			new AppException("操作活动异常",e);
+		}
+		return null;
+	}
+	
+	
 	/**
 	 * 活动开始
 	 * 定时任务
