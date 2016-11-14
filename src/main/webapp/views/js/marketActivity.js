@@ -155,3 +155,42 @@ function userOperate(status) {
 	}
 	return temp;
 }
+
+/**
+ * 活动详情 
+ * actv_no:活动编号,batch_no:批次号
+ * */
+actvDetail(actv_no,batch_no){
+	
+}
+
+/**
+ * 活动审核 
+ * actv_no:活动编号,batch_no:批次号,status:活动状态
+ * */
+editActv(actv_no,batch_no,status){
+	
+}
+
+/**
+ * 修改活动
+ * actv_no:活动编号,batch_no:批次号,status:活动状态
+ * */
+delActv(actv_no,batch_no,status){
+	
+}
+
+/**
+ * 删除活动 
+ * actv_no:活动编号,batch_no:批次号,status:活动状态
+ * */
+auditActv(actv_no,batch_no,status){
+	//询问框
+	layer.confirm('确认删除该活动？', {
+		offset:"100px",
+		btn: ['确定','取消'] //按钮
+	}, function(){
+		
+		  });
+	});
+}

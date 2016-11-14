@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
+		<link rel="stylesheet" href="../layui/css/layui.css">
+		<link rel="stylesheet" href="../css/home.css">
+		<style type="text/css">
+			@charset "utf-8";
+			/* layui修正 */
+			.layui-form-label {
+			    width: 130px;
+			}
+		</style>
+	</head>
+	<body>
+	<div class="container" style="margin-top: 15px;">
+      <div class="row">
+        <form id="userCreateForm" name="userCreateForm" action="#" method="post" onsubmit="" class="layui-form">
+          <div class="layui-form-item">
+            <label class="layui-form-label">角色</label>
+            <div class="layui-input-inline">
+              <input type="hidden" name="user_no" id="user_no" value="" />
+              <select id="admin_type" name="admin_Type" required lay-verify="required"></select>
+            </div>
+          </div>
+          <div class="layui-form-item">
+            <label class="layui-form-label">用户名</label>
+            <div class="layui-input-inline">
+              <input id="username" type="text" name="username" required lay-verify="required" maxlength="8" autocomplete="off" class="layui-input">
+            </div>
+          </div>
+          <div class="layui-form-item">
+            <label class="layui-form-label">密码</label>
+            <div class="layui-input-inline">
+              <input id="password" type="password" name="password" required lay-verify="required" readonly="readonly" autocomplete="off" class="layui-input" value="123456">
+            </div>
+            <div class="layui-form-mid layui-word-aux">初始密码为123456</div>
+          </div>
+          <div class="layui-form-item">
+            <div class="layui-input-block">
+              <button lay-submit lay-filter="userCreateForm" class="layui-btn">保存</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <script src="../js/jquery.min.js"></script>
+    <script src="../layui/layui.js"></script>
+    <script src="../js/public.js"></script>
+	<script src="../js/userCreate.js"></script>
+	</body>
+</html>
