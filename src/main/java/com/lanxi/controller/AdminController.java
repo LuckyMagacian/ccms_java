@@ -146,8 +146,9 @@ public class AdminController {
         Map<String, Object> map = new HashMap<>();
         // 得到登录用户的类型
         String name = null;
+        String type=null;
         try {
-            String type = (String) session.getAttribute("admin_Type");
+            type = (String) session.getAttribute("admin_Type");
             name = (String) session.getAttribute("username");
             if (!type.equals("1")) {
                 map.put("message", "您不是管理员，没有权限");
@@ -158,10 +159,10 @@ public class AdminController {
             return map;
         }
         String username = null;
-        String admin_Id=null;
+        String admin_Id = null;
         try {
             username = servletRequest.getParameter("username").trim();
-            admin_Id=servletRequest.getParameter("admin_Id").trim();
+            admin_Id = servletRequest.getParameter("admin_Id").trim();
         } catch (Exception e) {
             map.put("message", "获取参数失败");
             return map;

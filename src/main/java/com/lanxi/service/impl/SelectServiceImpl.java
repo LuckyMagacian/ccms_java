@@ -11,7 +11,7 @@ import javax.annotation.Resource;
  * Created by Administrator on 2016/11/10.
  */
 @Service
-public class selectServiceImpl implements SelectService{
+public class SelectServiceImpl implements SelectService{
     @Resource
     SelectDao selectDao;
 
