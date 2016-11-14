@@ -34,8 +34,9 @@ public class ActivityController {
 		logger.info("请求创建活动");
 		AppMessage message=new AppMessage();
 		try{
+			System.out.println(req.getParameterMap());
 			System.out.println(req.getParameter("actv_name"));
-			System.out.println(req.getParameter("prop"));
+			System.out.println(req.getParameter("prop[0][prop_value]"));
 			Activity activity=service.generatorActivity(req);
 			List<Prop>props=propService.generatorProp(req, activity);
 			if(null!=activity&&null!=activity.getActv_no()){

@@ -8,6 +8,7 @@ import com.lanxi.common.SqlUtil;
 import com.lanxi.entity.Activity;
 import com.lanxi.entity.Admin;
 import com.lanxi.entity.Chart;
+import com.lanxi.entity.Msg;
 import com.lanxi.entity.Prop;
 import com.lanxi.entity.SelectedUser;
 import com.sun.org.apache.bcel.internal.generic.NEW;
@@ -32,7 +33,7 @@ public class TestCase {
     public void testTest(){
         Class[] classes=new Class[]{Activity.class, Prop.class, Admin.class, Chart.class};
 
-        Class   clazz=SelectedUser.class;
+        Class   clazz=Msg.class;
         String  tableName="T_CCMS_"+clazz.getSimpleName().toUpperCase();
 
         String sql=SqlUtil.createInsert(clazz,"T_CCMS_"+clazz.getSimpleName().toUpperCase());
