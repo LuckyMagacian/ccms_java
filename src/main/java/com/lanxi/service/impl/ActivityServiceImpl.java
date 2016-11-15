@@ -172,8 +172,8 @@ public class ActivityServiceImpl implements ActivityService{
     		req.setCharacterEncoding("utf-8");
     		String actv_name    =req.getParameter("actv_name");
 	        String actv_state   =req.getParameter("actv_state");
-	        actv_name=actv_name.trim().isEmpty()?null:actv_name;
-	        actv_state=actv_state.trim().isEmpty()?null:actv_state;
+	        actv_name=actv_name!=null?actv_name.trim().isEmpty()?null:actv_name:null;
+	        actv_state=actv_state!=null?actv_state.trim().isEmpty()?null:actv_state:null;
 	        String date1		=req.getParameter("start1");
 	        String date2		=req.getParameter("start2");
 	        Date   start1		=null;
