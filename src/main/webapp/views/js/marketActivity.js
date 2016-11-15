@@ -15,7 +15,7 @@ $(function() {
 			"htmlStr": "<select id='actv_state' name='actv_state'></select>",
 			"type": "select",
 			"id": "actv_state",
-			"jsonArr": actvState
+			"jsonArr": actvState1
 		}, {
 			"name": "活动开始日期",
 			"htmlStr": '<input id="start_date" type="text" name="start_date" placeholder="开始日期起" autocomplete="off" class="layui-input" readonly="readonly" onclick="layui.laydate({elem: this, festival: true})"></div>' +
@@ -112,6 +112,7 @@ function tableData(jsonStr) {
 			}
 			//监听提交
 		form.on('submit(activitySearch)', function(data) {
+			console.log(JSON.stringify(data.field));
 			ajaxPost(project + '/activity/queryActivity.do', data.field, resetTable);
 			return false;
 		});
@@ -227,9 +228,9 @@ function delActv(actv_no, batch_no, status) {
 
 /* 筛选后重新加载表格*/
 function resetTable(jsonStr) {
-	var dataArr = null;
+	console.log(JSON.stringify(jsonStr));
 	if(jsonStr.errCode == "0000") {
-		var temp = new Array();
+		temp = new Array();
 		var jsonArr = jsonStr.content;
 		$.each(jsonArr, function(i) {
 			var startDate = getLocalTime(this.start_date),
@@ -248,21 +249,13 @@ function resetTable(jsonStr) {
 			tempRow[7] = '[<a href="javascript:actvDetail(' + actv_no + ',' + batch_no + ')">查看</a>]'; //活动详情
 			tempRow[8] = userOperate(acvtStatus); //用户操作
 			temp[i] = tempRow;
-			dataArr=temp;
 		});
+		var tab=$("#marketTable").DataTable();
+			tab.clear();
+			tab.rows.add(temp).draw();
 	} else {
 		layer.alert('加载表格数据失败');
 		console.log(jsonStr.errMsg);
 	}
-	$("#marketTable").DataTable({
-		dom: '<"top"<"toolbar">f<"searchbar">>rt<"bottom"lip>',
-		language: {
-			"lengthMenu": "每页 _MENU_ 条记录",
-			"zeroRecords": "没有找到记录",
-			"info": "第 _PAGE_ 页 ( 总共 _PAGES_ 页 )",
-			"infoEmpty": "无记录",
-			"infoFiltered": "(从 _MAX_ 条记录过滤)"
-		},
-		data: dataArr
-	});
+
 }

@@ -52,6 +52,14 @@ actvState = { //活动状态
 	"4": "已结束",
 	"5": "审核未通过"
 };
+actvState1 = { //活动状态（帶全部）
+	"":"全部",
+	"1": "待审核",
+	"2": "未开始",
+	"3": "进行中",
+	"4": "已结束",
+	"5": "审核未通过"
+};
 ruleType = { //规则类型
 	"0": "满足任意条件",
 	"1": "满足全部条件"
@@ -290,6 +298,7 @@ function ajaxPost(url, dataJson, successFunc) {
 	$.ajax({
 		type: "post",
 		url: url,
+		data:dataJson,
 		dataType: "json",
 		beforeSend: function() {
 
