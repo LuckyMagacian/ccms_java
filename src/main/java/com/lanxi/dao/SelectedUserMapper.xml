@@ -2,6 +2,26 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lanxi.dao.SelectedUserDao">
 
+<update id="updateSelectedUser" parameterType="com.lanxi.entity.SelectedUser">
+update T_CCMS_SELECT
+<set> 
+<if test="actv_no != null"> ACTV_NO = #{actv_no},</if>  
+<if test="batch_no != null"> BATCH_NO = #{batch_no},</if>  
+<if test="custr_nbr != null"> CUSTR_NBR = #{custr_nbr},</if>  
+<if test="name != null"> NAME = #{name},</if>  
+<if test="phone != null"> PHONE = #{phone},</if>  
+<if test="apply != null"> APPLY = #{apply},</if>  
+<if test="state != null"> STATE = #{state},</if>  
+<if test="result != null"> RESULT = #{result},</if>  
+</set>
+<where>
+<if test="actv_no != null"> and ACTV_NO = #{actv_no}  </if>  
+<if test="batch_no != null"> and BATCH_NO = #{batch_no}  </if>  
+<if test="custr_nbr != null"> and CUSTR_NBR = #{custr_nbr}  </if>  
+</where>
+</update>
+
+
 <select id="selectSelectedUser" resultMap="selectedUserMap" parameterType="com.lanxi.entity.SelectedUser" resultType="com.lanxi.entity.SelectedUser">
 SELECT
 ACTV_NO,BATCH_NO,CUSTR_NBR,NAME,PHONE,APPLY,STATE,RESULT
@@ -25,11 +45,22 @@ FROM T_CCMS_SELECT
 <where> 
 <if test="actv_no != null"> 	and ACTV_NO = #{actv_no}  </if>  
 <if test="batch_no != null"> 	and BATCH_NO = #{batch_no}  </if>  
-<if test="apply !=null">		and APPLY != #{apply}</if>
+<if test="apply !=null">		and APPLY = #{apply}</if>
 <if test="result !=null">		and RESULT = #{result}</if> 
 <if test="state !=null">		and STATE = #{state}</if> 
 </where>
 </select>
+<select id="querySuccessUser" resultMap="selectedUserMap" parameterType="java.util.Map" resultType="com.lanxi.entity.SelectedUser">
+SELECT
+ACTV_NO,BATCH_NO,CUSTR_NBR,NAME,PHONE,APPLY,STATE,RESULT
+FROM T_CCMS_SELECT
+<where> 
+RESULT = '0' or RESULT = '4'
+<if test="actv_no != null"> 	and ACTV_NO = #{actv_no}  </if>  
+<if test="batch_no != null"> 	and BATCH_NO = #{batch_no}  </if>  
+</where>
+</select>
+
 
 <select id="failedUser" resultMap="selectedUserMap" parameterType="com.lanxi.entity.Activity">
 UPDATE T_CCMS_SELECTEDUSER

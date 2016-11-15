@@ -3,6 +3,7 @@ package com.lanxi.service.impl;
 import com.lanxi.dao.ActivityDao;
 import com.lanxi.dao.AdminDao;
 import com.lanxi.dao.ChartDao;
+import com.lanxi.dao.MsgDao;
 import com.lanxi.dao.PropDao;
 import com.lanxi.dao.SelectedUserDao;
 import com.lanxi.entity.Activity;
@@ -32,6 +33,8 @@ public class DaoServiceImpl implements DaoService{
     private PropDao     propDao;
     @Resource
     private SelectedUserDao userDao;
+    @Resource
+    private MsgDao		msgDao;
     public ActivityDao  getActivityDao(){
         return activityDao;
     }
@@ -96,16 +99,20 @@ public class DaoServiceImpl implements DaoService{
 		Map<String,	Object> map=new HashMap<>();
 		map.put("actv_no", activity.getActv_no());
 		map.put("batch_no", activity.getBatch_no());
-		map.put("success", SelectedUser.USER_RESULT_SUCCESS);
-		return userDao.selectUserByState(map);
+		return userDao.querySuccessUser(map);
 	}
 
 	public List<SelectedUser> queryApplyUser(Activity activity){
 		Map<String,	Object> map=new HashMap<>();
 		map.put("actv_no", activity.getActv_no());
 		map.put("batch_no", activity.getBatch_no());
-		map.put("success", SelectedUser.USER_STATE_USEFUL);
+		map.put("state", SelectedUser.USER_STATE_USEFUL);
 		return userDao.selectUserByState(map);
+	}
+
+	@Override
+	public MsgDao getMsgDao() {
+		return msgDao;
 	}
 
 }

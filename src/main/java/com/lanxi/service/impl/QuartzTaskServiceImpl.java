@@ -8,15 +8,17 @@ import java.util.Map;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.tomcat.jni.User;
 import org.springframework.stereotype.Service;
 
+import com.alibaba.fastjson.JSONObject;
 import com.lanxi.common.AppException;
-import com.lanxi.common.ConfigUtil;
-import com.lanxi.common.HttpUtil;
+import com.lanxi.dao.MsgDao;
 import com.lanxi.entity.Activity;
+import com.lanxi.entity.Msg;
 import com.lanxi.entity.SelectedUser;
-import com.lanxi.entity.TempSms;
 import com.lanxi.service.DaoService;
+import com.lanxi.service.MsgService;
 import com.lanxi.service.QuartzTaskService;
 import com.lanxi.service.SmsService;
 @Service("quartzTaskService")
@@ -25,6 +27,8 @@ public class QuartzTaskServiceImpl implements QuartzTaskService {
 	DaoService daoService;
 	@Resource
 	SmsService smsService;
+	@Resource
+	MsgService msgService;
 	/**
 	 * 活动控制
 	 * @param req
@@ -38,15 +42,19 @@ public class QuartzTaskServiceImpl implements QuartzTaskService {
 			Activity activity=daoService.getActivityByIdAndBatchNo(actv_no, batch_no);
 			String oldState=activity.getActv_state();
 			activity.setActv_state(actv_state);
-			if(!"3".equals(oldState)&&"3".equals(activity.getActv_state())){
+			if(Activity.ACTIVITY_STATE_READY.equals(oldState)&&Activity.ACTIVITY_STATE_INING.equals(activity.getActv_state())){
 				//有效用户 短信提醒
 				Map<String, Object>map=new HashMap<>();
 				map.put("actv_no", activity.getActv_no());
 				map.put("batch_no", activity.getBatch_no());
 				map.put("state",SelectedUser.USER_STATE_USEFUL);
 				List<SelectedUser> users=daoService.getSelectedUserDao().selectUserByState(map);
-				for(SelectedUser each:users)
-					smsService.sendSms(each.getPhone(), activity.getMsg_tplt());
+				MsgDao msgDao=daoService.getMsgDao();
+				for(SelectedUser each:users){
+					Msg msg=msgService.makeMsg(activity,each.getPhone(),activity.getMsg_tplt());
+					msg.setMsg_type(Msg.MSG_TYPE_START);
+					msgDao.addMsg(msg);
+				}
 			}
 			daoService.getActivityDao().updateActivity(activity);
 			return activity;
@@ -76,10 +84,12 @@ public class QuartzTaskServiceImpl implements QuartzTaskService {
 				map.put("batch_no", each.getBatch_no());
 				map.put("state",SelectedUser.USER_STATE_USEFUL);
 				List<SelectedUser> users=daoService.getSelectedUserDao().selectUserByState(map);
+				MsgDao msgDao=daoService.getMsgDao();
 				for(SelectedUser one:users){
-					String content=each.getMsg_tplt();
-					String phone=one.getPhone();
-					smsService.sendSms(phone, content);
+					// TODO 短信直接是模版
+					Msg msg=msgService.makeMsg(each,one.getPhone(),each.getMsg_tplt());
+					msg.setMsg_type(Msg.MSG_TYPE_START);
+					msgDao.addMsg(msg);
 				}
 			}
 		}
@@ -103,4 +113,93 @@ public class QuartzTaskServiceImpl implements QuartzTaskService {
 		}
 	}
 	
+	/**
+	 * 立即发送短信
+	 * 指定活动则只发送改活动的短信
+	 * 指定手机号则只发送该手机号短信
+	 * @param req
+	 * @return
+	 */
+	public String sendMsg(HttpServletRequest req){
+		try{
+			req.setCharacterEncoding("utf-8");
+			String phone=req.getParameter("phone");
+			String actv_no=req.getParameter("actv_no");
+			String batch=req.getParameter("batch_no");
+			Integer batch_no=batch==null?0:Integer.parseInt(batch);
+			Msg temp=new Msg();
+			temp.setActv_no(actv_no);
+			temp.setBatch_no(batch_no);
+			temp.setPhone(phone);
+			MsgDao msgDao=daoService.getMsgDao();
+			List<Msg> msgs=msgDao.queryNeedSend(temp);
+			int flag=0;
+			
+			for(Msg each:msgs){
+				String rs=msgService.sendMsg(each);
+				JSONObject jobj=JSONObject.parseObject(rs);
+				if(each.getMsg_type().equals(Msg.MSG_TYPE_PROGRESS)){
+					SelectedUser user=new SelectedUser();
+					user.setActv_no(each.getActv_no());
+					user.setBatch_no(each.getBatch_no());
+					user=daoService.getSelectedUserDao().selectSelectedUser(user).get(0);
+					user.setResult(SelectedUser.USER_RESULT_NEAR);
+					daoService.getSelectedUserDao().updateUser(user);
+				}
+				if(each.getMsg_id().equals(Msg.MSG_TYPE_APPLY_SUCCESS)){
+					SelectedUser user=new SelectedUser();
+					user.setActv_no(each.getActv_no());
+					user.setBatch_no(each.getBatch_no());
+					user=daoService.getSelectedUserDao().selectSelectedUser(user).get(0);
+					user.setResult(SelectedUser.USER_RESULT_END);
+					daoService.getSelectedUserDao().updateUser(user);
+				}
+				if("0000".equals(jobj.get("retCode"))){
+					each.setSend_state(Msg.MSG_SEND_STATE_SEND);
+					flag|=1;
+				}
+				else{
+					each.setSend_state(Msg.MSG_SEND_STATE_FAIL);
+					flag|=2;
+				}
+				msgDao.updateMsg(each);
+			}
+			return flag+"";
+		}catch (Exception e) {
+			throw new AppException("手动发送短信失败", e);
+		}
+	}
+	/**
+	 * 发送待发与失败短信
+	 * 定时任务
+	 */
+	public void sendMsg(){
+		MsgDao msgDao=daoService.getMsgDao();
+		List<Msg> msgs=msgDao.queryNeedSend(null);
+		for(Msg each:msgs){
+			String rs=msgService.sendMsg(each);
+			JSONObject jobj=JSONObject.parseObject(rs);
+			if(each.getMsg_type().equals(Msg.MSG_TYPE_PROGRESS)){
+				SelectedUser user=new SelectedUser();
+				user.setActv_no(each.getActv_no());
+				user.setBatch_no(each.getBatch_no());
+				user=daoService.getSelectedUserDao().selectSelectedUser(user).get(0);
+				user.setResult(SelectedUser.USER_RESULT_NEAR);
+				daoService.getSelectedUserDao().updateUser(user);
+			}
+			if(each.getMsg_id().equals(Msg.MSG_TYPE_APPLY_SUCCESS)){
+				SelectedUser user=new SelectedUser();
+				user.setActv_no(each.getActv_no());
+				user.setBatch_no(each.getBatch_no());
+				user=daoService.getSelectedUserDao().selectSelectedUser(user).get(0);
+				user.setResult(SelectedUser.USER_RESULT_END);
+				daoService.getSelectedUserDao().updateUser(user);
+			}
+			if("0000".equals(jobj.get("retCode")))
+				each.setSend_state(Msg.MSG_SEND_STATE_SEND);
+			else
+				each.setSend_state(Msg.MSG_SEND_STATE_FAIL);
+			msgDao.updateMsg(each);
+		}
+	}
 }

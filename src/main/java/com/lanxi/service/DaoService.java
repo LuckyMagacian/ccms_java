@@ -2,6 +2,7 @@ package com.lanxi.service;
 import com.lanxi.dao.ActivityDao;
 import com.lanxi.dao.AdminDao;
 import com.lanxi.dao.ChartDao;
+import com.lanxi.dao.MsgDao;
 import com.lanxi.dao.PropDao;
 import com.lanxi.dao.SelectedUserDao;
 import com.lanxi.entity.Activity;
@@ -80,4 +81,10 @@ public interface DaoService {
 	 * @return
 	 */
     public List<SelectedUser> queryApplyUser(Activity activity);
+    
+    /**
+     * 获取短信dao
+     * @return
+     */
+    public MsgDao  		getMsgDao();
 }

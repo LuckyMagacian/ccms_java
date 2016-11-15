@@ -200,6 +200,7 @@ public class UserServiceImpl implements UserService {
 					if(field.getName().equals("result")){
 						switch (value) {
 						case "0":
+						case "4":
 							value="活动完成";
 							break;
 						case "1":

@@ -23,6 +23,8 @@ public class SelectedUser {
 	public static final String USER_RESULT_FAIL		="1";
 	/**活动状态-即将完成*/
 	public static final String USER_RESULT_NEAR		="2";
+	/**活动状态-结束*/
+	public static final String USER_RESULT_END		="3";
 	//---------------------------------常量区end-------------------------------------------
 	/**活动编号*/
 	private String 	actv_no;

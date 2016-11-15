@@ -33,7 +33,7 @@ public class TestCase {
     public void testTest(){
         Class[] classes=new Class[]{Activity.class, Prop.class, Admin.class, Chart.class};
 
-        Class   clazz=Msg.class;
+        Class   clazz=SelectedUser.class;
         String  tableName="T_CCMS_"+clazz.getSimpleName().toUpperCase();
 
         String sql=SqlUtil.createInsert(clazz,"T_CCMS_"+clazz.getSimpleName().toUpperCase());
@@ -94,5 +94,13 @@ public class TestCase {
     public void testStrR(){
     	String string="1234567891011121";
     	System.out.println(string.substring(0,6)+string.substring(0,string.length()-10).replaceAll("\\w","*")+string.substring(string.length()-4));
+    }
+    @Test
+    public void testOr(){
+    	Integer i=0;
+    	i|=1;
+    	System.out.println(i);
+    	i|=2;
+    	System.out.println(i);
     }
 }
