@@ -3,7 +3,6 @@ package com.lanxi.dao;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.tomcat.jni.User;
 import org.springframework.stereotype.Repository;
 
 import com.lanxi.entity.Activity;
@@ -26,7 +25,7 @@ public interface SelectedUserDao {
 	 * @param args
 	 * @return
 	 */
-	public List<SelectedUser> selectUserByState(Map<String, Object> args);
+		public List<SelectedUser> selectUserByState(Map<String, Object> args);
 	/**
 	 * 结束活动
 	 * 1活动编号

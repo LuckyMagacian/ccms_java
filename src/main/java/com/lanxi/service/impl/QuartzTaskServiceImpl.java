@@ -8,7 +8,6 @@ import java.util.Map;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.tomcat.jni.User;
 import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSONObject;
