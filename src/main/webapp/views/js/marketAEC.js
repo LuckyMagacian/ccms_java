@@ -48,6 +48,11 @@ $(function() {
 				end.elem = this
 				laydate(end);
 			}*/
+		form.select({
+			change:function(value,select){
+				layer.alert(value+' '+JSON.stringify(select));
+			}
+		});
 			//监听提交
 		form.on('submit(marketAECForm)', function(data) {
 			var temp=data.field,
