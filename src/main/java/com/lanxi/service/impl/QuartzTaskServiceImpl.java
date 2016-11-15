@@ -8,7 +8,6 @@ import java.util.Map;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.tomcat.jni.User;
 import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSONObject;
@@ -69,6 +68,7 @@ public class QuartzTaskServiceImpl implements QuartzTaskService {
 	 * 活动开始
 	 * 定时任务
 	 */
+	@SuppressWarnings("deprecation")
 	public void startActivity(){
 		List<Activity> activities=daoService.queryActivity(null,Activity.ACTIVITY_STATE_READY,null,null);
 		for(Activity each:activities){
@@ -98,6 +98,7 @@ public class QuartzTaskServiceImpl implements QuartzTaskService {
 	 * 活动结束
 	 * 定时任务
 	 */
+	@SuppressWarnings("deprecation")
 	public void endActivity(){
 		List<Activity> activities=daoService.queryActivity(null,Activity.ACTIVITY_STATE_INING,null,null);
 		for(Activity each:activities){

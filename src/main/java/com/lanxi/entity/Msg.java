@@ -1,8 +1,5 @@
 package com.lanxi.entity;
 
-import com.lanxi.common.RandomUtil;
-import com.lanxi.common.TimeUtil;
-
 public class Msg {
 	//-------------------------------------常量区start-----------------------------------------------------
 	/**短信类型-活动开始*/

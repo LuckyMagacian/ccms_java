@@ -1,12 +1,11 @@
 package com.lanxi.service;
 
-import com.lanxi.entity.Activity;
-import com.lanxi.entity.Prop;
-
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+
+import com.lanxi.entity.Activity;
+import com.lanxi.entity.Prop;
 
 /**
  * Created by 1 on 2016/11/8.

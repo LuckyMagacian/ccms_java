@@ -35,7 +35,7 @@ public class ActivityController {
 		AppMessage message=new AppMessage();
 		try{
 			Activity activity=service.generatorActivity(req);
-			List<Prop>props=propService.generatorProp(req, activity);
+			propService.generatorProp(req, activity);
 			if(null!=activity&&null!=activity.getActv_no()){
 				message.setErrCode("0000");
 				message.setErrMsg("创建活动成功");

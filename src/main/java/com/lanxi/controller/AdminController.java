@@ -26,9 +26,10 @@ public class AdminController {
     AdminService adminService;
 
     //添加用户
-    @RequestMapping("/admin.add")
+    @SuppressWarnings("finally")
+	@RequestMapping("/admin.add")
     @ResponseBody
-    public Map AddUser(HttpSession session, HttpServletRequest servletRequest) {
+    public Map<String,Object> AddUser(HttpSession session, HttpServletRequest servletRequest) {
         Map<String, Object> map = new HashMap<>();
         //得到登录用户的类型
         try {
@@ -81,9 +82,10 @@ public class AdminController {
     }
 
     //获取用户列表
-    @RequestMapping("/admin.getAllAdmin")
+    @SuppressWarnings("finally")
+	@RequestMapping("/admin.getAllAdmin")
     @ResponseBody
-    public Map getAllAdmin() {
+    public Map<String, Object> getAllAdmin() {
         Map<String, Object> map = new HashMap<>();
         List<Admin> adminList = adminService.getAllAdmin();
         try {
@@ -98,9 +100,10 @@ public class AdminController {
     }
 
     //修改用户
-    @RequestMapping("/admin.update")
+    @SuppressWarnings("finally")
+	@RequestMapping("/admin.update")
     @ResponseBody
-    public Map updateAdmin(HttpServletRequest servletRequest, HttpSession session) {
+    public Map<String, Object> updateAdmin(HttpServletRequest servletRequest, HttpSession session) {
         Map<String, Object> map = new HashMap<>();
         try {
             //得到登录用户的类型
@@ -140,9 +143,10 @@ public class AdminController {
     }
 
     //删除用户
-    @RequestMapping("/admin.delete")
+    @SuppressWarnings("finally")
+	@RequestMapping("/admin.delete")
     @ResponseBody
-    public Map deleteAdmin(HttpServletRequest servletRequest, HttpSession session) {
+    public Map<String, Object> deleteAdmin(HttpServletRequest servletRequest, HttpSession session) {
         Map<String, Object> map = new HashMap<>();
         // 得到登录用户的类型
         String name = null;
@@ -185,9 +189,10 @@ public class AdminController {
     }
 
     //得到session里面的数据
-    @RequestMapping("/admin.getSessionMessage")
+    @SuppressWarnings("finally")
+	@RequestMapping("/admin.getSessionMessage")
     @ResponseBody
-    public Map getSessionMessage(HttpSession session) {
+    public Map<String, Object> getSessionMessage(HttpSession session) {
         Map<String, Object> map = new HashMap<>();
         try {
             Admin admin = (Admin) session.getAttribute("admin");

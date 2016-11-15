@@ -131,6 +131,7 @@ public class TestDao {
 		
 	}
 	
+	@SuppressWarnings("deprecation")
 	@Test
 	public void testWhat(){
 //		List<Activity> list=dao.queryActivity(null, Activity.ACTIVITY_STATE_WAIT, null, null);

@@ -78,6 +78,7 @@ public class UserController {
 			while((temp=fin.read())!=-1)
 			os.write(temp);
 			os.close();
+			fin.close();
 		} catch (Exception e) {
 			throw new AppException("导出所有用户异常", e);
 		}
@@ -94,6 +95,7 @@ public class UserController {
 			while((temp=fin.read())!=-1)
 			os.write(temp);
 			os.close();
+			fin.close();
 		} catch (Exception e) {
 			throw new AppException("导出有效用户异常", e);
 		}
@@ -110,6 +112,7 @@ public class UserController {
 			while((temp=fin.read())!=-1)
 			os.write(temp);
 			os.close();
+			fin.close();
 		} catch (Exception e) {
 			throw new AppException("导出成功用户异常", e);
 		}
@@ -126,6 +129,7 @@ public class UserController {
 			while((temp=fin.read())!=-1)
 			os.write(temp);
 			os.close();
+			fin.close();
 		} catch (Exception e) {
 			throw new AppException("导出成功用户异常", e);
 		}

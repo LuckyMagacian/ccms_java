@@ -17,7 +17,6 @@ import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSONObject;
 import com.lanxi.common.AppException;
-import com.lanxi.common.AppMessage;
 import com.lanxi.common.ConfigUtil;
 import com.lanxi.common.ExcelUtil;
 import com.lanxi.common.HttpUtil;
@@ -25,8 +24,6 @@ import com.lanxi.entity.Activity;
 import com.lanxi.entity.SelectedUser;
 import com.lanxi.service.DaoService;
 import com.lanxi.service.UserService;
-import com.sun.org.apache.bcel.internal.generic.NEW;
-import com.sun.swing.internal.plaf.basic.resources.basic;
 @Service("userService")
 public class UserServiceImpl implements UserService {
 	private static Logger logger=Logger.getLogger(UserServiceImpl.class);
@@ -50,7 +47,6 @@ public class UserServiceImpl implements UserService {
 			String reCode=jobj.getString("result_code");
 			if("0".equals(reCode)){
 				logger.info("筛选完成");
-				String reMsg =jobj.getString("result_msg");
 //				String suggestion=jobj.getString("suggesstion");
 				Activity activity=daoService.getActivityByIdAndBatchNo(actv_no, Integer.parseInt(batch_no));
 //				activity.setSuggestion(suggestion);
@@ -85,7 +81,6 @@ public class UserServiceImpl implements UserService {
 			JSONObject jobj=JSONObject.parseObject(rs);
 			String reCode=jobj.getString("result_code");
 			if("0".equals(reCode)){
-				String reMsg =jobj.getString("result_msg");
 //				String suggestion=jobj.getString("suggesstion");
 				Activity activity=daoService.getActivityByIdAndBatchNo(actv_no, Integer.parseInt(batch_no));
 //				activity.setSuggestion(suggestion);

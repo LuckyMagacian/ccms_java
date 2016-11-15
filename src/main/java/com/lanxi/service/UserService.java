@@ -6,8 +6,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 
-import com.lanxi.entity.Activity;
-
 public interface UserService {
 	/**
 	 * 智能筛选用户

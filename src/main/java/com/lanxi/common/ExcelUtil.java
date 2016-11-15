@@ -1,19 +1,15 @@
 package com.lanxi.common;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFCellStyle;
-import org.apache.poi.hssf.usermodel.HSSFDataFormat;
 import org.apache.poi.hssf.usermodel.HSSFFont;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.hssf.util.HSSFColor;
-import org.apache.poi.hssf.util.HSSFRegionUtil;
-import org.apache.poi.ss.util.CellRangeAddress;
 
 public class ExcelUtil {
 	/**工作本*/
@@ -26,8 +22,6 @@ public class ExcelUtil {
 	private  static HSSFCellStyle commonStyle;	
 	/**普通字体*/
 	private static HSSFFont		commonFont;		
-	/**数据格式-小数*/
-	private static HSSFDataFormat doubleFormat;	
 	/**加载初始化*/
 	static{
 		init();
@@ -35,6 +29,7 @@ public class ExcelUtil {
 	/**
 	 * 初始化工作簿
 	 */
+	@SuppressWarnings("deprecation")
 	public static void init(){
 		workbook = new HSSFWorkbook();
 		

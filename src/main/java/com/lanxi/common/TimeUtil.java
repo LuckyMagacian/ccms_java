@@ -142,6 +142,7 @@ public class TimeUtil {
 	 * @param time
 	 * @return
 	 */
+	@SuppressWarnings("deprecation")
 	public static Date  getDateTime(Date date,Date time){
 		return new Date(date.getYear(),date.getMinutes(),date.getDate(),time.getHours(),time.getMinutes(),time.getSeconds());
 	}

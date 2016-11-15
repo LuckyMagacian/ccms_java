@@ -1,5 +1,7 @@
 package com.lanxi.test;
 
+import java.io.IOException;
+
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
@@ -56,7 +58,7 @@ public class TestExcel {
 	}
 	
 	@Test
-	public void testExcel(){
+	public void testExcel() throws IOException{
 		
 		//number=sheet count & number >sheet count
 		//没有sheet number=0  1个sheet number=1 两个sheet number=2
@@ -89,5 +91,6 @@ public class TestExcel {
 		row.createCell(1);
 		System.out.println(row.getLastCellNum());
 		System.out.println(cell.hashCode());
+		workbook.close();
 	}
 }

@@ -5,6 +5,7 @@ import java.io.StringWriter;
 
 import org.apache.log4j.Logger;
 
+@SuppressWarnings("serial")
 public class AppException extends RuntimeException{
 	private static Logger  logger=Logger.getLogger(AppException.class);
 	private static boolean testFlag=true;

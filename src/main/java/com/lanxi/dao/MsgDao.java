@@ -2,7 +2,6 @@ package com.lanxi.dao;
 
 import java.util.List;
 
-import com.lanxi.entity.Activity;
 import com.lanxi.entity.Msg;
 
 public interface MsgDao {

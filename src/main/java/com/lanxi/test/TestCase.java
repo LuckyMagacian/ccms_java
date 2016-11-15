@@ -1,28 +1,18 @@
 package com.lanxi.test;
 
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
-import com.google.gson.JsonObject;
-import com.lanxi.common.ExcelUtil;
-import com.lanxi.common.SqlUtil;
-import com.lanxi.entity.Activity;
-import com.lanxi.entity.Admin;
-import com.lanxi.entity.Chart;
-import com.lanxi.entity.Msg;
-import com.lanxi.entity.Prop;
-import com.lanxi.entity.SelectedUser;
-import com.sun.org.apache.bcel.internal.generic.NEW;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.junit.Test;
+
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+import com.lanxi.common.SqlUtil;
+import com.lanxi.entity.SelectedUser;
 
 /**
  * Created by 1 on 2016/11/8.
@@ -31,8 +21,6 @@ public class TestCase {
     @SuppressWarnings("rawtypes")
 	@Test
     public void testTest(){
-        Class[] classes=new Class[]{Activity.class, Prop.class, Admin.class, Chart.class};
-
         Class   clazz=SelectedUser.class;
         String  tableName="T_CCMS_"+clazz.getSimpleName().toUpperCase();
 
@@ -67,7 +55,7 @@ public class TestCase {
     	while((temp=buffReader.readLine())!=null)
     		strBuff.append(temp);
     	System.out.println(strBuff.toString());
-    	
+    	buffReader.close();
     	JSONObject jObj=JSONObject.parseObject(strBuff.toString());
 //    	System.out.println(jObj);
 //    	System.out.println(jObj.getClass());

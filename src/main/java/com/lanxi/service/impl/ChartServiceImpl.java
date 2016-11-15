@@ -20,7 +20,7 @@ public class ChartServiceImpl implements ChartService {
     private ChartDao chartDao;
     //得到chartMap
     @Override
-    public Map getChartMap() {
+    public Map<String, Object> getChartMap() {
          List<String> idList=chartDao.getIds();
          List<String> contentList=chartDao.getContents();
         Map<String,Object> map=new HashMap<String,Object>();

@@ -95,7 +95,6 @@ public class PropServiceImpl implements PropService {
     @Override
     public List<Prop> generatorProp(HttpServletRequest req, Activity activity) {
         try{
-        	Prop temp=new Prop();
         	List<Prop> props=makeProp(req, activity);
         	for(Prop each:props)
                 daoService.getPropDao().addProp(each);

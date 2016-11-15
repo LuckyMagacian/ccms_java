@@ -2,7 +2,6 @@ package com.lanxi.service.impl;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,15 +11,10 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Service;
 
-import com.alibaba.fastjson.JSONObject;
 import com.lanxi.common.AppException;
-import com.lanxi.common.AppMessage;
-import com.lanxi.common.ConfigUtil;
-import com.lanxi.common.HttpUtil;
 import com.lanxi.common.RandomUtil;
 import com.lanxi.common.TimeUtil;
 import com.lanxi.entity.Activity;
-import com.lanxi.entity.SelectedUser;
 import com.lanxi.service.ActivityService;
 import com.lanxi.service.DaoService;
 import com.lanxi.service.PropService;
