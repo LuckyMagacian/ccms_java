@@ -2,7 +2,7 @@ $(function() {
 	/* 全局变量 */
 	update_flag1=null;
 	actv_no=null;
-	batch_no+null;
+	batch_no=null;
 	
 	paramObj = getParam();
 	filterSet(paramObj);
@@ -68,7 +68,6 @@ function tableData(jsonStr) {
 	var temp1 = new Array();
 	if(jsonStr.errCode == "0000") {
 		var jsonArr = jsonStr.content;
-		console.log(JSON.stringify(jsonArr));
 		var suggestion=jsonArr.suggestion;
 		$.each(jsonArr.users, function(i) {
 			var tempRow = new Array();
@@ -98,7 +97,7 @@ function tableData(jsonStr) {
 			temp.actv_no = actv_no;
 			temp.batch_no = batch_no;
 			temp.condition = JSON.stringify(data.field);
-			alert(temp);
+			layer.alert(temp);
 			return false;
 		});
 	});

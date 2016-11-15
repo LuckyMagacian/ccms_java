@@ -25,7 +25,7 @@ public interface SelectedUserDao {
 	 * @param args
 	 * @return
 	 */
-	public List<SelectedUser> selectUserByState(Map<String, Object> args);
+		public List<SelectedUser> selectUserByState(Map<String, Object> args);
 	/**
 	 * 结束活动
 	 * 1活动编号
