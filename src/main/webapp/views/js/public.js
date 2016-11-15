@@ -1,5 +1,5 @@
 /* 全局变量 */
-project='/ccms_java';
+project = '/ccms_java';
 /** 营销活动模块
  * jsonName=<value:name>
  * */
@@ -13,11 +13,32 @@ actvStyle = { //活动形式
 	"3": "分期",
 	"4": "刷卡"
 };
+actvStyle1 = { //唤醒睡眠卡->活动形式
+	"1": "首刷激活",
+	"2": "冻卡激活"
+};
+actvStyle2 = { //提升业务量->活动形式
+	"3": "分期",
+	"4": "刷卡"
+};
 actvType = { //活动类型
 	"1": "赠送积分",
 	"2": "手续费折扣",
 	"3": "赠送礼品",
 	"4": "分期抽奖",
+	"5": "首刷",
+	"6": "激活",
+	"7": "满减",
+	"8": "满送",
+	"9": "满额返现"
+};
+actvType1 = { //分期->活动类型
+	"1": "赠送积分",
+	"2": "手续费折扣",
+	"3": "赠送礼品",
+	"4": "分期抽奖"
+};
+actvType2 = { //刷卡->活动类型
 	"5": "首刷",
 	"6": "激活",
 	"7": "满减",
@@ -51,11 +72,11 @@ fqs = { //分期数
 	"24": "24期",
 	"36": "36期"
 };
-gender = {//性别
+gender = { //性别
 	"0": "女",
 	"1": "男"
 };
-occCatgry={//单位性质
+occCatgry = { //单位性质
 	"1": "政府机关",
 	"2": "事业单位",
 	"3": "国有企业",
@@ -63,10 +84,10 @@ occCatgry={//单位性质
 	"5": "股份制企业",
 	"6": "民营企业",
 	"7": "其他企业",
-	"8":"个体/自由职业"
+	"8": "个体/自由职业"
 };
-shopping={//消费偏好
-	"0":"餐饮",
+shopping = { //消费偏好
+	"0": "餐饮",
 	"1": "出版印刷",
 	"2": "房产",
 	"3": "纺织服饰日用品",
@@ -76,20 +97,20 @@ shopping={//消费偏好
 	"7": "金融",
 	"8": "居民服务",
 	"9": "批发类",
-	"10":"汽车燃料配件零售",
-	"11":"食品饮料烟草零售",
-	"12":"休闲娱乐",
-	"13":"医疗医药器材",
-	"14":"综合零售",
-	"15":"租赁服务"
+	"10": "汽车燃料配件零售",
+	"11": "食品饮料烟草零售",
+	"12": "休闲娱乐",
+	"13": "医疗医药器材",
+	"14": "综合零售",
+	"15": "租赁服务"
 };
 /* 一下需要后台传递,先写死 */
-actvName={//活动名称,ID:name
-	"1001":"活动一",
-	"1003":"活动3",
-	"1004":"活动4"
+actvName = { //活动名称,ID:name
+	"1001": "活动一",
+	"1003": "活动3",
+	"1004": "活动4"
 };
-userType={//用户角色
+userType = { //用户角色
 	"1": "系统管理员",
 	"2": "审核人员",
 	"3": "业务人员"
@@ -183,20 +204,20 @@ function searchbar(cls, jsonArr, formJson) {
 		var temp = '<form id="' + formJson.id + '" name="' + formJson.id + '" action="' + formJson.action + '" method="' + formJson.method + '" onsubmit="' + formJson.onsubmit + '" class="layui-form">';
 	$.each(jsonArr, function(i) {
 		var _this = this;
-		if(_this.type=="btn"){
-			temp +='<div class="layui-form-item" style="margin-top:0px;"><div class="layui-input-inline">'+
-				'<button lay-submit lay-filter="'+_this.form+'" class="layui-btn '+_this.cls+'">'+_this.name+'</button></div></div>';
-		}else{
-			temp +='<div class="layui-form-item"><label class="layui-form-label">'+_this.name+'</label>';
+		if(_this.type == "btn") {
+			temp += '<div class="layui-form-item" style="margin-top:0px;"><div class="layui-input-inline">' +
+				'<button lay-submit lay-filter="' + _this.form + '" class="layui-btn ' + _this.cls + '">' + _this.name + '</button></div></div>';
+		} else {
+			temp += '<div class="layui-form-item"><label class="layui-form-label">' + _this.name + '</label>';
 			temp += '<div class="layui-input-inline">' + _this.htmlStr + '</div></div>';
 		}
-		
+
 	});
 	temp += '</form>';
 	$("div." + cls).append(temp);
 	$.each(jsonArr, function(i) {
-		if(this.type=="select"){
-			selectOp(this.id,this.jsonArr);
+		if(this.type == "select") {
+			selectOp(this.id, this.jsonArr);
 		}
 	});
 }
@@ -207,54 +228,54 @@ function searchbar(cls, jsonArr, formJson) {
  * toolbar,searchbar/formInfo详见tableBtn,searchbar函数中
  * func：表格数据格式化，带一个参数jsonStr，为ajax收到的原始数据
  * */
-function installTable(id,url,jsonArr,func){
-	var data=null;
-	if(jsonArr.data==undefined){
-		data={};
-	}else{
-		data=jsonArr.data;
+function installTable(id, url, jsonArr, func) {
+	var data = null;
+	if(jsonArr.data == undefined) {
+		data = {};
+	} else {
+		data = jsonArr.data;
 	}
-	layui.use('layer', function(){
+	layui.use('layer', function() {
 		var layer = layui.layer;
 		$.ajax({
-			type:"post",
-			url:url,
-			data:data,
-			dataType:"json",
-			beforeSend:function(){
+			type: "post",
+			url: url,
+			data: data,
+			dataType: "json",
+			beforeSend: function() {
 				layer.open({
-					type:3,
+					type: 3,
 					scrollbar: false
 				});
 			},
-			success:function(jsonStr){
+			success: function(jsonStr) {
 				layer.closeAll('loading'); //关闭加载层
-				var dataArr=jsonStr;
-				if(func!=undefined){
-					var dataArr=func(jsonStr);
+				var dataArr = jsonStr;
+				if(func != undefined) {
+					var dataArr = func(jsonStr);
 				}
-				$("#"+id).DataTable({
-			  		dom: '<"top"<"toolbar">f<"searchbar">>rt<"bottom"lip>',
-			  		language: {
-			  			"lengthMenu": "每页 _MENU_ 条记录",
-			  			"zeroRecords": "没有找到记录",
-			  			"info": "第 _PAGE_ 页 ( 总共 _PAGES_ 页 )",
-			  			"infoEmpty": "无记录",
-			  			"infoFiltered": "(从 _MAX_ 条记录过滤)"
-			  		},
-			  		data:dataArr
-			  	});
-				if(jsonArr.toolbar!=undefined){
-					tableBtn('toolbar',jsonArr.toolbar);//加载表格头部按钮
+				$("#" + id).DataTable({
+					dom: '<"top"<"toolbar">f<"searchbar">>rt<"bottom"lip>',
+					language: {
+						"lengthMenu": "每页 _MENU_ 条记录",
+						"zeroRecords": "没有找到记录",
+						"info": "第 _PAGE_ 页 ( 总共 _PAGES_ 页 )",
+						"infoEmpty": "无记录",
+						"infoFiltered": "(从 _MAX_ 条记录过滤)"
+					},
+					data: dataArr
+				});
+				if(jsonArr.toolbar != undefined) {
+					tableBtn('toolbar', jsonArr.toolbar); //加载表格头部按钮
 				}
-				if(jsonArr.searchbar!=undefined){
+				if(jsonArr.searchbar != undefined) {
 					searchbar('searchbar', jsonArr.searchbar, jsonArr.formInfo);
 				}
 			},
-			error:function(e){
-				console.log("err:"+JSON.stringify(e));
+			error: function(e) {
+				console.log("err:" + JSON.stringify(e));
 			}
-			
+
 		});
 	});
 }
@@ -265,69 +286,78 @@ function installTable(id,url,jsonArr,func){
  * beforeFunc:请求前触发函数,不带参数
  * successFunc:成功时触发函数,带一个参数jsonStr
  * */
-function ajaxPost(url,dataJson,successFunc){
+function ajaxPost(url, dataJson, successFunc) {
 	$.ajax({
-		  	type:"post",
-		  	url:url,
-		  	dataType:"json",
-		  	beforeSend:function(){
-		  		
-		  	},
-		  	success:function(jsonStr){
-		  		if(typeof successFunc=='function'){
-		  			successFunc(jsonStr);
-		  		}
-		  		
-		  	},
-		  	error:function(e){
-		  		console.log("error!\n "+e);
-		  	}
-		  });
-}
+		type: "post",
+		url: url,
+		dataType: "json",
+		beforeSend: function() {
 
-/* 用户权限控制 */
-adminId=null,
-adminType=null;
-loginName=null;
+		},
+		success: function(jsonStr) {
+			if(typeof successFunc == 'function') {
+				successFunc(jsonStr);
+			}
 
-function userControll(jsonStr){
-	if(jsonStr.statusCode==200){
-		if(jsonStr.admin_Type==null || jsonStr.username==null || jsonStr.admin==null){
-			alert("登录超时,请重新登录");
-			location.href=project+"/views/login.html";
-		}else{
-			adminId=jsonStr.admin.admin_Id;
-			adminType=jsonStr.admin_Type;
-			loginName=jsonStr.username;
-			$("#loginName").html(loginName);
+		},
+		error: function(e) {
+			console.log("error!\n " + e);
 		}
-	}else{
-		console.log("获取session失败!"+jsonStr.message);
-	}
-}
-
-$(function(){
-	ajaxPost(project+'/admin/admin.getSessionMessage',{},userControll);
-});
-
-function rePwd(){
-	ajaxPost(project+'/admin/admin.update',{},function(jsonStr){
-		
 	});
 }
 
-function logOut(){
-	ajaxPost(project+'/login/loginOut.do',{},function(jsonStr){
-		if(jsonStr.statusCode==200){
-			location.href=project+"/views/login.html";
-		}else{
+/* 用户权限控制 */
+adminId = null,
+	adminType = null;
+loginName = null;
+
+function userControll(jsonStr) {
+	if(jsonStr.statusCode == 200) {
+		if(jsonStr.admin_Type == null || jsonStr.username == null || jsonStr.admin == null) {
+			alert("登录超时,请重新登录");
+			location.href = project + "/views/login.html";
+		} else {
+			adminId = jsonStr.admin.admin_Id;
+			adminType = jsonStr.admin_Type;
+			loginName = jsonStr.username;
+			$("#loginName").html(loginName);
+		}
+	} else {
+		console.log("获取session失败!" + jsonStr.message);
+	}
+}
+
+$(function() {
+	ajaxPost(project + '/admin/admin.getSessionMessage', {}, userControll);
+});
+
+function rePwd() {
+	ajaxPost(project + '/admin/admin.update', {}, function(jsonStr) {
+
+	});
+}
+
+function logOut() {
+	ajaxPost(project + '/login/loginOut.do', {}, function(jsonStr) {
+		if(jsonStr.statusCode == 200) {
+			location.href = project + "/views/login.html";
+		} else {
 			alert('登出失败!,请重试');
-			console.log("error! "+jsonStr.message);
+			console.log("error! " + jsonStr.message);
 		}
 	});
 }
 
 /* 时间戳格式化 */
-    function getLocalTime(nS) {     
-       return new Date(parseInt(nS)).toLocaleString().replace(/年|月/g, "-").replace(/日/g, " ");      
-    } 
+function getLocalTime(nS) {
+	return new Date(parseInt(nS)).toLocaleString().replace(/年|月/g, "-").replace(/日/g, " ");
+}
+
+/* 关闭当前弹窗 */
+function closeThisLayer() {
+	layui.use('layer', function() {
+		var layer = layui.layer;
+		var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+		parent.layer.close(index);
+	});
+}

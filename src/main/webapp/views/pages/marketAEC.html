@@ -25,20 +25,20 @@
             <div class="layui-input-inline">
               <input type="hidden" name="actv_no" id="actv_no" value="" />
               <input type="hidden" name="batch_no" id="batch_no" value="" />
-              <select id="actv_target" name="actv_target" required lay-verify="required"></select>
+              <select id="actv_target" name="actv_target" required lay-verify="required" lay-filter="actv_target"></select>
             </div>
             <div class="layui-form-mid layui-word-aux">一些说明</div>
           </div>
           <div class="layui-form-item">
             <label class="layui-form-label">活动形式</label>
             <div class="layui-input-inline">
-            	<select id="actv_style" name="actv_style" required lay-verify="required"></select>
+            	<select id="actv_style" name="actv_style" required lay-verify="required" lay-filter="actv_style"></select>
             </div>
           </div>
-          <div class="layui-form-item">
+          <div class="layui-form-item hidden">
             <label class="layui-form-label">活动类型</label>
             <div class="layui-input-inline">
-            	<select id="actv_type" name="actv_type" required lay-verify="required"></select>
+            	<select id="actv_type" name="actv_type"></select>
             </div>
           </div>
           <div class="layui-form-item">
@@ -65,39 +65,39 @@
           </div>
           <!-- 特殊项 -->
           		<!-- 首刷激活 -->
-          <div class="layui-form-item">
+          <div class="layui-form-item hidden">
             <label class="layui-form-label">活动规则</label>
             <div class="layui-input-inline">
               <select id="ssjh" name="ssjh"></select>
             </div>
           </div>
           		<!-- 刷卡OR冻卡激活 -->
-          <div class="layui-form-item">       	
+          <div class="layui-form-item hidden">       	
             <label class="layui-form-label">刷卡笔数</label>
             <div class="layui-input-inline">
               <input id="skbs" type="text" name="skbs" autocomplete="off" class="layui-input">
             </div>
           </div>
-          <div class="layui-form-item">
+          <div class="layui-form-item hidden">
             <label class="layui-form-label">单笔金额</label>
             <div class="layui-input-inline">
               <input id="dbje" type="text" name="dbje" autocomplete="off" class="layui-input">
             </div>
           </div>
-          <div class="layui-form-item">
+          <div class="layui-form-item hidden">
             <label class="layui-form-label">累计金额</label>
             <div class="layui-input-inline">
               <input id="ljje" type="text" name="ljje" autocomplete="off" class="layui-input">
             </div>
           </div>
           		<!-- 分期 -->
-          <div class="layui-form-item">
+          <div class="layui-form-item hidden">
             <label class="layui-form-label">分期数</label>
             <div class="layui-input-inline">
               <select id="fqs" name="fqs"></select>
             </div>
           </div>
-          <div class="layui-form-item">
+          <div class="layui-form-item hidden">
             <label class="layui-form-label">分期金额</label>
             <div class="layui-input-inline">
               <input id="fqje" type="text" name="fqje" autocomplete="off" class="layui-input">
@@ -119,13 +119,13 @@
           <div class="layui-form-item">
             <label class="layui-form-label">参与方式</label>
             <div class="layui-input-inline">
-              <select id="join_type" name="join_type" required lay-verify="required"></select>
+              <select id="join_type" name="join_type" required lay-verify="required" lay-filter="join_type"></select>
             </div>
           </div>
-          <div class="layui-form-item">
+          <div class="layui-form-item hidden">
             <label class="layui-form-label">活动名额</label>
             <div class="layui-input-inline">
-              <input id="people_limit" type="text" name="people_limit" autocomplete="off" required lay-verify="number" class="layui-input">
+              <input id="people_limit" type="number" name="people_limit" autocomplete="off" class="layui-input">
             </div>
           </div>
           <div class="layui-form-item">

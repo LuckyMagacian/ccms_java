@@ -50,7 +50,6 @@ function createMarketActivity() {
 			scrollbar: false
 				//,cancel: layer.msg('取消创建活动') //回调客户筛选
 		});
-		layer.title('123',marketActivity);
 	});
 }
 
