@@ -1,16 +1,26 @@
 package com.lanxi.entity;
 
+import com.lanxi.common.RandomUtil;
+import com.lanxi.common.TimeUtil;
+
 public class Msg {
 	//-------------------------------------常量区start-----------------------------------------------------
+	/**短信类型-活动开始*/
 	public static final String MSG_TYPE_START			="1";
-	public static final String MSG_TYPE_PROGRESS		="2";	
+	/**短信类型-进度提醒*/
+	public static final String MSG_TYPE_PROGRESS		="2";
+	/**短信类型-活动完成*/
 	public static final String MSG_TYPE_SUCCESS			="3";
+	/**短信类型-报名成功*/
 	public static final String MSG_TYPE_APPLY_SUCCESS	="4";
+	/**短信类型-报名失败*/
 	public static final String MSG_TYPE_APPLY_FAIL		="5";	
 	
-	
+	/**短信发送状态-等待发送*/
 	public static final String MSG_SEND_STATE_READY			="1"; 
+	/**短信发送状态-发送成功*/
 	public static final String MSG_SEND_STATE_SEND			="2"; 
+	/**短信发送状态-发送失败*/
 	public static final String MSG_SEND_STATE_FAIL			="3"; 
 	//--------------------------------------常量区end-------------------------------------------------------
 	
@@ -70,6 +80,11 @@ public class Msg {
 	public void setSend_time(String send_time) {
 		this.send_time = send_time;
 	}
-
+	@Override
+	public String toString() {
+		return "Msg [msg_id=" + msg_id + ", actv_no=" + actv_no + ", batch_no=" + batch_no + ", phone=" + phone
+				+ ", msg_type=" + msg_type + ", content=" + content + ", send_state=" + send_state + ", send_time="
+				+ send_time + "]";
+	}
 	
 }

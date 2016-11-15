@@ -95,4 +95,12 @@ public class TestCase {
     	String string="1234567891011121";
     	System.out.println(string.substring(0,6)+string.substring(0,string.length()-10).replaceAll("\\w","*")+string.substring(string.length()-4));
     }
+    @Test
+    public void testOr(){
+    	Integer i=0;
+    	i|=1;
+    	System.out.println(i);
+    	i|=2;
+    	System.out.println(i);
+    }
 }

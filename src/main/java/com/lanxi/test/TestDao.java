@@ -20,12 +20,19 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.lanxi.common.BeanUtil;
 import com.lanxi.common.ExcelUtil;
+import com.lanxi.common.HttpUtil;
+import com.lanxi.common.RandomUtil;
+import com.lanxi.common.SmsUtil;
+import com.lanxi.common.TimeUtil;
 import com.lanxi.dao.ActivityDao;
+import com.lanxi.dao.MsgDao;
 import com.lanxi.dao.SelectedUserDao;
 import com.lanxi.entity.Activity;
+import com.lanxi.entity.Msg;
 import com.lanxi.entity.SelectedUser;
 import com.lanxi.service.ActivityService;
 import com.lanxi.service.DaoService;
+import com.lanxi.service.SmsService;
 import com.lanxi.service.impl.DaoServiceImpl;
 import com.sun.scenario.effect.AbstractShadow;
 
@@ -102,5 +109,26 @@ public class TestDao {
 		activity.setActv_no("1");
 		activity.setBatch_no(1);
 		System.out.println(adao.queryActivity(activity));
+	}
+	@Test
+	public void testMsgDao(){
+		MsgDao msgDao=dao.getMsgDao();
+		SmsService service=ac.getBean(SmsService.class);
+		Msg msg=new Msg();
+//		msg.setActv_no("1");
+//		msg.setBatch_no(1);
+//		msg.setContent("测试短信");
+//		msg.setMsg_id(TimeUtil.getDateTime()+RandomUtil.getRandomNumber(6));
+//		msg.setPhone("15757135741");
+//		msg.setMsg_type(Msg.MSG_TYPE_PROGRESS);
+//		msg.setSend_state(Msg.MSG_SEND_STATE_READY);
+//		msgDao.addMsg(msg);
+//		msg=msgDao.selectMsg(msg).get(0);
+//		System.out.println(msg);
+//		System.out.println(service.sendSms(msg.getPhone(), msg.getContent()));
+//		msg.setSend_time(TimeUtil.getDateTime());
+//		msg.setSend_state(Msg.MSG_SEND_STATE_SEND);
+//		msgDao.updateMsg(msg);
+		System.out.println(msgDao.queryNeedSend(null));
 	}
 }

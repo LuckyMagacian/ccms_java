@@ -18,4 +18,14 @@ public interface QuartzTaskService {
 	 * 定时任务
 	 */
 	public void endActivity();
+	/**
+	 * 手动发送短信
+	 * @param req
+	 * @return
+	 */
+	public String sendMsg(HttpServletRequest req);
+	/**
+	 * 定时发送短信
+	 */
+	public void  sendMsg();
 }
