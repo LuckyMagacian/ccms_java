@@ -99,15 +99,14 @@ public class DaoServiceImpl implements DaoService{
 		Map<String,	Object> map=new HashMap<>();
 		map.put("actv_no", activity.getActv_no());
 		map.put("batch_no", activity.getBatch_no());
-		map.put("success", SelectedUser.USER_RESULT_SUCCESS);
-		return userDao.selectUserByState(map);
+		return userDao.querySuccessUser(map);
 	}
 
 	public List<SelectedUser> queryApplyUser(Activity activity){
 		Map<String,	Object> map=new HashMap<>();
 		map.put("actv_no", activity.getActv_no());
 		map.put("batch_no", activity.getBatch_no());
-		map.put("success", SelectedUser.USER_STATE_USEFUL);
+		map.put("state", SelectedUser.USER_STATE_USEFUL);
 		return userDao.selectUserByState(map);
 	}
 

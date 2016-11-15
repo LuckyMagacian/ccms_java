@@ -8,6 +8,7 @@ import java.util.Map;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.tomcat.jni.User;
 import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSONObject;
@@ -137,6 +138,22 @@ public class QuartzTaskServiceImpl implements QuartzTaskService {
 			for(Msg each:msgs){
 				String rs=msgService.sendMsg(each);
 				JSONObject jobj=JSONObject.parseObject(rs);
+				if(each.getMsg_type().equals(Msg.MSG_TYPE_PROGRESS)){
+					SelectedUser user=new SelectedUser();
+					user.setActv_no(each.getActv_no());
+					user.setBatch_no(each.getBatch_no());
+					user=daoService.getSelectedUserDao().selectSelectedUser(user).get(0);
+					user.setResult(SelectedUser.USER_RESULT_NEAR);
+					daoService.getSelectedUserDao().updateUser(user);
+				}
+				if(each.getMsg_id().equals(Msg.MSG_TYPE_APPLY_SUCCESS)){
+					SelectedUser user=new SelectedUser();
+					user.setActv_no(each.getActv_no());
+					user.setBatch_no(each.getBatch_no());
+					user=daoService.getSelectedUserDao().selectSelectedUser(user).get(0);
+					user.setResult(SelectedUser.USER_RESULT_END);
+					daoService.getSelectedUserDao().updateUser(user);
+				}
 				if("0000".equals(jobj.get("retCode"))){
 					each.setSend_state(Msg.MSG_SEND_STATE_SEND);
 					flag|=1;
@@ -162,6 +179,22 @@ public class QuartzTaskServiceImpl implements QuartzTaskService {
 		for(Msg each:msgs){
 			String rs=msgService.sendMsg(each);
 			JSONObject jobj=JSONObject.parseObject(rs);
+			if(each.getMsg_type().equals(Msg.MSG_TYPE_PROGRESS)){
+				SelectedUser user=new SelectedUser();
+				user.setActv_no(each.getActv_no());
+				user.setBatch_no(each.getBatch_no());
+				user=daoService.getSelectedUserDao().selectSelectedUser(user).get(0);
+				user.setResult(SelectedUser.USER_RESULT_NEAR);
+				daoService.getSelectedUserDao().updateUser(user);
+			}
+			if(each.getMsg_id().equals(Msg.MSG_TYPE_APPLY_SUCCESS)){
+				SelectedUser user=new SelectedUser();
+				user.setActv_no(each.getActv_no());
+				user.setBatch_no(each.getBatch_no());
+				user=daoService.getSelectedUserDao().selectSelectedUser(user).get(0);
+				user.setResult(SelectedUser.USER_RESULT_END);
+				daoService.getSelectedUserDao().updateUser(user);
+			}
 			if("0000".equals(jobj.get("retCode")))
 				each.setSend_state(Msg.MSG_SEND_STATE_SEND);
 			else

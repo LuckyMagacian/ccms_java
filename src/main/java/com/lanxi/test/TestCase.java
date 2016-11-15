@@ -33,7 +33,7 @@ public class TestCase {
     public void testTest(){
         Class[] classes=new Class[]{Activity.class, Prop.class, Admin.class, Chart.class};
 
-        Class   clazz=Msg.class;
+        Class   clazz=SelectedUser.class;
         String  tableName="T_CCMS_"+clazz.getSimpleName().toUpperCase();
 
         String sql=SqlUtil.createInsert(clazz,"T_CCMS_"+clazz.getSimpleName().toUpperCase());
