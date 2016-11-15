@@ -18,9 +18,9 @@ $(function() {
 			"jsonArr": actvState1
 		}, {
 			"name": "活动开始日期",
-			"htmlStr": '<input id="start_date" type="text" name="start_date" placeholder="开始日期起" autocomplete="off" class="layui-input" readonly="readonly" onclick="layui.laydate({elem: this, festival: true})"></div>' +
+			"htmlStr": '<input id="start1" type="text" name="start1" placeholder="开始日期起" autocomplete="off" class="layui-input" readonly="readonly" onclick="layui.laydate({elem: this, festival: true})"></div>' +
 				'<div class="layui-form-mid"> - </div><div class="layui-input-inline">' +
-				'<input id="stop_date" type="text" name="stop_date" placeholder="开始日期止" autocomplete="off" readonly="readonly" class="layui-input" onclick="layui.laydate({elem: this, festival: true})">',
+				'<input id="start2" type="text" name="start2" placeholder="开始日期止" autocomplete="off" readonly="readonly" class="layui-input" onclick="layui.laydate({elem: this, festival: true})">',
 			"type": "other"
 		}, {
 			"name": "查询",
@@ -86,7 +86,6 @@ function tableData(jsonStr) {
 			laydate = layui.laydate;
 
 		var start = {
-			min: laydate.now(),
 			max: '2099-12-31 23:59:59',
 			istoday: false,
 			choose: function(datas) {
@@ -95,18 +94,17 @@ function tableData(jsonStr) {
 			}
 		};
 		var end = {
-			min: laydate.now(),
 			max: '2099-12-31 23:59:59',
 			istoday: false,
 			choose: function(datas) {
 				start.max = datas; //结束日选好后，重置开始日的最大日期
 			}
 		};
-		document.getElementById('start_date').onclick = function() {
+		document.getElementById('start1').onclick = function() {
 			start.elem = this;
 			laydate(start);
 		}
-		document.getElementById('stop_date').onclick = function() {
+		document.getElementById('start2').onclick = function() {
 				end.elem = this
 				laydate(end);
 			}
@@ -161,9 +159,18 @@ function userOperate(status) {
  * actv_no:活动编号,batch_no:批次号
  * */
 function actvDetail(actv_no, batch_no) {
-
+	ajaxPost(project+'/activity/queryDetail.do',{
+		'actv_no':actv_no,
+		'batch_no':batch_no
+	},detailLayer);
 }
 
+function detailLayer(jsonStr){
+	layui.use('layer', function() {
+		var layer = layui.layer;
+		layer.alert(JSON.stringify(jsonStr));
+	});
+}
 /**
  * 活动审核 
  * actv_no:活动编号,batch_no:批次号,status:活动状态
